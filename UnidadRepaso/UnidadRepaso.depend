@@ -1,0 +1,28 @@
+# depslib dependency file v1.0
+1711832064 source:c:\devs\tda\tdavector.c
+	"TDAVector.h"
+
+1711832077 c:\devs\tda\tdavector.h
+	<stdio.h>
+	<stdlib.h>
+
+1711836109 source:c:\devs\unidadrepaso\recursividad.c
+	"recursividad.h"
+
+1711836109 c:\devs\unidadrepaso\recursividad.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1711836144 source:c:\devs\unidadrepaso\main.c
+	"../TDA/TDAVector.h"
+	"recursividad.h"
+	"tests.h"
+
+1711833971 c:\devs\unidadrepaso\tests.h
+	"recursividad.h"
+
+1711833683 source:c:\devs\unidadrepaso\tests.c
+	"tests.h"
+	"recursividad.h"
+

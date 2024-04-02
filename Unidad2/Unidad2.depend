@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1712094991 source:c:\devs\bibliotecas\productos.c
+	"productos.h"
+
+1712094880 c:\devs\bibliotecas\productos.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1712093795 source:c:\devs\tda\piladinamica.c
+	"pilaDinamica.h"
+
+1712093379 c:\devs\tda\piladinamica.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1712093405 source:c:\devs\tda\pilaestatica.c
+	"pilaEstatica.h"
+
+1712093398 c:\devs\tda\pilaestatica.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1712094917 source:c:\devs\unidad2\main.c
+	"../TDA/pilaDinamica.h"
+	"../Bibliotecas/productos.h"
+

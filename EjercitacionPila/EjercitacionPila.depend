@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1712092985 source:c:\devs\ejercitacionpila\main.c
+	"pilaDinamica.h"
+
+1712093398 c:\devs\ejercitacionpila\pilaestatica.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1712093405 source:c:\devs\ejercitacionpila\pilaestatica.c
+	"pilaEstatica.h"
+
+1712093379 c:\devs\ejercitacionpila\piladinamica.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1712093795 source:c:\devs\ejercitacionpila\piladinamica.c
+	"pilaDinamica.h"
+
