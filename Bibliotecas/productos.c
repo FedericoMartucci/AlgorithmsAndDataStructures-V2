@@ -32,3 +32,8 @@ void generarProductos(tProducto* vecProductos, int cantidad)
     }
 
 }
+
+int cmpCodigo(const void* a, const void* b)
+{
+    return strcmp(((tProducto*)a)->codigo, ((tProducto*)b)->codigo);
+}

@@ -11,12 +11,16 @@ int generarArchivoProductos(const char* nombre, const char* tipo)
 
     generarProductos(loteProductos, CANT_PRODUCTOS);
 
-    if((error = abrirArchivo(&archivoProductos, nombre, tipo)) != OK)
-        return error;
-
     if(strcmp(tipo, "BINARIO") == 0)
+    {
+        if((error = abrirArchivo(&archivoProductos, nombre, "wb")) != OK)
+            return error;
         fwrite(loteProductos, sizeof(tProducto), CANT_PRODUCTOS, archivoProductos);
+    }
     else if(strcmp(tipo, "TEXTO") == 0)
+    {
+        if((error = abrirArchivo(&archivoProductos, nombre, "wt")) != OK)
+            return error;
         for (i = 0; i < CANT_PRODUCTOS; i++)
         {
             fprintf(archivoProductos, "%s|%s|%s|%d/%d/%d|%d/%d/%d|%d|%.2f|%.2f\n",
@@ -33,6 +37,9 @@ int generarArchivoProductos(const char* nombre, const char* tipo)
                     loteProductos[i].precioCompra,
                     loteProductos[i].precioVenta);
         }
+    }
+    else
+        return FILE_OPEN_MODE_ERR;
 
     fclose(archivoProductos);
     return OK;
@@ -40,26 +47,35 @@ int generarArchivoProductos(const char* nombre, const char* tipo)
 
 int abrirArchivo(FILE** archivoAAbrir, const char* nombre, const char* tipo)
 {
-    if(strcmp(tipo, "BINARIO") == 0)
+    if(!(*archivoAAbrir = fopen(nombre, tipo)))
     {
-        if(!(*archivoAAbrir = fopen(nombre, "wb")))
-        {
-            perror("The file could not be opened");
-            return FILE_ERR;
-        }
+        perror("The file could not be opened");
+        return FILE_ERR;
     }
-    else if(strcmp(tipo, "TEXTO") == 0)
-    {
-        if(!(*archivoAAbrir = fopen(nombre, "wt")))
-        {
-            perror("The file could not be opened");
-            return FILE_ERR;
-        }
+
+    return OK;
+}
+
+int ordenarArchivoTexto(const char* nombre, int(*cmp)(const void*, const void*))
+{
+    int error;
+    char buffer[TAM_BUFFER];
+    FILE* archAOrdenar;
+
+    if((error = abrirArchivo(&archAOrdenar, nombre, "rt")) != OK){
+        return error;
     }
-    else
-    {
-        return FILE_OPEN_MODE_ERR;
+
+    while(fgets(buffer, sizeof(buffer), archAOrdenar)){
+        printf("%s", buffer);
     }
+
+    fclose(archAOrdenar);
+    return OK;
+}
+int ordenarArchivoBinario(const char* nombre, int(*cmp)(const void*, const void*))
+{
+
 
     return OK;
 }

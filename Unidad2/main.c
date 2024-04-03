@@ -7,12 +7,15 @@ int main()
 {
     int error;
 
-    if((error = generarArchivoProductos("datos.txt", "BINARIO")) != OK){
+    if((error = generarArchivoProductos("datos.txt", "TEXTO")) != OK){
         fprintf(stderr, "Error al abrir el archivo: %d", error);
         return error;
     }
 
-//    ordenarArchivoTexto("datos.txt", cmpCodigo);
+    if((error = ordenarArchivoTexto("datos.txt", cmpCodigo)) != OK){
+        fprintf(stderr, "Error al abrir el archivo: %d", error);
+        return error;
+    }
 //    ordenarArchivoBinario("datos.bin", cmpCodigo);
 
 //    cargarPilaConNumeros(&sumando1);

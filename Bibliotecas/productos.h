@@ -30,5 +30,6 @@ typedef struct {
 
 void imprimirProducto(const void* p);
 void generarProductos(tProducto* vecProductos, int cantidad);
+int cmpCodigo(const void* a, const void* b);
 
 #endif // PRODUCTOS_H_INCLUDED
