@@ -9,6 +9,8 @@
 #define TAM_DESCRIPCION 16
 #define TAM_PROVEEDOR 16
 
+#define CANT_PRODUCTOS 30
+
 typedef struct {
     int dia;
     int mes;

@@ -31,6 +31,22 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="../Bibliotecas/archivos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Bibliotecas/archivos.h" />
+		<Unit filename="../Bibliotecas/productos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Bibliotecas/productos.h" />
+		<Unit filename="../TDA/pilaDinamica.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../TDA/pilaDinamica.h" />
+		<Unit filename="../TDA/pilaEstatica.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../TDA/pilaEstatica.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
