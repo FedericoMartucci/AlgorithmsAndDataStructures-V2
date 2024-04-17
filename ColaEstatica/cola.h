@@ -5,11 +5,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define COLA_LLENA 0
-#define COLA_VACIA 0
-#define SIN_MEM 0
-#define OK 1
-#define TAM_COLA 100
+#define COLA_LLENA -6
+#define COLA_VACIA -5
+#define SIN_MEM -4
+#define OK 0
+#define TAM_COLA 90000
 
 #define MINIMO(X, Y) (X < Y? X : Y)
 
