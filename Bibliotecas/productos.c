@@ -1,15 +1,19 @@
 #include "productos.h"
 
-void imprimirProducto(const void* p) {
-    printf("Código: %s\n", ((tProducto*)p)->codigo);
-    printf("Descripción: %s\n", ((tProducto*)p)->descripcion);
-    printf("Proveedor: %s\n", ((tProducto*)p)->proveedor);
-    printf("Fecha de compra: %02d/%02d/%d\n", ((tProducto*)p)->fechaCompra.dia, ((tProducto*)p)->fechaCompra.mes, ((tProducto*)p)->fechaCompra.anio);
-    printf("Fecha de vencimiento: %02d/%02d/%d\n", ((tProducto*)p)->fechaVencimiento.dia, ((tProducto*)p)->fechaVencimiento.mes, ((tProducto*)p)->fechaVencimiento.anio);
-    printf("Cantidad: %d\n", ((tProducto*)p)->cantidad);
-    printf("Precio de compra: %.2f\n", ((tProducto*)p)->precioCompra);
-    printf("Precio de venta: %.2f\n", ((tProducto*)p)->precioVenta);
-    printf("\n");
+void mostrarProducto(FILE* destino, const void* p) {
+    fprintf(destino, "%s|%s|%s|%d/%d/%d|%d/%d/%d|%d|%.2f|%.2f\n",
+            ((tProducto*)p)->codigo,
+            ((tProducto*)p)->descripcion,
+            ((tProducto*)p)->proveedor,
+            ((tProducto*)p)->fechaCompra.dia,
+            ((tProducto*)p)->fechaCompra.mes,
+            ((tProducto*)p)->fechaCompra.anio,
+            ((tProducto*)p)->fechaVencimiento.dia,
+            ((tProducto*)p)->fechaVencimiento.mes,
+            ((tProducto*)p)->fechaVencimiento.anio,
+            ((tProducto*)p)->cantidad,
+            ((tProducto*)p)->precioCompra,
+            ((tProducto*)p)->precioVenta);
 }
 
 void generarProductos(tProducto* vecProductos, int cantidad)
@@ -35,5 +39,84 @@ void generarProductos(tProducto* vecProductos, int cantidad)
 
 int cmpCodigo(const void* a, const void* b)
 {
-    return strcmp(((tProducto*)a)->codigo, ((tProducto*)b)->codigo);
+    return strcmp(((tProducto*)b)->codigo, ((tProducto*)a)->codigo);
+//    return ((tProducto*)a)->cantidad - ((tProducto*)b)->cantidad;
+}
+
+void trozarProducto(char* cadena, void* destino)
+{
+    tProducto* producto = (tProducto*)destino;
+    char* aux;
+
+    aux = strrchr(cadena, '\n');
+    *aux = '\0';
+
+    aux = strrchr(cadena, '|');
+    *aux = '\0';
+    aux ++;
+
+    producto->precioVenta = atof(aux);
+
+    aux = strrchr(cadena, '|');
+    *aux = '\0';
+    aux ++;
+
+    producto->precioCompra = atof(aux);
+
+    aux = strrchr(cadena, '|');
+    *aux = '\0';
+    aux ++;
+
+    producto->cantidad = atoi(aux);
+
+    aux = strrchr(cadena, '/');
+    *aux = '\0';
+    aux ++;
+
+    producto->fechaVencimiento.anio = atoi(aux);
+
+    aux = strrchr(cadena, '/');
+    *aux = '\0';
+    aux ++;
+
+    producto->fechaVencimiento.mes = atoi(aux);
+
+    aux = strrchr(cadena, '|');
+    *aux = '\0';
+    aux ++;
+
+    producto->fechaVencimiento.dia = atoi(aux);
+
+    aux = strrchr(cadena, '/');
+    *aux = '\0';
+    aux ++;
+
+    producto->fechaCompra.anio = atoi(aux);
+
+    aux = strrchr(cadena, '/');
+    *aux = '\0';
+    aux ++;
+
+    producto->fechaCompra.mes = atoi(aux);
+
+    aux = strrchr(cadena, '|');
+    *aux = '\0';
+    aux ++;
+
+    producto->fechaCompra.dia = atoi(aux);
+
+    aux = strrchr(cadena, '|');
+    *aux = '\0';
+    aux ++;
+
+    strcpy(producto->proveedor, aux);
+
+    aux = strrchr(cadena, '|');
+    *aux = '\0';
+    aux ++;
+
+    strcpy(producto->descripcion, aux);
+
+    strcpy(producto->codigo, cadena);
+
 }

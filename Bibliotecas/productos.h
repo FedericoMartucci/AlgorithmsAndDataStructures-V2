@@ -4,12 +4,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #define TAM_CODIGO 8
 #define TAM_DESCRIPCION 16
 #define TAM_PROVEEDOR 16
 
-#define CANT_PRODUCTOS 30
+#define CANT_PRODUCTOS 10000
+#define CANT_NUMEROS 10
 
 typedef struct {
     int dia;
@@ -28,8 +30,9 @@ typedef struct {
     float precioVenta;
 } tProducto;
 
-void imprimirProducto(const void* p);
+void mostrarProducto(FILE* destino, const void* p);
 void generarProductos(tProducto* vecProductos, int cantidad);
+void trozarProducto(char* cadena, void* destino);
 int cmpCodigo(const void* a, const void* b);
 
 #endif // PRODUCTOS_H_INCLUDED
