@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../TDA/pilaDinamica.h"
+#include "../ColaDinamica/cola.h"
 
 #define OK 0
 #define MEM_ERR -2
@@ -18,6 +19,10 @@
 
 #define ATOI(X) (X - '0')
 
+#define CANT_CALCULOS 31
+#define TAM_CALCULO_MAX 100
+
+int generarArchivoCalculos(const char* nombre, const char* tipo);
 int generarArchivoProductos(const char* nombre, const char* tipo);
 int generarArchivoNumeros(const char* nombre, const char* tipo);
 int abrirArchivo(FILE** archivoAAbrir, const char* nombre, const char* tipo);
@@ -29,6 +34,7 @@ int ordenarArchivoBinario(const char* nombre, unsigned tamRegistro,
 int cargarPilaConNumerosDeUnArchTexto(tPila* sumando, const char* nombreArch,
                                       unsigned tamRegistro);
 
+void mostrarCalculo(FILE* destino, const void* p);
 void mostrarNumero(FILE* destino, const void* p);
 int sumarPilas(tPila* sumando1, tPila* sumando2);
 

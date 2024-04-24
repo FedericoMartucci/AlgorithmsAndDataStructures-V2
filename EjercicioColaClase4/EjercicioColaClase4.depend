@@ -1,0 +1,63 @@
+# depslib dependency file v1.0
+1713978418 source:c:\devs\ejerciciocolaclase4\main.c
+	"archivos.h"
+
+1713910850 source:c:\devs\bibliotecas\archivos.c
+	"archivos.h"
+	"productos.h"
+
+1713910883 c:\devs\bibliotecas\archivos.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../TDA/pilaDinamica.h"
+	"../ColaDinamica/cola.h"
+
+1713824176 c:\devs\tda\piladinamica.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1713911094 c:\devs\coladinamica\cola.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1713821883 c:\devs\bibliotecas\productos.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+
+1713818117 source:c:\devs\bibliotecas\productos.c
+	"productos.h"
+
+1713123508 source:c:\devs\coladinamica\cola.c
+	"cola.h"
+
+1712094309 source:c:\devs\ejercitacionpila\piladinamica.c
+	"pilaDinamica.h"
+
+1712094405 c:\devs\ejercitacionpila\piladinamica.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1713977843 source:c:\devs\ejerciciocolaclase4\archivos.c
+	"archivos.h"
+
+1713976821 c:\devs\ejerciciocolaclase4\archivos.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../ColaDinamica/cola.h"
+	"pila.h"
+
+1713961205 c:\devs\ejerciciocolaclase4\pila.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1713961769 source:c:\devs\ejerciciocolaclase4\pila.c
+	"pila.h"
+

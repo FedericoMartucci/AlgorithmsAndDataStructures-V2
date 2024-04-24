@@ -5,10 +5,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define COLA_LLENA 0
-#define COLA_VACIA 0
-#define SIN_MEM 0
-#define OK 1
+#define COLA_LLENA -3
+#define COLA_VACIA -2
+#define SIN_MEM -1
+#define OK 0
 
 #define MINIMO(X, Y) (X < Y? X : Y)
 

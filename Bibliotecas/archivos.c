@@ -1,6 +1,66 @@
 #include "archivos.h"
 #include "productos.h"
 
+int generarArchivoCalculos(const char* nombre, const char* tipo)
+{
+    int error;
+    int i;
+
+    FILE* archivoCalculos;
+    char loteCalculos[CANT_CALCULOS][TAM_CALCULO_MAX] =
+    {
+        "{[((3 + 2) * 4) - [5 + {6 * (4 - 2)}]}",
+        "{[4 * (3 + 5)] - (6 - 2)) * 7",
+        "{[(2 * 3) + 4] - (5 * 6)]}",
+        "{[8 - (4 * 2)] * 3 - {9 + (6 * 2)}}]",
+        "{[3 + {2 * (4 - 3)}]} * (5 - 2)",
+        "{[6 * 2) - {4 * (3 - 2)]}} * 5",
+        "{((3 + 2) * [4 - {5 + (6 * 2)}]}",
+        "{[2 * (3 + 4)] - (5 * 6))} * 7",
+        "(8 - 4) * {2 * [3 - (9 * 2)]}]",
+        "{[(3 * 2) - 4] * (5 + 6)}]",
+        "(2 * 3) + {[4 * (5 - 2)] - 6}",
+        "(7 - {3 * (4 - 2)]}) * 5",
+        "{[8 - (4 * 2)] * 3 - {9 + (6 * 2)}}]",
+        "[3 + {2 * (4 - 3)}]} * (5 - 2)",
+        "{[6 * 2) - {4 * (3 - 2)]}} * 5",
+        "{((3 + 2) * [4 - {5 + (6 * 2)}]}",
+        "{[2 * (3 + 4)] - (5 * 6))} * 7",
+        "(8 - 4) * {2 * [3 - (9 * 2)]}]",
+        "{[(3 * 2) - 4] * (5 + 6)}]",
+        "(2 * 3) + {[4 * (5 - 2)] - 6}",
+        "(7 - {3 * (4 - 2)]}) * 5",
+        "{((3 + 2) * [4 - {5 + (6 * 2)}]",
+        "{[2 * (3 + 4)] - (5 * 6}",
+        "(8 - 4) * {2 * [3 - (9 * 2)]}]",
+        "{[(3 * 2) - 4] * (5 + 6)}",
+        "(2 * 3) + {[4 * (5 - 2)] - 6}",
+        "(7 - {3 * (4 - 2)]}) * 5",
+        "[3 + {2 * (4 - 3)}]} * (5 - 2",
+        "{[6 * 2) - {4 * (3 - 2)]}} * 5",
+        "{((3 + 2) * 4 - {[5 + {6 * (4 - 2)}}}"
+    };
+
+    if(strcmpi(tipo, "BINARIO") == 0)
+    {
+        if((error = abrirArchivo(&archivoCalculos, nombre, "wb")) != OK)
+            return error;
+        fwrite(loteCalculos, TAM_CALCULO_MAX, CANT_CALCULOS, archivoCalculos);
+    }
+    else if(strcmpi(tipo, "TEXTO") == 0)
+    {
+        if((error = abrirArchivo(&archivoCalculos, nombre, "wt")) != OK)
+            return error;
+        for (i = 0; i < CANT_CALCULOS; i++)
+            mostrarCalculo(stdout, &loteCalculos[i]);
+    }
+    else
+        return FILE_OPEN_MODE_ERR;
+
+    fclose(archivoCalculos);
+    return OK;
+}
+
 int generarArchivoProductos(const char* nombre, const char* tipo)
 {
     int error;
@@ -70,7 +130,13 @@ int generarArchivoNumeros(const char* nombre, const char* tipo)
     return OK;
 }
 
-void mostrarNumero(FILE* destino, const void* p) {
+void mostrarCalculo(FILE* destino, const void* p)
+{
+    fprintf(destino, "%s\n", (char*)p);
+}
+
+void mostrarNumero(FILE* destino, const void* p)
+{
     fprintf(destino, "%d", *(int*)p);
 }
 
