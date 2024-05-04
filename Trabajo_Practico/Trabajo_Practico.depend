@@ -1,11 +1,45 @@
 # depslib dependency file v1.0
-1714788141 source:c:\devs\trabajo_practico\main.c
-	"archivos.h"
+1714856835 source:c:\devs\trabajo_practico\main.c
+	"curlReducido.h"
 
-1714788171 c:\devs\trabajo_practico\archivos.h
+1714852536 c:\devs\trabajo_practico\archivos.h
 	<stdio.h>
 	<stdlib.h>
+	"juego.h"
+	"pregunta.h"
 
-1714788238 source:c:\devs\trabajo_practico\archivos.c
+1714852557 source:c:\devs\trabajo_practico\archivos.c
 	"archivos.h"
+
+1714848306 source:c:\devs\trabajo_practico\juego.c
+	"juego.h"
+
+1714848306 c:\devs\trabajo_practico\juego.h
+
+1714850952 source:c:\devs\trabajo_practico\pregunta.c
+	"pregunta.h"
+
+1714852416 c:\devs\trabajo_practico\pregunta.h
+
+1714852875 source:c:\devs\trabajo_practico\curl.c
+	"curl.h"
+
+1714852875 c:\devs\trabajo_practico\curl.h
+	<curl/curl.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"juego.h"
+	"pregunta.h"
+
+1714856893 source:c:\devs\trabajo_practico\curlreducido.c
+	"curlReducido.h"
+
+1714853368 c:\devs\trabajo_practico\curlreducido.h
+	<curl/curl.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"juego.h"
+	"pregunta.h"
 
