@@ -2,19 +2,17 @@
 
 void parsearPregunta(char* json, void* preguntas)
 {
-    cJSON* json_array;
+    cJSON* json_array = cJSON_Parse(json);
     cJSON* item;
     tPregunta* preguntaAux;
     int i;
     int cantPreguntas;
 
-    json_array = cJSON_Parse(json);
     cantPreguntas = cJSON_GetArraySize(json_array);
     preguntaAux = (tPregunta*) preguntas;
-
     if (json_array == NULL)
     {
-        printf("Error parsing JSON.\n");
+        fprintf(stderr, "Error al parsear el JSON.\n");
         return;
     }
 
@@ -24,7 +22,7 @@ void parsearPregunta(char* json, void* preguntas)
         item = cJSON_GetArrayItem(json_array, i);
         if (item == NULL)
         {
-            printf("Error al obtener el item %d del vector del JSON.\n", i);
+            fprintf(stderr, "Error al obtener el item %d del vector del JSON.\n", i);
             return;
         }
 
@@ -35,7 +33,7 @@ void parsearPregunta(char* json, void* preguntas)
         strcpy(preguntaAux->opcion_2, cJSON_GetObjectItem(item, "opcion_2")->valuestring);
         strcpy(preguntaAux->opcion_3, cJSON_GetObjectItem(item, "opcion_3")->valuestring);
         preguntaAux->nivel = cJSON_GetObjectItem(item, "nivel")->valueint;
-        imprimirPregunta(stdout, preguntaAux);
+//        imprimirPregunta(stdout, preguntaAux);
         preguntaAux++;
     }
 

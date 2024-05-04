@@ -1174,6 +1174,7 @@ fail:
         global_error = local_error;
     }
 
+
     return NULL;
 }
 

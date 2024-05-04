@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1714859394 source:c:\devs\trabajo_practico\main.c
+1714863038 source:c:\devs\trabajo_practico\main.c
 	"curlReducido.h"
 	"pregunta.h"
 
@@ -17,7 +17,7 @@
 
 1714848306 c:\devs\trabajo_practico\juego.h
 
-1714860452 source:c:\devs\trabajo_practico\pregunta.c
+1714861658 source:c:\devs\trabajo_practico\pregunta.c
 	"pregunta.h"
 
 1714860360 c:\devs\trabajo_practico\pregunta.h
@@ -36,21 +36,22 @@
 	"juego.h"
 	"pregunta.h"
 
-1714859296 source:c:\devs\trabajo_practico\curlreducido.c
+1714865048 source:c:\devs\trabajo_practico\curlreducido.c
 	"curlReducido.h"
 
-1714857927 c:\devs\trabajo_practico\curlreducido.h
+1714863001 c:\devs\trabajo_practico\curlreducido.h
 	<curl/curl.h>
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"juego.h"
 	"pregunta.h"
+	"archivos.h"
 
 1714859326 c:\devs\trabajo_practico\cjson.h
 	<stddef.h>
 
-1714859321 source:c:\devs\trabajo_practico\cjson.c
+1714862874 source:c:\devs\trabajo_practico\cjson.c
 	<string.h>
 	<stdio.h>
 	<math.h>
