@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../TDA/pilaDinamica.h"
+//#include "../TDA/pilaDinamica.h"
 #include "../ColaDinamica/cola.h"
 
 #define OK 0
@@ -37,5 +37,7 @@ int cargarPilaConNumerosDeUnArchTexto(tPila* sumando, const char* nombreArch,
 void mostrarCalculo(FILE* destino, const void* p);
 void mostrarNumero(FILE* destino, const void* p);
 int sumarPilas(tPila* sumando1, tPila* sumando2);
+
+void ordenarConDosPilasAscendente( tPila* entrada, unsigned tam, int (*comparar)( const void* a, const void* b ) );
 
 #endif // ARCHIVOS_H_INCLUDED

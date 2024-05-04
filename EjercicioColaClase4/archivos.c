@@ -131,7 +131,7 @@ int depurarCalculos(char* inicioCalculo)
         }
         else if(ES_CARACTER_ESPECIAL_FINAL(*inicioCalculo))
         {
-            if(verTopePila(&caracteresEspeciales, &caracterEspecialApilado, sizeof(char)) == OK &&
+            if(verTopePila(&caracteresEspeciales, &caracterEspecialApilado, sizeof(char)) == OK && //
                     esComplemento(*inicioCalculo, caracterEspecialApilado))
             {
                 desapilar(&caracteresEspeciales, &caracterEspecialApilado, sizeof(char));
@@ -194,7 +194,6 @@ void trozarCalculos(char* cadena, void* destino)
         {
             *separador = '\0';
             separador++;
-            *separador = '\0';
         }
         ponerEnCola((tCola*)destino, calculo, strlen(calculo) + 1);
         separador++;

@@ -42,6 +42,10 @@ int cmpCodigo(const void* a, const void* b)
     return strcmp(((tProducto*)b)->codigo, ((tProducto*)a)->codigo);
 //    return ((tProducto*)a)->cantidad - ((tProducto*)b)->cantidad;
 }
+int filtrarCodigo(const void* a, const void* b)
+{
+    return strcmp(((tProducto*)b)->codigo, ((tProducto*)a)->codigo) > 0;
+}
 
 void trozarProducto(char* cadena, void* destino)
 {

@@ -11,7 +11,7 @@
 1713823485 source:c:\devs\tda\piladinamica.c
 	"pilaDinamica.h"
 
-1713824176 c:\devs\tda\piladinamica.h
+1714241414 c:\devs\tda\piladinamica.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -24,18 +24,18 @@
 	<stdlib.h>
 	<string.h>
 
-1713823462 source:c:\devs\unidad2\main.c
+1714241157 source:c:\devs\unidad2\main.c
 	"../TDA/pilaDinamica.h"
 	"../Bibliotecas/productos.h"
 	"../Bibliotecas/archivos.h"
 
-1713825020 c:\devs\bibliotecas\archivos.h
+1714241385 c:\devs\bibliotecas\archivos.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"../TDA/pilaDinamica.h"
 
-1713824543 source:c:\devs\bibliotecas\archivos.c
+1714241792 source:c:\devs\bibliotecas\archivos.c
 	"archivos.h"
 	"productos.h"
 

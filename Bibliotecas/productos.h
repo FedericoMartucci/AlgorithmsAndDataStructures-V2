@@ -10,7 +10,7 @@
 #define TAM_DESCRIPCION 16
 #define TAM_PROVEEDOR 16
 
-#define CANT_PRODUCTOS 10000
+#define CANT_PRODUCTOS 100
 #define CANT_NUMEROS 10
 
 typedef struct {
@@ -34,5 +34,6 @@ void mostrarProducto(FILE* destino, const void* p);
 void generarProductos(tProducto* vecProductos, int cantidad);
 void trozarProducto(char* cadena, void* destino);
 int cmpCodigo(const void* a, const void* b);
+int filtrarCodigo(const void* a, const void* b);
 
 #endif // PRODUCTOS_H_INCLUDED

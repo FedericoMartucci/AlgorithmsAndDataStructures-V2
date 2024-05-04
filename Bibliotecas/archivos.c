@@ -243,6 +243,7 @@ int ordenarArchivoTexto(const char* nombre, unsigned tamRegistro,
     fclose(archOrdenado);
     return OK;
 }
+
 int ordenarArchivoBinario(const char* nombre, unsigned tamRegistro,
                         int(*cmp)(const void*, const void*))
 {
@@ -413,4 +414,80 @@ int sumarPilas(tPila* sumando1, tPila* sumando2)
 
     fclose(archResultado);
     return OK;
+}
+
+
+void ordenarConDosPilasAscendente( tPila* entrada, unsigned tam, int (*comparar)( const void* a, const void* b ) )
+{
+    tPila pMayores;
+    tPila pMenores;
+    void* buffer;
+    void* aux;
+
+    crearPila( &pMayores );
+    crearPila( &pMenores );
+
+    buffer = malloc( tam ); //tam es el tamaño del dato a ordenar
+    if(         !buffer         )
+    {
+        printf("PROBLEMAS RESERVANDO MEMORIA PARA buffer\n");
+        return;
+    }
+
+    aux = malloc(tam);
+    if(         !aux         )
+    {
+        printf("PROBLEMAS RESERVANDO MEMORIA PARA aux\n");
+        free(buffer);
+        return;
+    }
+
+    while(          *entrada         )
+    {
+        desapilar( entrada, buffer, tam );
+        if(         !pMayores           )
+        {
+            apilar( &pMayores, buffer, tam );
+        }
+        else
+        {
+            if(         comparar( pMayores->info, buffer ) > 0         )
+            {
+                while(          pMenores && comparar( buffer, pMenores->info ) < 0          )
+                {
+                    desapilar( &pMenores, aux, tam );
+                    apilar( &pMayores, aux, tam );
+                }
+                apilar( &pMenores, buffer, tam );
+            }
+            else
+            {
+                while(          pMayores && comparar( buffer, pMayores->info ) > 0          )
+                {
+                    desapilar( &pMayores, aux, tam );
+                    apilar( &pMenores, aux, tam );
+                }
+                apilar( &pMayores, buffer, tam );
+            }
+        }
+    }
+
+    while(          pMenores          )
+    {
+        desapilar( &pMenores, buffer, tam );
+        apilar( &pMayores, buffer, tam );
+    }
+
+    //accion( &pMayores );
+
+    while(          pMayores            )
+    {
+        desapilar( &pMayores, buffer, tam );
+        mostrarProducto(stdout, buffer);
+    }
+
+    vaciarPila( &pMayores );    //Lineas de código para asegurar el jamas tener memory leaks aunque en teoria al llegar acá siempre deberian estar vacias las 2 pilas
+    vaciarPila( &pMenores );
+    free( buffer );
+    free( aux );
 }
