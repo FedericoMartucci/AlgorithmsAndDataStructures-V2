@@ -61,9 +61,9 @@ int obtenerPreguntas(CURL** cURL, tPregunta* preguntas, int dificultad, int cant
         return ERROR_SOLICITUD;
     }
 
-    // Analizamos la respuesta JSON y almacenamos las preguntas en la estructura preguntas
-    // Aquí debes implementar el código para parsear la respuesta JSON y almacenar las preguntas en la estructura preguntas
-    printf("Respuesta recibida: %s\n", response);
+    parsearPregunta(response, preguntas);
+
+//    printf("Respuesta recibida: %s\n", response);
 
     return OK;
 }

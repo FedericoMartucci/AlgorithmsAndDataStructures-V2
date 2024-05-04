@@ -1,6 +1,7 @@
 # depslib dependency file v1.0
-1714856835 source:c:\devs\trabajo_practico\main.c
+1714859394 source:c:\devs\trabajo_practico\main.c
 	"curlReducido.h"
+	"pregunta.h"
 
 1714852536 c:\devs\trabajo_practico\archivos.h
 	<stdio.h>
@@ -16,10 +17,13 @@
 
 1714848306 c:\devs\trabajo_practico\juego.h
 
-1714850952 source:c:\devs\trabajo_practico\pregunta.c
+1714860452 source:c:\devs\trabajo_practico\pregunta.c
 	"pregunta.h"
 
-1714852416 c:\devs\trabajo_practico\pregunta.h
+1714860360 c:\devs\trabajo_practico\pregunta.h
+	<stdio.h>
+	<string.h>
+	"cJSON.h"
 
 1714852875 source:c:\devs\trabajo_practico\curl.c
 	"curl.h"
@@ -32,14 +36,28 @@
 	"juego.h"
 	"pregunta.h"
 
-1714856893 source:c:\devs\trabajo_practico\curlreducido.c
+1714859296 source:c:\devs\trabajo_practico\curlreducido.c
 	"curlReducido.h"
 
-1714853368 c:\devs\trabajo_practico\curlreducido.h
+1714857927 c:\devs\trabajo_practico\curlreducido.h
 	<curl/curl.h>
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"juego.h"
 	"pregunta.h"
+
+1714859326 c:\devs\trabajo_practico\cjson.h
+	<stddef.h>
+
+1714859321 source:c:\devs\trabajo_practico\cjson.c
+	<string.h>
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<limits.h>
+	<ctype.h>
+	<float.h>
+	<locale.h>
+	"cJSON.h"
 
