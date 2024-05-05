@@ -1,4 +1,6 @@
 #include "juego.h"
+#include "archivos.h"
+#include "curlReducido.h"
 
 char mostrarMenu()
 {
@@ -24,7 +26,7 @@ char mostrarMenu()
 
 int iniciarJuego()
 {
-    tPregunta preguntas[100];
+    tJuego juego;
     char opcion;
     int estado;
 
@@ -34,8 +36,7 @@ int iniciarJuego()
     {
     case 'A':
         printf("¡Comencemos a jugar!\n");
-        estado = configurarJuego(preguntas);
-//        cargarJugadores();
+        estado = configurarJuego(&juego);
 //        comenzarRondas();
 //        mostrarResultado();
         break;
@@ -48,24 +49,71 @@ int iniciarJuego()
     return estado;
 }
 
-int configurarJuego(tPregunta* bufferPreguntas)
+int configurarJuego(tJuego* juego)
 {
-    CURL *curl;
+    CURL* cURL;
     int estado;
 
-    if ((estado = cargarCURL(&curl)) != OK)
+//        cargarJugadores(juego);
+//        elegirDificultad();
+    if((estado = leerArchivoConfig(juego)) != OK)
+        return estado;
+
+    if ((estado = cargarCURL(&cURL)) != OK)
         return estado;
 
     ///TODO: chequear las siguientes 3 lineas
-    //    if((estado = verificarConectividad(&curl)) != OK ){
+    //    if((estado = verificarConectividad(&cURL)) != OK ){
     //        return estado;
     //    }
 
-    if (curl)
-        estado = obtenerPreguntas(&curl, bufferPreguntas, 1, 8);
+    if (cURL)
+        estado = obtenerPreguntas(&cURL, juego->preguntas, 1, juego->cantRondas);
 
-    liberarCurl(&curl);
-
+    liberarCurl(&cURL);
     return estado;
 }
+
+//int cargarJugadores(tJuego* juego)
+//{
+//    int numJugador = 1;
+//    tJugador jugadorActual;
+//
+//    ingresarNombreJugador(numJugador, &jugadorActual);
+//
+//    while(*(jugadorActual.nombre) != '0')
+//    {
+//        if(juego->jugadoresCargados == NULL)
+//        {
+//            if((juego->jugadoresCargados = malloc(sizeof(tJugador))) == NULL)
+//            {
+//                juego->codigoError = SIN_MEMORIA;
+//                return SIN_MEMORIA;
+//            }
+//        }
+//        else if((juego->jugadoresCargados = (tJugador *)realloc(juego->jugadoresCargados,
+//                                            sizeof(tJugador)*numJugador )) == NULL)
+//        {
+//            juego->codigoError = SIN_MEMORIA;
+//            return SIN_MEMORIA;
+//        }
+//
+//        memcpy(&juego->jugadoresCargados[numJugador - 1], &jugadorActual, sizeof(tJugador));
+//        juego->cantJugadores ++;
+//        numJugador ++;
+//        ingresarNombreJugador(numJugador, &jugadorActual);
+//    }
+//    return TODO_OK;
+//}
+//
+//void ingresarNombreJugador(int numJugador, tJugador* jugadorActual)
+//{
+//    fprintf(stdout, "Ingrese el nombre del jugador %d o ingrese '0' para finalizar\n", numJugador);
+//    scanf("%s", jugadorActual->nombre);
+//
+//    jugadorActual->turno = numJugador;
+//    fflush(stdin);
+//
+//    system("cls");
+//}
 

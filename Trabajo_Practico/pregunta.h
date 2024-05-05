@@ -1,9 +1,9 @@
 #ifndef PREGUNTA_H_INCLUDED
 #define PREGUNTA_H_INCLUDED
 
-
 #include <stdio.h>
 #include <string.h>
+
 #include "cJSON.h"
 
 #define TAM_ID 4
