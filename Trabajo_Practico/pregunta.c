@@ -2,6 +2,7 @@
 
 void parsearPregunta(char* json, void* preguntas)
 {
+
     cJSON* json_array = cJSON_Parse(json);
     cJSON* item;
     tPregunta* preguntaAux;
