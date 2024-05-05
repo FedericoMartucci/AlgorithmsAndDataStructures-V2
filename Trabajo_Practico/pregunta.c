@@ -8,6 +8,9 @@ void parsearPregunta(char* json, void* preguntas)
     tPregunta* preguntaAux;
     int i;
     int cantPreguntas;
+    FILE* arch;
+
+    abrirArchivo(&arch, "prueba.txt", "wt");
 
     cantPreguntas = cJSON_GetArraySize(json_array);
     preguntaAux = (tPregunta*) preguntas;
@@ -34,7 +37,7 @@ void parsearPregunta(char* json, void* preguntas)
         strcpy(preguntaAux->opcion_2, cJSON_GetObjectItem(item, "opcion_2")->valuestring);
         strcpy(preguntaAux->opcion_3, cJSON_GetObjectItem(item, "opcion_3")->valuestring);
         preguntaAux->nivel = cJSON_GetObjectItem(item, "nivel")->valueint;
-//        imprimirPregunta(stdout, preguntaAux);
+        imprimirPregunta(arch, preguntaAux);
         preguntaAux++;
     }
 
