@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-ilei","opcion_2":"Mariano Moreno","opcion_3":"Bartolomé Mitre","nivel":1},{"id":"3","pregunta":"¿Cuál es el monumento más famoso de la ciudad de Buenos Aires?","resp_correcta":"Obelisco","opcion_1":"Casa Rosada","opcion_2":"Teatro Colón","opcion_3":"Recoleta","nivel":1},{"id":"4","pregunta":"¿Cuál es el río más importante de Argentina?","resp_correcta":"Río Paraná","opcion_1":"Río de la Plata","opcion_2":"Río Uruguay","opcion_3":"Río Paraguay","nivel":1},{"id":"5","pregunta":"¿Cuál es el deporte más popular en Argentina?","resp_correcta":"Fútbol","opcion_1":"Rugby","opcion_2":"Hockey","opcion_3":"Tenis","nivel":1},{"id":"16","pregunta":"¿Cuál es el río más largo del mundo?","resp_correcta":"Río Amazonas","opcion_1":"Río Nilo","opcion_2":"Río Yangtsé","opcion_3":"Río Mississippi","nivel":1},{"id":"17","pregunta":"¿En qué país se encuentra la Torre Eiffel?","resp_correcta":"Francia","opcion_1":"Italia","opcion_2":"España","opcion_3":"Reino Unido","nivel":1},{"id":"18","pregunta":"¿Qué planeta es conocido como el 'Planeta Rojo'?","resp_correcta":"Marte","opcion_1":"Venus","opcion_2":"Mercurio","opcion_3":"Júpiter","nivel":1}]
-=======
 ID: 1
 Pregunta: ¿Cuál es la capital de Argentina?
 Respuesta Correcta: Buenos Aires
@@ -65,4 +62,3 @@ Opción 2: Mercurio
 Opción 3: Júpiter
 Nivel: 1
 
->>>>>>> 82404649d3e762583178e51048af169ee03d4c3b
