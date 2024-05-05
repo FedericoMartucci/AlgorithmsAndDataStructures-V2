@@ -1,1 +1,64 @@
-er Milei","opcion_2":"Mariano Moreno","opcion_3":"Bartolomé Mitre","nivel":1},{"id":"3","pregunta":"¿Cuál es el monumento más famoso de la ciudad de Buenos Aires?","resp_correcta":"Obelisco","opcion_1":"Casa Rosada","opcion_2":"Teatro Colón","opcion_3":"Recoleta","nivel":1},{"id":"4","pregunta":"¿Cuál es el río más importante de Argentina?","resp_correcta":"Río Paraná","opcion_1":"Río de la Plata","opcion_2":"Río Uruguay","opcion_3":"Río Paraguay","nivel":1},{"id":"5","pregunta":"¿Cuál es el deporte más popular en Argentina?","resp_correcta":"Fútbol","opcion_1":"Rugby","opcion_2":"Hockey","opcion_3":"Tenis","nivel":1},{"id":"16","pregunta":"¿Cuál es el río más largo del mundo?","resp_correcta":"Río Amazonas","opcion_1":"Río Nilo","opcion_2":"Río Yangtsé","opcion_3":"Río Mississippi","nivel":1},{"id":"17","pregunta":"¿En qué país se encuentra la Torre Eiffel?","resp_correcta":"Francia","opcion_1":"Italia","opcion_2":"España","opcion_3":"Reino Unido","nivel":1},{"id":"18","pregunta":"¿Qué planeta es conocido como el 'Planeta Rojo'?","resp_correcta":"Marte","opcion_1":"Venus","opcion_2":"Mercurio","opcion_3":"Júpiter","nivel":1}]
+ID: 1
+Pregunta: ¿Cuál es la capital de Argentina?
+Respuesta Correcta: Buenos Aires
+Opción 1: Córdoba
+Opción 2: Rosario
+Opción 3: Mendoza
+Nivel: 1
+
+ID: 2
+Pregunta: ¿Quién fue el primer presidente de Argentina?
+Respuesta Correcta: Bernardino Rivadavia
+Opción 1: Javier Milei
+Opción 2: Mariano Moreno
+Opción 3: Bartolomé Mitre
+Nivel: 1
+
+ID: 3
+Pregunta: ¿Cuál es el monumento más famoso de la ciudad de Buenos Aires?
+Respuesta Correcta: Obelisco
+Opción 1: Casa Rosada
+Opción 2: Teatro Colón
+Opción 3: Recoleta
+Nivel: 1
+
+ID: 4
+Pregunta: ¿Cuál es el río más importante de Argentina?
+Respuesta Correcta: Río Paraná
+Opción 1: Río de la Plata
+Opción 2: Río Uruguay
+Opción 3: Río Paraguay
+Nivel: 1
+
+ID: 5
+Pregunta: ¿Cuál es el deporte más popular en Argentina?
+Respuesta Correcta: Fútbol
+Opción 1: Rugby
+Opción 2: Hockey
+Opción 3: Tenis
+Nivel: 1
+
+ID: 16
+Pregunta: ¿Cuál es el río más largo del mundo?
+Respuesta Correcta: Río Amazonas
+Opción 1: Río Nilo
+Opción 2: Río Yangtsé
+Opción 3: Río Mississippi
+Nivel: 1
+
+ID: 17
+Pregunta: ¿En qué país se encuentra la Torre Eiffel?
+Respuesta Correcta: Francia
+Opción 1: Italia
+Opción 2: España
+Opción 3: Reino Unido
+Nivel: 1
+
+ID: 18
+Pregunta: ¿Qué planeta es conocido como el 'Planeta Rojo'?
+Respuesta Correcta: Marte
+Opción 1: Venus
+Opción 2: Mercurio
+Opción 3: Júpiter
+Nivel: 1
+
