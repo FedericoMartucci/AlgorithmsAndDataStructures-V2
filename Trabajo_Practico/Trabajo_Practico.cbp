@@ -35,9 +35,25 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="archivos.h" />
+		<Unit filename="cJSON.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="cJSON.h" />
+		<Unit filename="curlReducido.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="curlReducido.h" />
+		<Unit filename="juego.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="juego.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="pregunta.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="pregunta.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

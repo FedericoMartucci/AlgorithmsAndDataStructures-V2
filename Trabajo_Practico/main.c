@@ -2,10 +2,12 @@
 #include "curlReducido.h"
 #include "pregunta.h"
 
+
 int main() {
     CURL *curl;
-
+//    setlocale(LC_ALL, "spanish");
     tPregunta preguntas[100]; // Suponiendo que almacenarás un máximo de 100 preguntas
+
 
     if (cargarCURL(&curl) != OK)
     {
