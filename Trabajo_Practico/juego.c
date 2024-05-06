@@ -39,7 +39,7 @@ int iniciarJuego()
         estado = configurarJuego(&juego);
         mostrarOrdenJuego(&juego);
         mostrarInformacionJuego(&juego);
-//        comenzarRondas();
+        iniciarTrivia(&juego);
 //        mostrarResultado();
         break;
     case 'B':
@@ -50,16 +50,18 @@ int iniciarJuego()
 
     return estado;
 }
-
+/// Funcion de debugging
 void imprimirDatosJuego(tJuego* juego)
 {
     printf("Rondas: %d\n", juego->cantRondas);
     printf("Tiempo ronda: %d\n", juego->tiempoRonda);
     printf("Cant jugadores: %d\n", juego->cantJugadores);
+
     for(int i = 0; i < juego->cantJugadores; i++)
         printf("Jugador %d: %s\n", i, juego->jugadores[i].nombre);
     for(int i = 0; i < juego->cantRondas; i++)
         imprimirPregunta(stdout, &juego->preguntas[i]);
+
     printf("Dificultad: %d\n", juego->dificultad);
 }
 
@@ -132,7 +134,39 @@ void mostrarInformacionJuego(const tJuego* juego)
 {
     printf("\nCantidad de rondas: %d\n", juego->cantRondas);
     printf("Tiempo por ronda: %d\n", juego->tiempoRonda);
+}
 
-    printf("\n%s, ¿estás listo para iniciar el juego?", juego->jugadores[0].nombre);
-    system("pause");
+void iniciarTrivia(tJuego* juego)
+{
+    int i;
+    int rondaActual;
+//    char respuesta;
+    char opciones[CANT_OPCIONES][TAM_OPCION];
+
+    for(i = 0; i < juego->cantJugadores; i++)
+    {
+        printf("\n%s, ¿estás listo para iniciar el juego?\n", juego->jugadores[i].nombre);
+        printf("Si esta listo, ingrese una tecla para comenzar...\n");
+        getch();
+        fflush(stdin);
+        system("cls");
+        printf("Jugador actual: %s\n", juego->jugadores[i].nombre);
+
+        for(rondaActual = 0; rondaActual < juego->cantRondas; rondaActual++)
+        {
+            cargarYMezclarOpciones(opciones, &juego->preguntas[rondaActual]);
+            printf("Pregunta %d: %s\n", rondaActual + 1, juego->preguntas[rondaActual].pregunta);
+            for (int i = 0; i < CANT_OPCIONES; i++)
+                printf("%c- %s\n", 'A' + i, opciones[i]);
+            printf("Respuesta: ");
+//            obtenerPalabraduranteNSegundos(palabra,juego->tiempoRound);
+//            memcpy(juego->tableroResp[i][rondaActual].palabra, respuesta, sizeof(char));
+        }
+        puts("Su turno a finalizado, ingrese una tecla para continuar");
+        getch();
+        system("cls");
+    }
+    puts("Juego terminado, ingrese cualquier tecla para continuar");
+    getch();
+    system("cls");
 }

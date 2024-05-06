@@ -10,16 +10,17 @@ enum eDificultad
 
 #define TAM_ID 4
 #define TAM_PREGUNTA 256
-#define TAM_RESPUESTA 256
+#define TAM_OPCION 256
+#define CANT_OPCIONES 4
 
 typedef struct
 {
     char id[TAM_ID];
     char pregunta[TAM_PREGUNTA];
-    char resp_correcta[TAM_RESPUESTA];
-    char opcion_1[TAM_RESPUESTA];
-    char opcion_2[TAM_RESPUESTA];
-    char opcion_3[TAM_RESPUESTA];
+    char resp_correcta[TAM_OPCION];
+    char opcion_1[TAM_OPCION];
+    char opcion_2[TAM_OPCION];
+    char opcion_3[TAM_OPCION];
     enum eDificultad nivel;
 } tPregunta;
 

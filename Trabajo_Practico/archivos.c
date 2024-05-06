@@ -27,7 +27,9 @@ int leerArchivoConfig(tJuego* juego)
 
     fclose(archConfig);
 
-    if(juego->cantRondas < MIN_RONDAS || juego->cantRondas > MAX_RONDAS || juego->tiempoRonda < MIN_TIEMPO_RONDA)
+    if(juego->cantRondas < MIN_RONDAS ||
+       juego->cantRondas > MAX_RONDAS ||
+       juego->tiempoRonda < MIN_TIEMPO_RONDA)
         return ERROR_PARAMETROS;
 
     return OK;

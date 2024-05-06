@@ -1,4 +1,5 @@
 #include "curlReducido.h"
+#include "juego.h"
 
 ///PROBLEMA, LAS SOLICITUDES HTTP MANDAN DATOS DE A PARTES  -> SOLUCION, ESPERAR A RECIBIR TODO Y DESPUÉS PARSEAR
 ///La función write_callback se llama cada vez que libcurl recibe datos del servidor

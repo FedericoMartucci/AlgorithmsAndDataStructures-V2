@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <conio.h>
 #include <time.h>
 
 #include "curlReducido.h"
@@ -19,5 +20,6 @@ void elegirDificultad(tJuego* juego);
 void mezclar(void* item, int cantElementos, void(*mezclarImpl)(void*, int));
 void mostrarOrdenJuego(const tJuego* juego);
 void mostrarInformacionJuego(const tJuego* juego);
+void iniciarTrivia(tJuego* juego);
 
 #endif // JUEGO_H_INCLUDED

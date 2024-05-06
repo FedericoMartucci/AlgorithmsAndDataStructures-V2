@@ -1,4 +1,5 @@
 #include "pregunta.h"
+#include "juego.h"
 
 void parsearPregunta(char* json, void* preguntas)
 {
@@ -72,7 +73,6 @@ void mezclarPreguntas(void* preguntas, int cantPreguntas)
     }
 }
 
-
 void intercambiarPreguntas(tPregunta* preguntaA, tPregunta* preguntaB)
 {
     tPregunta temp;
@@ -80,4 +80,38 @@ void intercambiarPreguntas(tPregunta* preguntaA, tPregunta* preguntaB)
     memcpy(&temp, preguntaA, sizeof(tPregunta));
     memcpy(preguntaA, preguntaB, sizeof(tPregunta));
     memcpy(preguntaB, &temp, sizeof(tPregunta));
+}
+
+void cargarYMezclarOpciones(char opciones[][TAM_OPCION],
+                            const tPregunta* pregunta)
+{
+    strcpy(opciones[0], pregunta->resp_correcta);
+    strcpy(opciones[1], pregunta->opcion_1);
+    strcpy(opciones[2], pregunta->opcion_2);
+    strcpy(opciones[3], pregunta->opcion_3);
+
+    mezclar(opciones, CANT_OPCIONES, mezclarOpciones);
+}
+
+void mezclarOpciones(void* opciones, int cantOpciones)
+{
+    int i;
+    int j;
+
+    for(i = cantOpciones - 1; i > 0; i--)
+    {
+        j = rand() % (i + 1);
+        if (i != j)
+            intercambiarOpciones(opciones + TAM_OPCION * i,
+                                 opciones + TAM_OPCION * j);
+    }
+}
+
+void intercambiarOpciones(char* opcionA, char* opcionB)
+{
+    char temp[TAM_OPCION];
+
+    strcpy(temp, opcionA);
+    strcpy(opcionA, opcionB);
+    strcpy(opcionB, temp);
 }
