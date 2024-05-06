@@ -16,14 +16,14 @@
 	"pregunta.h"
 	"archivos.h"
 
-1714954513 c:\devs\trabajo_practico\archivos.h
+1715030908 c:\devs\trabajo_practico\archivos.h
 	"juego.h"
 	"estructuras.h"
 
-1714960620 source:c:\devs\trabajo_practico\archivos.c
+1715034379 source:c:\devs\trabajo_practico\archivos.c
 	"archivos.h"
 
-1715027104 source:c:\devs\trabajo_practico\juego.c
+1715030962 source:c:\devs\trabajo_practico\juego.c
 	"juego.h"
 	"archivos.h"
 	"curlReducido.h"
@@ -43,11 +43,11 @@
 
 1714852875 D
 
-1714963586 source:c:\devs\trabajo_practico\pregunta.c
+1715034379 source:c:\devs\trabajo_practico\pregunta.c
 	"pregunta.h"
 	"juego.h"
 
-1714962873 c:\devs\trabajo_practico\pregunta.h
+1715034379 c:\devs\trabajo_practico\pregunta.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

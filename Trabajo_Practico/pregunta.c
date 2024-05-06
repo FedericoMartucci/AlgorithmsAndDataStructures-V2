@@ -115,3 +115,14 @@ void intercambiarOpciones(char* opcionA, char* opcionB)
     strcpy(opcionA, opcionB);
     strcpy(opcionB, temp);
 }
+
+char obtenerLetra(const char* opcion, const tPregunta* pregunta)
+{
+    if (strcmp(opcion, pregunta->opcion_1) == 0)
+        return 'A';
+    else if (strcmp(opcion, pregunta->opcion_2) == 0)
+        return 'B';
+    else if (strcmp(opcion, pregunta->opcion_3) == 0)
+        return 'C';
+    return 'D';
+}

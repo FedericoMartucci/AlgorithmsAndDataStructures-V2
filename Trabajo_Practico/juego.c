@@ -35,13 +35,12 @@ int iniciarJuego()
     switch(opcion)
     {
     case 'A':
-        printf("¡Comencemos a jugar!\n");
         estado = configurarJuego(&juego);
         mostrarOrdenJuego(&juego);
         mostrarInformacionJuego(&juego);
         iniciarTrivia(&juego);
         determinarPuntos(&juego);
-//        mostrarResultado();
+        estado = imprimirResultados(&juego);
         break;
     case 'B':
         printf("¡Hasta luego!\n");
@@ -50,20 +49,6 @@ int iniciarJuego()
     }
 
     return estado;
-}
-/// Funcion de debugging
-void imprimirDatosJuego(tJuego* juego)
-{
-    printf("Rondas: %d\n", juego->cantRondas);
-    printf("Tiempo ronda: %d\n", juego->tiempoRonda);
-    printf("Cant jugadores: %d\n", juego->cantJugadores);
-
-    for(int i = 0; i < juego->cantJugadores; i++)
-        printf("Jugador %d: %s\n", i, juego->jugadores[i].nombre);
-    for(int i = 0; i < juego->cantRondas; i++)
-        imprimirPregunta(stdout, &juego->preguntas[i]);
-
-    printf("Dificultad: %d\n", juego->dificultad);
 }
 
 int configurarJuego(tJuego* juego)
@@ -90,8 +75,6 @@ int configurarJuego(tJuego* juego)
         estado = obtenerPreguntas(&cURL, juego->preguntas, juego->dificultad, juego->cantRondas);
 
     liberarCurl(&cURL);
-
-//    imprimirDatosJuego(juego);
 
     return estado;
 }
@@ -141,7 +124,7 @@ void mostrarOrdenJuego(const tJuego* juego)
 void mostrarInformacionJuego(const tJuego* juego)
 {
     printf("\nCantidad de rondas: %d\n", juego->cantRondas);
-    printf("Tiempo por ronda: %d\n", juego->tiempoRonda);
+    printf("Tiempo por ronda: %d\n\n", juego->tiempoRonda);
 }
 
 void iniciarTrivia(tJuego* juego)
@@ -158,7 +141,7 @@ void iniciarTrivia(tJuego* juego)
 
     for(i = 0; i < juego->cantJugadores; i++)
     {
-        printf("\n%s, ¿estás listo para iniciar el juego?\n", juego->jugadores[i].nombre);
+        printf("%s, ¿estás listo para iniciar el juego?\n", juego->jugadores[i].nombre);
         printf("Si esta listo, ingrese una tecla para comenzar...\n");
         getch();
         fflush(stdin);
@@ -277,58 +260,6 @@ int obtenerCorrectasEnMenorTiempo(const tJugador* jugadores, int cantJugadores,
 
     return correctasEnMenorTiempo;
 }
-
-//void imprimirResultados(tJuego* juego)
-//{
-//    FILE *pfInforme;
-//    time_t tiempoTranscurrido = time(NULL);
-//    struct tm *fechaHora = localtime(&tiempoTranscurrido);
-//    char nombreArch[TAM_NOMBRE_INFORME];
-//    snprintf(nombreArch, sizeof(nombreArch), "informe-juego_%4d-%02d-%02d-%02d-%02d.txt",
-//             (fechaHora->tm_year + 1900), (fechaHora->tm_mon + 1), fechaHora->tm_mday, fechaHora->tm_hour, fechaHora->tm_min);
-//    if( (pfInforme = fopen(nombreArch, "wt"))==NULL )
-//        juego->codigoError=ERROR_CREACION_ARCHIVO;
-//    generarImpresion(juego,pfInforme);
-//    fclose(pfInforme);
-//
-//    generarImpresion(juego,stdout);
-//}
-
-//void generarImpresion(tJuego * juego, FILE* salida)
-//{
-//    tJugador jugadorActual;
-//    fprintf(salida,"LETRA-JUGADOR ");
-//
-//    mapInOrdenConContexto(&juego->jugadores,salida,imprimirNombreJugador);  //imprime los nombres de los jugadores en orden al turno
-//
-//    fprintf(salida,"\n");
-//    for(int rondaActual=0; rondaActual < juego->cantRondas; rondaActual++)
-//    {
-//        fprintf(salida,"  %c:          ", juego->letras[rondaActual]);
-//        for(int i=0; i<juego->cantJugadores; i++)
-//        {
-//            fprintf(salida,"%-17s%2d  ",juego->tableroResp[i][rondaActual].palabra,
-//                    juego->tableroResp[i][rondaActual].puntos);
-//        }
-//        fprintf(salida,"\n");
-//    }
-//    fprintf(salida,"RESULT:       ");
-//    for(int i=0; i<juego->cantJugadores; i++)
-//        fprintf(salida,"                 %2d  ",juego->resultados[i]);
-//    fprintf(salida,"\n");
-//    fprintf(salida,"GANADORES: ");
-//    for(int i=0; i<juego->cantJugadores; i++)
-//    {
-//        if(juego->resultados[i]==juego->puntajeGanador)
-//        {
-//            jugadorActual.turno=i+1;
-//            obtenerDatoPorClaveArbol(&juego->jugadores,&jugadorActual,sizeof(tJugador),compararTurnos);
-//            fprintf(salida,"|%s| ", jugadorActual.nombre);
-//        }
-//    }
-//    fprintf(salida,"\nPUNTAJE GANADOR:%d\n",juego->puntajeGanador);
-//}
-
 
 //void cerrarJuego(tJuego* juego)
 //{
