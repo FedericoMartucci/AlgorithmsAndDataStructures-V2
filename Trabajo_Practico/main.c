@@ -3,6 +3,7 @@
 int main()
 {
     int estado;
+    srand(time(NULL));
 
     estado = iniciarJuego();
 

@@ -67,6 +67,7 @@ int configurarJuego(tJuego* juego)
     int estado;
 
     cargarJugadores(juego);
+    mezclarJugadores(juego);
     elegirDificultad(juego);
 
     if((estado = leerArchivoConfig(juego)) != OK)
