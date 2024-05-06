@@ -239,9 +239,11 @@ void determinarPuntos(tJuego* juego)
     {
         correctasEnMenorTiempoPorRonda = obtenerCorrectasEnMenorTiempo(juego->jugadores, juego->cantJugadores, ronda, juego->menorTiempoRespuesta[ronda]);
         for (jugador = 0; jugador < juego->cantJugadores; jugador++)
+        {
             calcularPuntajePorJugador(&juego->jugadores[jugador], ronda,
                                       juego->menorTiempoRespuesta[ronda],
                                       correctasEnMenorTiempoPorRonda);
+        }
     }
 }
 
@@ -259,59 +261,4 @@ int obtenerCorrectasEnMenorTiempo(const tJugador* jugadores, int cantJugadores,
             correctasEnMenorTiempo++;
 
     return correctasEnMenorTiempo;
-}
-
-//void cerrarJuego(tJuego* juego)
-//{
-//    ///se libera todo la informacion, tipo vaciar, liberar, free, esto debe ir despues del la funcion
-//
-//    if(juego->tableroResp!=NULL)
-//        for(int i=0; i<juego->cantJugadores; i++)
-//            if(juego->tableroResp[i]!=NULL)
-//                free(juego->tableroResp[i]);
-//
-//    if(juego->tableroResp!=NULL)
-//        free(juego->tableroResp);
-//    if(juego->resultados!=NULL)
-//        free(juego->resultados);
-//    if(juego->letras!=NULL)
-//        free(juego->letras);
-//    if(juego->ordenes!=NULL)
-//        free(juego->ordenes);
-//    if(juego->jugadoresCargados!=NULL)
-//        free(juego->jugadoresCargados);
-//    vaciarArbol(&juego->jugadores);     ///vaciar arbol
-//    liberarCurl(&juego->curl);
-//
-//}
-
-void calcularPuntajePorJugador(tJugador* jugador, int nroRonda, int menorTiempo,
-                               int correctasEnMenorTiempoPorRonda)
-{
-    if (jugador->respuestas[nroRonda].esCorrecta)
-    {
-        if (jugador->respuestas[nroRonda].tiempoDeRespuesta == menorTiempo)
-        {
-            if(correctasEnMenorTiempoPorRonda <= 1)
-            {
-                jugador->respuestas[nroRonda].puntaje = PUNTOS_RESPUESTA_CORRECTA_UNICA_MAS_RAPIDA;
-                jugador->puntaje += PUNTOS_RESPUESTA_CORRECTA_UNICA_MAS_RAPIDA;
-            }
-            else
-            {
-                jugador->respuestas[nroRonda].puntaje = PUNTOS_RESPUESTA_CORRECTA_NO_UNICA_MAS_RAPIDA;
-                jugador->puntaje += PUNTOS_RESPUESTA_CORRECTA_NO_UNICA_MAS_RAPIDA;
-            }
-        }
-        else
-        {
-            jugador->respuestas[nroRonda].puntaje = PUNTOS_RESPUESTA_CORRECTA_MENOS_RAPIDA;
-            jugador->puntaje += PUNTOS_RESPUESTA_CORRECTA_MENOS_RAPIDA;
-        }
-    }
-    else if (strcmp(jugador->respuestas[nroRonda].opcion, "") != 0)
-    {
-        jugador->respuestas[nroRonda].puntaje = PUNTOS_RESPUESTA_INCORRECTA;
-        jugador->puntaje += PUNTOS_RESPUESTA_INCORRECTA;
-    }
 }

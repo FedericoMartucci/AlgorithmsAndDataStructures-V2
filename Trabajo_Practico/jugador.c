@@ -56,3 +56,34 @@ void intercambiarJugadores(tJugador* jugadorA, tJugador* jugadorB)
     memcpy(jugadorA, jugadorB, sizeof(tJugador));
     memcpy(jugadorB, &temp, sizeof(tJugador));
 }
+
+void calcularPuntajePorJugador(tJugador* jugador, int nroRonda, int menorTiempo,
+                               int correctasEnMenorTiempoPorRonda)
+{
+    if (jugador->respuestas[nroRonda].esCorrecta)
+    {
+        if (jugador->respuestas[nroRonda].tiempoDeRespuesta == menorTiempo)
+        {
+            if(correctasEnMenorTiempoPorRonda <= 1)
+            {
+                jugador->respuestas[nroRonda].puntaje = PUNTOS_RESPUESTA_CORRECTA_UNICA_MAS_RAPIDA;
+                jugador->puntaje += PUNTOS_RESPUESTA_CORRECTA_UNICA_MAS_RAPIDA;
+            }
+            else
+            {
+                jugador->respuestas[nroRonda].puntaje = PUNTOS_RESPUESTA_CORRECTA_NO_UNICA_MAS_RAPIDA;
+                jugador->puntaje += PUNTOS_RESPUESTA_CORRECTA_NO_UNICA_MAS_RAPIDA;
+            }
+        }
+        else
+        {
+            jugador->respuestas[nroRonda].puntaje = PUNTOS_RESPUESTA_CORRECTA_MENOS_RAPIDA;
+            jugador->puntaje += PUNTOS_RESPUESTA_CORRECTA_MENOS_RAPIDA;
+        }
+    }
+    else if (strcmp(jugador->respuestas[nroRonda].opcion, "") != 0)
+    {
+        jugador->respuestas[nroRonda].puntaje = PUNTOS_RESPUESTA_INCORRECTA;
+        jugador->puntaje += PUNTOS_RESPUESTA_INCORRECTA;
+    }
+}

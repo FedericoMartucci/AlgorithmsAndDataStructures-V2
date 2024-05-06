@@ -11,5 +11,7 @@ void cargarJugadores(tJuego* juego);
 void ingresarNombreJugador(int numJugador, tJugador* jugadorActual);
 void mezclarJugadores(void* juego, int cantJugadores);
 void intercambiarJugadores(tJugador* jugadorA, tJugador* jugadorB);
+void calcularPuntajePorJugador(tJugador* jugador, int nroRonda, int menorTiempo,
+                               int correctasEnMenorTiempoPorRonda);
 
 #endif // JUGADOR_H_INCLUDED

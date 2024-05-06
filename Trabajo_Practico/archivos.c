@@ -70,6 +70,9 @@ void generarImpresion(FILE* salida, const tJuego* juego)
 {
     int ronda;
     int jugador;
+    int puntajeMaximo;
+
+    calcularPuntajeMaximo(juego->jugadores, &puntajeMaximo, juego->cantJugadores);
 
     for (ronda = 0; ronda < juego->cantRondas; ronda++)
     {
@@ -101,8 +104,24 @@ void generarImpresion(FILE* salida, const tJuego* juego)
 
     fprintf(salida, "Total\n");
     for (jugador = 0; jugador < juego->cantJugadores; jugador++)
-        fprintf(salida, "\t%s:\t%-03d puntos\n",
+        fprintf(salida, "\t%s:\t%4d puntos\n",
                 juego->jugadores[jugador].nombre,
                 juego->jugadores[jugador].puntaje);
-    fprintf(salida, "Ganador/es: ");
+
+    fprintf(salida, "Ganador/es:\n");
+    for (jugador = 0; jugador < juego->cantJugadores; jugador++)
+        if (juego->jugadores[jugador].puntaje == puntajeMaximo)
+            fprintf(salida, "\t%s\n", juego->jugadores[jugador].nombre);
+
+}
+
+void calcularPuntajeMaximo(const tJugador* jugadores, int* puntajeMaximo, int cantJugadores)
+{
+    int jugador;
+
+    *puntajeMaximo = jugadores[0].puntaje;
+
+    for (jugador = 1; jugador < cantJugadores; jugador++)
+        if (jugadores[jugador].puntaje > *puntajeMaximo)
+            *puntajeMaximo = jugadores[jugador].puntaje;
 }

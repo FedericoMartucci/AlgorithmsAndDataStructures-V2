@@ -15,5 +15,6 @@ int abrirArchivo(FILE** archivoAAbrir, const char* nombreArchivo, const char* mo
 int leerArchivoConfig(tJuego* juego);
 int imprimirResultados(const tJuego* juego);
 void generarImpresion(FILE* salida, const tJuego* juego);
+void calcularPuntajeMaximo(const tJugador* jugadores, int* puntajeMaximo, int cantJugadores);
 
 #endif // ARCHIVOS_H_INCLUDED
