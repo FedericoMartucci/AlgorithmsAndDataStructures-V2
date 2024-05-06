@@ -103,13 +103,20 @@ void elegirDificultad(tJuego* juego)
     fflush(stdin);
     scanf("%7s", dificultad);
 
-    if (strcmpi(dificultad, "FACIL") == 0) {
+    if (strcmpi(dificultad, "FACIL") == 0)
+    {
         juego->dificultad = FACIL;
-    } else if (strcmpi(dificultad, "MEDIO") == 0) {
+    }
+    else if (strcmpi(dificultad, "MEDIO") == 0)
+    {
         juego->dificultad = MEDIO;
-    } else if (strcmpi(dificultad, "DIFICIL") == 0) {
+    }
+    else if (strcmpi(dificultad, "DIFICIL") == 0)
+    {
         juego->dificultad = DIFICIL;
-    } else {
+    }
+    else
+    {
         juego->dificultad = DIFICIL;
     }
 
@@ -140,7 +147,7 @@ void iniciarTrivia(tJuego* juego)
 {
     int i;
     int rondaActual;
-//    char respuesta;
+    char respuesta = '\0';
     char opciones[CANT_OPCIONES][TAM_OPCION];
 
     for(i = 0; i < juego->cantJugadores; i++)
@@ -150,23 +157,70 @@ void iniciarTrivia(tJuego* juego)
         getch();
         fflush(stdin);
         system("cls");
-        printf("Jugador actual: %s\n", juego->jugadores[i].nombre);
+        printf("Jugador actual: %s", juego->jugadores[i].nombre);
 
         for(rondaActual = 0; rondaActual < juego->cantRondas; rondaActual++)
         {
+            puts("");
             cargarYMezclarOpciones(opciones, &juego->preguntas[rondaActual]);
-            printf("Pregunta %d: %s\n", rondaActual + 1, juego->preguntas[rondaActual].pregunta);
+            printf("\nPregunta %d: %s\n", rondaActual + 1, juego->preguntas[rondaActual].pregunta);
             for (int i = 0; i < CANT_OPCIONES; i++)
                 printf("%c- %s\n", 'A' + i, opciones[i]);
             printf("Respuesta: ");
-//            obtenerPalabraduranteNSegundos(palabra,juego->tiempoRound);
+            iniciarTemporizador(respuesta, juego->tiempoRonda);
 //            memcpy(juego->tableroResp[i][rondaActual].palabra, respuesta, sizeof(char));
         }
-        puts("Su turno a finalizado, ingrese una tecla para continuar");
+        printf("\n\nSu turno ha finalizado, ingrese una tecla para continuar");
         getch();
         system("cls");
     }
     puts("Juego terminado, ingrese cualquier tecla para continuar");
     getch();
     system("cls");
+}
+
+void iniciarTemporizador(char respuesta, int tiempoLimite)
+{
+    char key;
+    time_t startTime;
+    int cursorPosition ;  // Posición del cursor en el buffer
+
+    respuesta = '\0';
+    startTime = time(NULL);
+    cursorPosition = 0;
+
+    while (difftime(time(NULL), startTime) < tiempoLimite)
+    {
+        usleep(1000);  // duerme la entrada cada 1 milisegundos, importante asi para no cargar al procesador en un bucle hiper rapido
+        if (_kbhit())
+        {
+            // Si el usuario presiona una tecla, la almacenamos
+            key = _getch();
+            if (key == RETORNO_DE_CARRO)    // Tecla Enter
+            {
+                break;        // Salir si se presiona Enter
+            }
+            else if (key == BACKSPACE)      // Retroceso (Backspace)
+            {
+                if (cursorPosition > 0)
+                {
+                    // Solo retroceder si no estamos al principio del buffer
+                    cursorPosition--;
+                    printf("\b \b");  // Retrocede y borra un carácter en la pantalla
+                    respuesta = '\0';  // Borra el carácter retrocedido en el buffer
+                }
+            }
+            else
+            {
+                // Almacena el carácter en el buffer y muestra en pantalla
+                respuesta = key;
+//                palabra[cursorPosition+1] = '\0';
+                printf("%c", key);
+                cursorPosition = (cursorPosition + 1) % (TAM_OPCION - 1);      //si supera a max, significa que vuelve a la misma
+            }
+        }
+    }
+    if(difftime(time(NULL), startTime) >= tiempoLimite)
+        puts(" - No puede contestar, el tiempo ha finalizado");
+    fflush(stdin);  // por la dudas, habria que fijarse si deberia estar
 }

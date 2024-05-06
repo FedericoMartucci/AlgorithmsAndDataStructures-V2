@@ -23,18 +23,19 @@
 1714960620 source:c:\devs\trabajo_practico\archivos.c
 	"archivos.h"
 
-1714962713 source:c:\devs\trabajo_practico\juego.c
+1714964990 source:c:\devs\trabajo_practico\juego.c
 	"juego.h"
 	"archivos.h"
 	"curlReducido.h"
 
-1714962810 c:\devs\trabajo_practico\juego.h
+1714964962 c:\devs\trabajo_practico\juego.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 	<conio.h>
 	<time.h>
+	<unistd.h>
 	"curlReducido.h"
 	"pregunta.h"
 	"jugador.h"
