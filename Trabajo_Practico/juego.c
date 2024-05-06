@@ -169,8 +169,8 @@ void iniciarTrivia(tJuego* juego)
             for (int i = 0; i < CANT_OPCIONES; i++)
                 printf("%c- %s\n", 'A' + i, opciones[i]);
             printf("Respuesta: ");
-            iniciarTemporizador(respuesta, juego->tiempoRonda);
-//            memcpy(juego->tableroResp[i][rondaActual].palabra, respuesta, sizeof(char));
+            juego->jugadores[i].respuestas[rondaActual].tiempoDeRespuesta = iniciarTemporizador(&respuesta, juego->tiempoRonda);;
+            juego->jugadores[i].respuestas[rondaActual].opcion = respuesta;
         }
         printf("\n\nSu turno ha finalizado, ingrese una tecla para continuar");
         getch();
@@ -181,12 +181,13 @@ void iniciarTrivia(tJuego* juego)
     system("cls");
 }
 
-void iniciarTemporizador(char respuesta, int tiempoLimite)
+int iniciarTemporizador(char* respuesta, int tiempoLimite)
 {
     char key;
     time_t startTime;
     int cursorPosition ;  // Posición del cursor en el buffer
 
+    *respuesta = '\0';
     startTime = time(NULL);
     cursorPosition = 0;
 
@@ -208,14 +209,14 @@ void iniciarTemporizador(char respuesta, int tiempoLimite)
                     // Solo retroceder si no estamos al principio del buffer
                     cursorPosition--;
                     printf("\b \b");  // Retrocede y borra un carácter en la pantalla
-                    respuesta = '\0';  // Borra el carácter retrocedido en el buffer
+                    *respuesta = '\0';  // Borra el carácter retrocedido en el buffer
                 }
             }
             else if (esLetraValida(toupper(key)) && cursorPosition == 0)
             {
                 // Almacena el carácter en el buffer y muestra en pantalla
-                respuesta = key;
-                printf("%c", key);
+                *respuesta = key;
+                printf("%c", toupper(key));
                 cursorPosition++;
             }
         }
@@ -223,8 +224,8 @@ void iniciarTemporizador(char respuesta, int tiempoLimite)
 
     if(difftime(time(NULL), startTime) >= tiempoLimite)
         printf("- No puede contestar, el tiempo ha finalizado");
-
     fflush(stdin);
+    return (int)difftime(time(NULL), startTime);
 }
 
 int esLetraValida(char key)
