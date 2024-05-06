@@ -7,8 +7,6 @@
 
 #include "estructuras.h"
 
-#define OK 0
-
 //typedef struct{
 //    int posRealRegistro;
 //    int posSorteado;
@@ -25,7 +23,7 @@
 //void ordenarPorInsercionPorDatoSorteo(tOrden* vec, int ce);
 //void liberarOrden(tOrden* orden);
 
-int cargarJugadores(tJuego* juego);
+void cargarJugadores(tJuego* juego);
 void ingresarNombreJugador(int numJugador, tJugador* jugadorActual);
 
 #endif // JUGADOR_H_INCLUDED

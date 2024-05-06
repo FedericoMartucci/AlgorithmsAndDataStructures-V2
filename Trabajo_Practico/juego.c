@@ -49,13 +49,26 @@ int iniciarJuego()
     return estado;
 }
 
+void imprimirDatosJuego(tJuego* juego)
+{
+    printf("Rondas: %d\n", juego->cantRondas);
+    printf("Tiempo ronda: %d\n", juego->tiempoRonda);
+    printf("Cant jugadores: %d\n", juego->cantJugadores);
+    for(int i = 0; i < juego->cantJugadores; i++)
+        printf("Jugador %d: %s\n", i, juego->jugadores[i].nombre);
+    for(int i = 0; i < juego->cantRondas; i++)
+        imprimirPregunta(stdout, &juego->preguntas[i]);
+    printf("Dificultad: %d\n", juego->dificultad);
+}
+
 int configurarJuego(tJuego* juego)
 {
     CURL* cURL;
     int estado;
 
-//        cargarJugadores(juego);
-//        elegirDificultad();
+    cargarJugadores(juego);
+    elegirDificultad(juego);
+
     if((estado = leerArchivoConfig(juego)) != OK)
         return estado;
 
@@ -68,9 +81,35 @@ int configurarJuego(tJuego* juego)
     //    }
 
     if (cURL)
-        estado = obtenerPreguntas(&cURL, juego->preguntas, 1, juego->cantRondas);
+        estado = obtenerPreguntas(&cURL, juego->preguntas, juego->dificultad, juego->cantRondas);
 
     liberarCurl(&cURL);
+
+    imprimirDatosJuego(juego);
+
     return estado;
 }
+
+void elegirDificultad(tJuego* juego)
+{
+    char dificultad[8];
+
+    fprintf(stdout, "Ingrese la dificultad deseada (FACIL - MEDIA - DIFICIL): ");
+    fflush(stdin);
+    scanf("%7s", dificultad);
+
+    if (strcmpi(dificultad, "FACIL") == 0) {
+        juego->dificultad = FACIL;
+    } else if (strcmpi(dificultad, "MEDIO") == 0) {
+        juego->dificultad = MEDIO;
+    } else if (strcmpi(dificultad, "DIFICIL") == 0) {
+        juego->dificultad = DIFICIL;
+    } else {
+        juego->dificultad = DIFICIL;
+    }
+
+    system("cls");
+}
+
+
 

@@ -14,5 +14,6 @@
 char mostrarMenu();
 int iniciarJuego();
 int configurarJuego(tJuego* juego);
+void elegirDificultad(tJuego* juego);
 
 #endif // JUEGO_H_INCLUDED

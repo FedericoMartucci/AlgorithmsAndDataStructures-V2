@@ -1,30 +1,32 @@
 #include "jugador.h"
 
-int cargarJugadores(tJuego* juego)
+void cargarJugadores(tJuego* juego)
 {
     int numJugador;
     tJugador jugadorActual;
 
-    numJugador = 1;
+    numJugador = 0;
 
-    ingresarNombreJugador(numJugador, &jugadorActual);
+    ingresarNombreJugador(numJugador + 1, &jugadorActual);
 
-    while(strcmp(jugadorActual.nombre, "0"))
+    while(strcmp(jugadorActual.nombre, "0") && numJugador < MAX_JUGADORES)
     {
-        memcpy(&juego->jugadores[numJugador - 1], &jugadorActual, sizeof(tJugador));
-        juego->cantJugadores ++;
         numJugador ++;
-        ingresarNombreJugador(numJugador, &jugadorActual);
+        juego->cantJugadores ++;
+        memcpy(&juego->jugadores[numJugador - 1], &jugadorActual, sizeof(tJugador));
+        ingresarNombreJugador(numJugador + 1, &jugadorActual);
     }
-
-    return OK;
 }
 
 void ingresarNombreJugador(int numJugador, tJugador* jugadorActual)
 {
-    fprintf(stdout, "Ingrese el nombre del jugador %d o ingrese '0' para finalizar: ", numJugador);
-    fflush(stdin);
-    scanf("%s", jugadorActual->nombre);
+    do
+    {
+        fprintf(stdout, "Ingrese el nombre del jugador %d o ingrese '0' para finalizar: ", numJugador);
+        fflush(stdin);
+        gets(jugadorActual->nombre);
+    }
+    while(strlen(jugadorActual->nombre) == 0);
 
     jugadorActual->turno = numJugador;
 

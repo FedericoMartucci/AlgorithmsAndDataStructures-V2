@@ -52,6 +52,7 @@ typedef struct
     int cantRondas;
     int tiempoRonda;
     int cantJugadores;
+    enum eDificultad dificultad;
     tPregunta preguntas[MAX_PREGUNTAS]; //Cambiar a tArbol si considero priorizar memoria antes que complejidad computacional (performance).
     tJugador jugadores[MAX_JUGADORES]; //Cambiar a tArbol si considero priorizar memoria antes que complejidad computacional (performance).
 } tJuego;
