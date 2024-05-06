@@ -14,6 +14,7 @@ void cargarJugadores(tJuego* juego)
         numJugador ++;
         juego->cantJugadores ++;
         memcpy(&juego->jugadores[numJugador - 1], &jugadorActual, sizeof(tJugador));
+        juego->jugadores[numJugador - 1].puntaje = 0;
         ingresarNombreJugador(numJugador + 1, &jugadorActual);
     }
 }

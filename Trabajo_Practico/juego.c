@@ -40,6 +40,7 @@ int iniciarJuego()
         mostrarOrdenJuego(&juego);
         mostrarInformacionJuego(&juego);
         iniciarTrivia(&juego);
+        determinarPuntos(&juego);
 //        mostrarResultado();
         break;
     case 'B':
@@ -147,9 +148,12 @@ void iniciarTrivia(tJuego* juego)
 {
     int i;
     int rondaActual;
+    int menorTiempo;
+    int tiempoDeRespuesta;
     char respuesta;
     char opciones[CANT_OPCIONES][TAM_OPCION];
 
+    menorTiempo = juego->tiempoRonda;
     respuesta = '\0';
 
     for(i = 0; i < juego->cantJugadores; i++)
@@ -169,8 +173,14 @@ void iniciarTrivia(tJuego* juego)
             for (int i = 0; i < CANT_OPCIONES; i++)
                 printf("%c- %s\n", 'A' + i, opciones[i]);
             printf("Respuesta: ");
-            juego->jugadores[i].respuestas[rondaActual].tiempoDeRespuesta = iniciarTemporizador(&respuesta, juego->tiempoRonda);;
-            juego->jugadores[i].respuestas[rondaActual].opcion = respuesta;
+            tiempoDeRespuesta = iniciarTemporizador(&respuesta, juego->tiempoRonda);
+            juego->jugadores[i].respuestas[rondaActual].esCorrecta = strcmp(respuesta == '\0'? "" : opciones[toupper(respuesta) - 'A'], juego->preguntas[rondaActual].resp_correcta) == 0;
+            if(menorTiempo > tiempoDeRespuesta && juego->jugadores[i].respuestas[rondaActual].esCorrecta)
+                menorTiempo = tiempoDeRespuesta;
+            juego->menorTiempoRespuesta[rondaActual] = menorTiempo;
+            juego->jugadores[i].respuestas[rondaActual].tiempoDeRespuesta = tiempoDeRespuesta;
+            strcpy(juego->jugadores[i].respuestas[rondaActual].opcion, respuesta == '\0'? "" : opciones[toupper(respuesta) - 'A']);
+            juego->jugadores[i].respuestas[rondaActual].puntaje = 0;
         }
         printf("\n\nSu turno ha finalizado, ingrese una tecla para continuar");
         getch();
@@ -234,4 +244,143 @@ int esLetraValida(char key)
            key == 'B' ||
            key == 'C' ||
            key == 'D';
+}
+
+void determinarPuntos(tJuego* juego)
+{
+    int ronda;
+    int jugador;
+    int correctasEnMenorTiempoPorRonda;
+
+    for (ronda = 0; ronda < juego->cantRondas; ronda++)
+    {
+        correctasEnMenorTiempoPorRonda = obtenerCorrectasEnMenorTiempo(juego->jugadores, juego->cantJugadores, ronda, juego->menorTiempoRespuesta[ronda]);
+        for (jugador = 0; jugador < juego->cantJugadores; jugador++)
+            calcularPuntajePorJugador(&juego->jugadores[jugador], ronda,
+                                      juego->menorTiempoRespuesta[ronda],
+                                      correctasEnMenorTiempoPorRonda);
+    }
+}
+
+int obtenerCorrectasEnMenorTiempo(const tJugador* jugadores, int cantJugadores,
+                                  int nroRonda, int menorTiempo)
+{
+    int jugador;
+    int correctasEnMenorTiempo;
+
+    correctasEnMenorTiempo = 0;
+
+    for (jugador = 0; jugador < cantJugadores; jugador++)
+        if(jugadores[jugador].respuestas[nroRonda].esCorrecta &&
+                jugadores[jugador].respuestas[nroRonda].tiempoDeRespuesta ==  menorTiempo)
+            correctasEnMenorTiempo++;
+
+    return correctasEnMenorTiempo;
+}
+
+//void imprimirResultados(tJuego* juego)
+//{
+//    FILE *pfInforme;
+//    time_t tiempoTranscurrido = time(NULL);
+//    struct tm *fechaHora = localtime(&tiempoTranscurrido);
+//    char nombreArch[TAM_NOMBRE_INFORME];
+//    snprintf(nombreArch, sizeof(nombreArch), "informe-juego_%4d-%02d-%02d-%02d-%02d.txt",
+//             (fechaHora->tm_year + 1900), (fechaHora->tm_mon + 1), fechaHora->tm_mday, fechaHora->tm_hour, fechaHora->tm_min);
+//    if( (pfInforme = fopen(nombreArch, "wt"))==NULL )
+//        juego->codigoError=ERROR_CREACION_ARCHIVO;
+//    generarImpresion(juego,pfInforme);
+//    fclose(pfInforme);
+//
+//    generarImpresion(juego,stdout);
+//}
+
+//void generarImpresion(tJuego * juego, FILE* salida)
+//{
+//    tJugador jugadorActual;
+//    fprintf(salida,"LETRA-JUGADOR ");
+//
+//    mapInOrdenConContexto(&juego->jugadores,salida,imprimirNombreJugador);  //imprime los nombres de los jugadores en orden al turno
+//
+//    fprintf(salida,"\n");
+//    for(int rondaActual=0; rondaActual < juego->cantRondas; rondaActual++)
+//    {
+//        fprintf(salida,"  %c:          ", juego->letras[rondaActual]);
+//        for(int i=0; i<juego->cantJugadores; i++)
+//        {
+//            fprintf(salida,"%-17s%2d  ",juego->tableroResp[i][rondaActual].palabra,
+//                    juego->tableroResp[i][rondaActual].puntos);
+//        }
+//        fprintf(salida,"\n");
+//    }
+//    fprintf(salida,"RESULT:       ");
+//    for(int i=0; i<juego->cantJugadores; i++)
+//        fprintf(salida,"                 %2d  ",juego->resultados[i]);
+//    fprintf(salida,"\n");
+//    fprintf(salida,"GANADORES: ");
+//    for(int i=0; i<juego->cantJugadores; i++)
+//    {
+//        if(juego->resultados[i]==juego->puntajeGanador)
+//        {
+//            jugadorActual.turno=i+1;
+//            obtenerDatoPorClaveArbol(&juego->jugadores,&jugadorActual,sizeof(tJugador),compararTurnos);
+//            fprintf(salida,"|%s| ", jugadorActual.nombre);
+//        }
+//    }
+//    fprintf(salida,"\nPUNTAJE GANADOR:%d\n",juego->puntajeGanador);
+//}
+
+
+//void cerrarJuego(tJuego* juego)
+//{
+//    ///se libera todo la informacion, tipo vaciar, liberar, free, esto debe ir despues del la funcion
+//
+//    if(juego->tableroResp!=NULL)
+//        for(int i=0; i<juego->cantJugadores; i++)
+//            if(juego->tableroResp[i]!=NULL)
+//                free(juego->tableroResp[i]);
+//
+//    if(juego->tableroResp!=NULL)
+//        free(juego->tableroResp);
+//    if(juego->resultados!=NULL)
+//        free(juego->resultados);
+//    if(juego->letras!=NULL)
+//        free(juego->letras);
+//    if(juego->ordenes!=NULL)
+//        free(juego->ordenes);
+//    if(juego->jugadoresCargados!=NULL)
+//        free(juego->jugadoresCargados);
+//    vaciarArbol(&juego->jugadores);     ///vaciar arbol
+//    liberarCurl(&juego->curl);
+//
+//}
+
+void calcularPuntajePorJugador(tJugador* jugador, int nroRonda, int menorTiempo,
+                               int correctasEnMenorTiempoPorRonda)
+{
+    if (jugador->respuestas[nroRonda].esCorrecta)
+    {
+        if (jugador->respuestas[nroRonda].tiempoDeRespuesta == menorTiempo)
+        {
+            if(correctasEnMenorTiempoPorRonda <= 1)
+            {
+                jugador->respuestas[nroRonda].puntaje = PUNTOS_RESPUESTA_CORRECTA_UNICA_MAS_RAPIDA;
+                jugador->puntaje += PUNTOS_RESPUESTA_CORRECTA_UNICA_MAS_RAPIDA;
+            }
+            else
+            {
+                jugador->respuestas[nroRonda].puntaje = PUNTOS_RESPUESTA_CORRECTA_NO_UNICA_MAS_RAPIDA;
+                jugador->puntaje += PUNTOS_RESPUESTA_CORRECTA_NO_UNICA_MAS_RAPIDA;
+            }
+        }
+        else
+        {
+            jugador->respuestas[nroRonda].puntaje = PUNTOS_RESPUESTA_CORRECTA_MENOS_RAPIDA;
+            jugador->puntaje += PUNTOS_RESPUESTA_CORRECTA_MENOS_RAPIDA;
+        }
+    }
+    else if (strcmp(jugador->respuestas[nroRonda].opcion, "") != 0)
+    {
+        jugador->respuestas[nroRonda].puntaje = PUNTOS_RESPUESTA_INCORRECTA;
+        jugador->puntaje += PUNTOS_RESPUESTA_INCORRECTA;
+    }
 }

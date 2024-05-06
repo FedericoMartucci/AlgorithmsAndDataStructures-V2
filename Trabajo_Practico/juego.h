@@ -27,5 +27,10 @@ void mostrarInformacionJuego(const tJuego* juego);
 void iniciarTrivia(tJuego* juego);
 int iniciarTemporizador(char* respuesta, int tiempoLimite);
 int esLetraValida(char key);
+void determinarPuntos(tJuego* juego);
+int obtenerCorrectasEnMenorTiempo(const tJugador* jugadores, int cantJugadores,
+                                  int nroRonda, int menorTiempo);
+void calcularPuntajePorJugador(tJugador* jugador, int nroRonda, int menorTiempo,
+                               int correctasEnMenorTiempoPorRonda);
 
 #endif // JUEGO_H_INCLUDED

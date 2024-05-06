@@ -29,7 +29,8 @@ typedef struct
     int id;
     int puntaje;
     int tiempoDeRespuesta;
-    char opcion;
+    int esCorrecta;
+    char opcion[TAM_OPCION];
 } tRespuesta;
 
 #define NOMBRE_MAX 48
@@ -39,6 +40,7 @@ typedef struct
 {
     char nombre[NOMBRE_MAX];
     int turno;
+    int puntaje;
     tRespuesta respuestas[MAX_PREGUNTAS]; //utilizar lista o cola
 } tJugador;
 
@@ -46,16 +48,23 @@ typedef struct
 #define MIN_RONDAS 4
 #define MAX_RONDAS 7
 #define MAX_PREGUNTAS 100
-#define MAX_JUGADORES 100
+#define MAX_JUGADORES 10
 
 typedef struct
 {
     int cantRondas;
     int tiempoRonda;
     int cantJugadores;
+    int menorTiempoRespuesta[MAX_PREGUNTAS];
     enum eDificultad dificultad;
     tPregunta preguntas[MAX_PREGUNTAS]; //Cambiar a tArbol si considero priorizar memoria antes que complejidad computacional (performance).
     tJugador jugadores[MAX_JUGADORES]; //Cambiar a tArbol si considero priorizar memoria antes que complejidad computacional (performance).
 } tJuego;
+
+// PUNTAJES
+#define PUNTOS_RESPUESTA_CORRECTA_UNICA_MAS_RAPIDA 3
+#define PUNTOS_RESPUESTA_CORRECTA_NO_UNICA_MAS_RAPIDA 2
+#define PUNTOS_RESPUESTA_CORRECTA_MENOS_RAPIDA 1
+#define PUNTOS_RESPUESTA_INCORRECTA -2
 
 #endif // ESTRUCTURAS_H_INCLUDED

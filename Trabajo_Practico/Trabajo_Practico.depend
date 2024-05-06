@@ -1,7 +1,7 @@
 # depslib dependency file v1.0
 141 <<<<<<< HEAD
 
-1714958647 source:c:\devs\trabajo_practico\main.c
+1715023659 source:c:\devs\trabajo_practico\main.c
 	"juego.h"
 
 1714936875 04649d3e762583178e51048af169ee03d4c3b
@@ -23,12 +23,12 @@
 1714960620 source:c:\devs\trabajo_practico\archivos.c
 	"archivos.h"
 
-1714967290 source:c:\devs\trabajo_practico\juego.c
+1715027104 source:c:\devs\trabajo_practico\juego.c
 	"juego.h"
 	"archivos.h"
 	"curlReducido.h"
 
-1714967299 c:\devs\trabajo_practico\juego.h
+1715027989 c:\devs\trabajo_practico\juego.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -88,14 +88,14 @@
 	<locale.h>
 	"cJSON.h"
 
-1714959827 c:\devs\trabajo_practico\jugador.h
+1715027973 c:\devs\trabajo_practico\jugador.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"estructuras.h"
 
-1714962660 c:\devs\trabajo_practico\estructuras.h
+1715029931 c:\devs\trabajo_practico\estructuras.h
 
-1714959827 source:c:\devs\trabajo_practico\jugador.c
+1715022896 source:c:\devs\trabajo_practico\jugador.c
 	"jugador.h"
 

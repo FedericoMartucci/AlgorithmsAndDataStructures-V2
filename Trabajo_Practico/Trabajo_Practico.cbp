@@ -43,10 +43,15 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="curlReducido.h" />
+		<Unit filename="estructuras.h" />
 		<Unit filename="juego.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="juego.h" />
+		<Unit filename="jugador.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="jugador.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

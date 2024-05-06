@@ -7,21 +7,6 @@
 
 #include "estructuras.h"
 
-//typedef struct{
-//    int posRealRegistro;
-//    int posSorteado;
-//} tOrden;
-
-
-//int compararTurnos(const void* d1,const void* d2);
-//void mostrarJugador(void* dato);
-//
-//void imprimirNombreJugador(void* jugador,void *salida);
-//
-//int inicializarOrden(tOrden** orden,int cant);
-//void ordenarPorInsercionPorDatoSorteo(tOrden* vec, int ce);
-//void liberarOrden(tOrden* orden);
-
 void cargarJugadores(tJuego* juego);
 void ingresarNombreJugador(int numJugador, tJugador* jugadorActual);
 void mezclarJugadores(void* juego, int cantJugadores);
