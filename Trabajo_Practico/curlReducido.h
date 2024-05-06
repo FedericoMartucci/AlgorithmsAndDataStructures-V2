@@ -2,7 +2,9 @@
 #define CURLREDUCIDO_H_INCLUDED
 
 #include <curl/curl.h>
+
 #include "pregunta.h"
+#include "estructuras.h"
 
 #define NO_PUDO_CARGAR -1
 #define OK 0

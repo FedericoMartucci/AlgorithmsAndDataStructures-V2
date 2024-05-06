@@ -2,6 +2,7 @@
 #define ARCHIVOS_H_INCLUDED
 
 #include "juego.h"
+#include "estructuras.h"
 
 #define MAX_LINEA_CONFIG 255
 

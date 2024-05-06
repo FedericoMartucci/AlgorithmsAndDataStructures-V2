@@ -16,34 +16,38 @@
 	"pregunta.h"
 	"archivos.h"
 
-1714945317 c:\devs\trabajo_practico\archivos.h
+1714954513 c:\devs\trabajo_practico\archivos.h
 	"juego.h"
+	"estructuras.h"
 
-1714945041 source:c:\devs\trabajo_practico\archivos.c
+1714946635 source:c:\devs\trabajo_practico\archivos.c
 	"archivos.h"
 
-1714945761 source:c:\devs\trabajo_practico\juego.c
+1714952642 source:c:\devs\trabajo_practico\juego.c
 	"juego.h"
 	"archivos.h"
 	"curlReducido.h"
 
-1714946635 c:\devs\trabajo_practico\juego.h
+1714954570 c:\devs\trabajo_practico\juego.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 	"curlReducido.h"
 	"pregunta.h"
+	"jugador.h"
+	"estructuras.h"
 
 1714852875 D
 
 1714945041 source:c:\devs\trabajo_practico\pregunta.c
 	"pregunta.h"
 
-1714945566 c:\devs\trabajo_practico\pregunta.h
+1714954570 c:\devs\trabajo_practico\pregunta.h
 	<stdio.h>
 	<string.h>
 	"cJSON.h"
+	"estructuras.h"
 
 1714852875 source:c:\devs\trabajo_practico\curl.c
 	"curl.h"
@@ -59,9 +63,10 @@
 1714945041 source:c:\devs\trabajo_practico\curlreducido.c
 	"curlReducido.h"
 
-1714945668 c:\devs\trabajo_practico\curlreducido.h
+1714954513 c:\devs\trabajo_practico\curlreducido.h
 	<curl/curl.h>
 	"pregunta.h"
+	"estructuras.h"
 
 1714859326 c:\devs\trabajo_practico\cjson.h
 	<stddef.h>
@@ -76,4 +81,12 @@
 	<float.h>
 	<locale.h>
 	"cJSON.h"
+
+1714954583 c:\devs\trabajo_practico\jugador.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"estructuras.h"
+
+1714954570 c:\devs\trabajo_practico\estructuras.h
 

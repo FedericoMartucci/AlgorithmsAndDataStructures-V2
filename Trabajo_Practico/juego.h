@@ -8,18 +8,8 @@
 
 #include "curlReducido.h"
 #include "pregunta.h"
-
-#define MIN_TIEMPO_RONDA 1
-#define MIN_RONDAS 4
-#define MAX_RONDAS 7
-#define MAX_PREGUNTAS 100
-
-typedef struct
-{
-    int cantRondas;
-    int tiempoRonda;
-    tPregunta preguntas[MAX_PREGUNTAS]; //Cambiar a tArbol
-} tJuego;
+#include "jugador.h"
+#include "estructuras.h"
 
 char mostrarMenu();
 int iniciarJuego();
