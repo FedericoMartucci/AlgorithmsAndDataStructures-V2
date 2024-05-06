@@ -47,7 +47,6 @@ void mezclarJugadores(void* juego, int cantJugadores)
     }
 }
 
-
 void intercambiarJugadores(tJugador* jugadorA, tJugador* jugadorB)
 {
     tJugador temp;

@@ -23,12 +23,12 @@
 1714946635 source:c:\devs\trabajo_practico\archivos.c
 	"archivos.h"
 
-1714959529 source:c:\devs\trabajo_practico\juego.c
+1714960317 source:c:\devs\trabajo_practico\juego.c
 	"juego.h"
 	"archivos.h"
 	"curlReducido.h"
 
-1714959529 c:\devs\trabajo_practico\juego.h
+1714960304 c:\devs\trabajo_practico\juego.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -83,7 +83,7 @@
 	<locale.h>
 	"cJSON.h"
 
-1714959481 c:\devs\trabajo_practico\jugador.h
+1714959827 c:\devs\trabajo_practico\jugador.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -91,6 +91,6 @@
 
 1714954933 c:\devs\trabajo_practico\estructuras.h
 
-1714959454 source:c:\devs\trabajo_practico\jugador.c
+1714959827 source:c:\devs\trabajo_practico\jugador.c
 	"jugador.h"
 

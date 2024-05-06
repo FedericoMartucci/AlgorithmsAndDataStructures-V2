@@ -37,6 +37,8 @@ int iniciarJuego()
     case 'A':
         printf("¡Comencemos a jugar!\n");
         estado = configurarJuego(&juego);
+        mostrarOrdenJuego(&juego);
+        mostrarInformacionJuego(&juego);
 //        comenzarRondas();
 //        mostrarResultado();
         break;
@@ -66,12 +68,12 @@ int configurarJuego(tJuego* juego)
     CURL* cURL;
     int estado;
 
+    if((estado = leerArchivoConfig(juego)) != OK)
+        return estado;
+
     cargarJugadores(juego);
     mezclar(juego, juego->cantJugadores, mezclarJugadores);
     elegirDificultad(juego);
-
-    if((estado = leerArchivoConfig(juego)) != OK)
-        return estado;
 
     if ((estado = cargarCURL(&cURL)) != OK)
         return estado;
@@ -86,7 +88,7 @@ int configurarJuego(tJuego* juego)
 
     liberarCurl(&cURL);
 
-    imprimirDatosJuego(juego);
+//    imprimirDatosJuego(juego);
 
     return estado;
 }
@@ -117,4 +119,20 @@ void mezclar(void* item, int cantElementos, void(*mezclarImpl)(void*, int))
     mezclarImpl(item, cantElementos);
 }
 
+void mostrarOrdenJuego(const tJuego* juego)
+{
+    int i;
 
+    puts("Orden de juego:");
+    for (i = 0; i < juego->cantJugadores; i++)
+        printf("Turno %d: %s\n", i + 1, juego->jugadores[i].nombre);
+}
+
+void mostrarInformacionJuego(const tJuego* juego)
+{
+    printf("\nCantidad de rondas: %d\n", juego->cantRondas);
+    printf("Tiempo por ronda: %d\n", juego->tiempoRonda);
+
+    printf("\n%s, ¿estás listo para iniciar el juego?", juego->jugadores[0].nombre);
+    system("pause");
+}

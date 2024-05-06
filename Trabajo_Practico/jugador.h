@@ -19,7 +19,6 @@
 //void imprimirNombreJugador(void* jugador,void *salida);
 //
 //int inicializarOrden(tOrden** orden,int cant);
-//void ramdomizarOrden(tOrden* orden,int cant);
 //void ordenarPorInsercionPorDatoSorteo(tOrden* vec, int ce);
 //void liberarOrden(tOrden* orden);
 

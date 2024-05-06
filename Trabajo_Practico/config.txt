@@ -1,2 +1,2 @@
-Rounds: 5
+Rounds: 7
 Tiempo por round: 333

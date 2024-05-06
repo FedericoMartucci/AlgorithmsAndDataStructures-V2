@@ -17,5 +17,7 @@ int iniciarJuego();
 int configurarJuego(tJuego* juego);
 void elegirDificultad(tJuego* juego);
 void mezclar(void* item, int cantElementos, void(*mezclarImpl)(void*, int));
+void mostrarOrdenJuego(const tJuego* juego);
+void mostrarInformacionJuego(const tJuego* juego);
 
 #endif // JUEGO_H_INCLUDED
