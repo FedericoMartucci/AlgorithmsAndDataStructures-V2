@@ -33,18 +33,17 @@ void ingresarNombreJugador(int numJugador, tJugador* jugadorActual)
     system("cls");
 }
 
-void mezclarJugadores(tJuego* juego)
+void mezclarJugadores(void* juego, int cantJugadores)
 {
-    int i, j;
+    int i;
+    int j;
 
-    for(i = juego->cantJugadores - 1; i > 0; i--)
+    for(i = cantJugadores - 1; i > 0; i--)
     {
         j = rand() % (i + 1);
-        printf("numero rand: %d\n", j);
-        if (i != j) // Verifica que los índices no sean iguales antes de intercambiar
-        {
-            intercambiarJugadores(&juego->jugadores[i], &juego->jugadores[j]);
-        }
+        if (i != j)
+            intercambiarJugadores(&((tJuego*)juego)->jugadores[i],
+                                  &((tJuego*)juego)->jugadores[j]);
     }
 }
 

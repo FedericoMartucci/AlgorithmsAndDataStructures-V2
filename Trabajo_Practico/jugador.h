@@ -25,7 +25,7 @@
 
 void cargarJugadores(tJuego* juego);
 void ingresarNombreJugador(int numJugador, tJugador* jugadorActual);
-void mezclarJugadores(tJuego* juego);
+void mezclarJugadores(void* juego, int cantJugadores);
 void intercambiarJugadores(tJugador* jugadorA, tJugador* jugadorB);
 
 #endif // JUGADOR_H_INCLUDED

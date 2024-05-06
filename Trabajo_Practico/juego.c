@@ -67,7 +67,7 @@ int configurarJuego(tJuego* juego)
     int estado;
 
     cargarJugadores(juego);
-    mezclarJugadores(juego);
+    mezclar(juego, juego->cantJugadores, mezclarJugadores);
     elegirDificultad(juego);
 
     if((estado = leerArchivoConfig(juego)) != OK)
@@ -112,5 +112,9 @@ void elegirDificultad(tJuego* juego)
     system("cls");
 }
 
+void mezclar(void* item, int cantElementos, void(*mezclarImpl)(void*, int))
+{
+    mezclarImpl(item, cantElementos);
+}
 
 

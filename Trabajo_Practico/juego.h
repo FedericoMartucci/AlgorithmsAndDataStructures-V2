@@ -16,5 +16,6 @@ char mostrarMenu();
 int iniciarJuego();
 int configurarJuego(tJuego* juego);
 void elegirDificultad(tJuego* juego);
+void mezclar(void* item, int cantElementos, void(*mezclarImpl)(void*, int));
 
 #endif // JUEGO_H_INCLUDED

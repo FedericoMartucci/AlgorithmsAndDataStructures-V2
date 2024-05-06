@@ -57,3 +57,27 @@ void imprimirPregunta(FILE* salida, const void* pregunta)
             ((tPregunta*)pregunta)->opcion_3,
             ((tPregunta*)pregunta)->nivel);
 }
+
+void mezclarPreguntas(void* preguntas, int cantPreguntas)
+{
+    int i;
+    int j;
+
+    for(i = cantPreguntas - 1; i > 0; i--)
+    {
+        j = rand() % (i + 1);
+        if (i != j)
+            intercambiarPreguntas(&((tPregunta*)preguntas)[i],
+                                  &((tPregunta*)preguntas)[j]);
+    }
+}
+
+
+void intercambiarPreguntas(tPregunta* preguntaA, tPregunta* preguntaB)
+{
+    tPregunta temp;
+
+    memcpy(&temp, preguntaA, sizeof(tPregunta));
+    memcpy(preguntaA, preguntaB, sizeof(tPregunta));
+    memcpy(preguntaB, &temp, sizeof(tPregunta));
+}

@@ -9,5 +9,7 @@
 
 void parsearPregunta(char* jsonString, void* preguntas);
 void imprimirPregunta(FILE* salida, const void* pregunta);
+void mezclarPreguntas(void* preguntas, int cantPreguntas);
+void intercambiarPreguntas(tPregunta* preguntaA, tPregunta* preguntaB);
 
 #endif // PREGUNTA_H_INCLUDED
