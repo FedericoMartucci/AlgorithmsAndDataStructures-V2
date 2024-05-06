@@ -23,12 +23,12 @@
 1714960620 source:c:\devs\trabajo_practico\archivos.c
 	"archivos.h"
 
-1714964990 source:c:\devs\trabajo_practico\juego.c
+1714966031 source:c:\devs\trabajo_practico\juego.c
 	"juego.h"
 	"archivos.h"
 	"curlReducido.h"
 
-1714964962 c:\devs\trabajo_practico\juego.h
+1714966047 c:\devs\trabajo_practico\juego.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

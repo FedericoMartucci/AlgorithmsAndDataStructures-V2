@@ -147,8 +147,10 @@ void iniciarTrivia(tJuego* juego)
 {
     int i;
     int rondaActual;
-    char respuesta = '\0';
+    char respuesta;
     char opciones[CANT_OPCIONES][TAM_OPCION];
+
+    respuesta = '\0';
 
     for(i = 0; i < juego->cantJugadores; i++)
     {
@@ -185,7 +187,6 @@ void iniciarTemporizador(char respuesta, int tiempoLimite)
     time_t startTime;
     int cursorPosition ;  // Posición del cursor en el buffer
 
-    respuesta = '\0';
     startTime = time(NULL);
     cursorPosition = 0;
 
@@ -210,17 +211,26 @@ void iniciarTemporizador(char respuesta, int tiempoLimite)
                     respuesta = '\0';  // Borra el carácter retrocedido en el buffer
                 }
             }
-            else
+            else if (esLetraValida(toupper(key)) && cursorPosition == 0)
             {
                 // Almacena el carácter en el buffer y muestra en pantalla
                 respuesta = key;
-//                palabra[cursorPosition+1] = '\0';
                 printf("%c", key);
-                cursorPosition = (cursorPosition + 1) % (TAM_OPCION - 1);      //si supera a max, significa que vuelve a la misma
+                cursorPosition++;
             }
         }
     }
+
     if(difftime(time(NULL), startTime) >= tiempoLimite)
-        puts(" - No puede contestar, el tiempo ha finalizado");
-    fflush(stdin);  // por la dudas, habria que fijarse si deberia estar
+        printf("- No puede contestar, el tiempo ha finalizado");
+
+    fflush(stdin);
+}
+
+int esLetraValida(char key)
+{
+    return key == 'A' ||
+           key == 'B' ||
+           key == 'C' ||
+           key == 'D';
 }

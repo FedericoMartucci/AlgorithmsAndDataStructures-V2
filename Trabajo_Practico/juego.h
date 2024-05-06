@@ -26,5 +26,6 @@ void mostrarOrdenJuego(const tJuego* juego);
 void mostrarInformacionJuego(const tJuego* juego);
 void iniciarTrivia(tJuego* juego);
 void iniciarTemporizador(char respuesta, int tiempoLimite);
+int esLetraValida(char key);
 
 #endif // JUEGO_H_INCLUDED
