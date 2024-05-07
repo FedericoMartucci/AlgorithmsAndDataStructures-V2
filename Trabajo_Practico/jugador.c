@@ -29,7 +29,7 @@ void ingresarNombreJugador(int numJugador, tJugador* jugadorActual)
     }
     while(strlen(jugadorActual->nombre) == 0);
 
-    jugadorActual->turno = numJugador;
+//    jugadorActual->turno = numJugador;
 
     system("cls");
 }

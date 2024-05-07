@@ -14,8 +14,8 @@
 #define OPCION_VALIDA 1
 #define OPCION_NO_VALIDA 0
 
-#define RETORNO_DE_CARRO 13
-#define BACKSPACE 8
+#define RETORNO_DE_CARRO '\r'
+#define BACKSPACE '\b'
 
 int esLetraValida(char key);
 char obtenerLetra(const char* opcion, const tPregunta* pregunta);

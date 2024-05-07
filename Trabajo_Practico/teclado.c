@@ -62,7 +62,7 @@ char captarIngresoDificultad(const tMapeoDificultad* mapeoDificultades, int cant
     cursorPosition = 0;
     opcion = '\0';
 
-    while(key != RETORNO_DE_CARRO)
+    while(key != RETORNO_DE_CARRO || opcion == '\0')
     {
         if (_kbhit())
         {

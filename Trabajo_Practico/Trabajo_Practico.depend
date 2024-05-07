@@ -96,7 +96,7 @@
 1715037240 source:c:\devs\trabajo_practico\jugador.c
 	"jugador.h"
 
-1715050529 c:\devs\trabajo_practico\teclado.h
+1715051046 c:\devs\trabajo_practico\teclado.h
 	<stdio.h>
 	<ctype.h>
 	<conio.h>
@@ -104,6 +104,6 @@
 	<unistd.h>
 	"estructuras.h"
 
-1715050529 source:c:\devs\trabajo_practico\teclado.c
+1715051116 source:c:\devs\trabajo_practico\teclado.c
 	"teclado.h"
 
