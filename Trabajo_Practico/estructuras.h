@@ -24,6 +24,9 @@ typedef struct
     enum eDificultad nivel;
 } tPregunta;
 
+#define PRIMERA_OPCION_VALIDA 'A'
+#define ULTIMA_OPCION_VALIDA 'D'
+
 typedef struct
 {
     int id;

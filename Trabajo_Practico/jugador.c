@@ -60,6 +60,9 @@ void intercambiarJugadores(tJugador* jugadorA, tJugador* jugadorB)
 void calcularPuntajePorJugador(tJugador* jugador, int nroRonda, int menorTiempo,
                                int correctasEnMenorTiempoPorRonda)
 {
+    printf("Nro ronda: %d\n", nroRonda);
+    printf("Correctas menor tiempo: %d\n", correctasEnMenorTiempoPorRonda);
+    printf("Menor tiempo: %d\n", menorTiempo);
     if (jugador->respuestas[nroRonda].esCorrecta)
     {
         if (jugador->respuestas[nroRonda].tiempoDeRespuesta == menorTiempo)

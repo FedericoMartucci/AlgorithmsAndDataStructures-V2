@@ -18,6 +18,12 @@ void cargarYMezclarOpciones(char opciones[][TAM_OPCION],
                             const tPregunta* pregunta);
 void mezclarOpciones(void* opciones, int cantOpciones);
 void intercambiarOpciones(char* opcionA, char* opcionB);
+
 char obtenerLetra(const char* opcion, const tPregunta* pregunta);
+
+void realizarPregunta(tJuego* juego, int jugador, int rondaActual);
+void procesarRespuesta(tJuego* juego, int jugador, int rondaActual,
+                       char opciones[][TAM_OPCION], char respuesta,
+                       int menorTiempo, int tiempoDeRespuesta);
 
 #endif // PREGUNTA_H_INCLUDED

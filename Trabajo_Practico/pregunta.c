@@ -126,3 +126,39 @@ char obtenerLetra(const char* opcion, const tPregunta* pregunta)
         return 'C';
     return 'D';
 }
+
+void realizarPregunta(tJuego* juego, int jugador, int rondaActual)
+{
+    char opciones[CANT_OPCIONES][TAM_OPCION];
+    int opcion;
+    int menorTiempo;
+    int tiempoDeRespuesta;
+    char respuesta;
+
+    menorTiempo = juego->tiempoRonda;
+
+    cargarYMezclarOpciones(opciones, &juego->preguntas[rondaActual]);
+
+    for (opcion = 0; opcion < CANT_OPCIONES; opcion++)
+        printf("%c- %s\n", 'A' + opcion, opciones[opcion]);
+    printf("Respuesta: ");
+    tiempoDeRespuesta = iniciarTemporizador(&respuesta, juego->tiempoRonda);
+
+    procesarRespuesta(juego, jugador, rondaActual, opciones, respuesta, menorTiempo, tiempoDeRespuesta);
+}
+
+void procesarRespuesta(tJuego* juego, int jugador, int rondaActual, char opciones[][TAM_OPCION], char respuesta, int menorTiempo, int tiempoDeRespuesta)
+{
+    if(respuesta == '\0')
+        juego->jugadores[jugador].respuestas[rondaActual].esCorrecta = 0;
+    else
+        juego->jugadores[jugador].respuestas[rondaActual].esCorrecta = strcmp(opciones[toupper(respuesta) - 'A'], juego->preguntas[rondaActual].resp_correcta) == 0;
+
+    if(menorTiempo > tiempoDeRespuesta && juego->jugadores[jugador].respuestas[rondaActual].esCorrecta)
+        menorTiempo = tiempoDeRespuesta;
+
+    juego->menorTiempoRespuesta[rondaActual] = menorTiempo;
+    juego->jugadores[jugador].respuestas[rondaActual].tiempoDeRespuesta = tiempoDeRespuesta;
+    strcpy(juego->jugadores[jugador].respuestas[rondaActual].opcion, respuesta == '\0'? "" : opciones[toupper(respuesta) - 'A']);
+    juego->jugadores[jugador].respuestas[rondaActual].puntaje = 0;
+}

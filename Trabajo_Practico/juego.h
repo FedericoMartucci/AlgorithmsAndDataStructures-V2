@@ -25,6 +25,8 @@ void mezclar(void* item, int cantElementos, void(*mezclarImpl)(void*, int));
 void mostrarOrdenJuego(const tJuego* juego);
 void mostrarInformacionJuego(const tJuego* juego);
 void iniciarTrivia(tJuego* juego);
+void realizarRondas(tJuego* juego, int jugador);
+void realizarPregunta(tJuego* juego, int jugador, int rondaActual);
 int iniciarTemporizador(char* respuesta, int tiempoLimite);
 int esLetraValida(char key);
 void determinarPuntos(tJuego* juego);

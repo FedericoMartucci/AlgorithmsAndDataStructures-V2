@@ -129,42 +129,19 @@ void mostrarInformacionJuego(const tJuego* juego)
 
 void iniciarTrivia(tJuego* juego)
 {
-    int i;
-    int rondaActual;
-    int menorTiempo;
-    int tiempoDeRespuesta;
-    char respuesta;
-    char opciones[CANT_OPCIONES][TAM_OPCION];
+    int jugador;
 
-    menorTiempo = juego->tiempoRonda;
-    respuesta = '\0';
-
-    for(i = 0; i < juego->cantJugadores; i++)
+    for(jugador = 0; jugador < juego->cantJugadores; jugador++)
     {
-        printf("%s, ¿estás listo para iniciar el juego?\n", juego->jugadores[i].nombre);
+        printf("%s, ¿estás listo para iniciar el juego?\n", juego->jugadores[jugador].nombre);
         printf("Si esta listo, ingrese una tecla para comenzar...\n");
         getch();
         fflush(stdin);
         system("cls");
-        printf("Jugador actual: %s", juego->jugadores[i].nombre);
+        printf("Jugador actual: %s", juego->jugadores[jugador].nombre);
 
-        for(rondaActual = 0; rondaActual < juego->cantRondas; rondaActual++)
-        {
-            puts("");
-            cargarYMezclarOpciones(opciones, &juego->preguntas[rondaActual]);
-            printf("\nPregunta %d: %s\n", rondaActual + 1, juego->preguntas[rondaActual].pregunta);
-            for (int i = 0; i < CANT_OPCIONES; i++)
-                printf("%c- %s\n", 'A' + i, opciones[i]);
-            printf("Respuesta: ");
-            tiempoDeRespuesta = iniciarTemporizador(&respuesta, juego->tiempoRonda);
-            juego->jugadores[i].respuestas[rondaActual].esCorrecta = strcmp(respuesta == '\0'? "" : opciones[toupper(respuesta) - 'A'], juego->preguntas[rondaActual].resp_correcta) == 0;
-            if(menorTiempo > tiempoDeRespuesta && juego->jugadores[i].respuestas[rondaActual].esCorrecta)
-                menorTiempo = tiempoDeRespuesta;
-            juego->menorTiempoRespuesta[rondaActual] = menorTiempo;
-            juego->jugadores[i].respuestas[rondaActual].tiempoDeRespuesta = tiempoDeRespuesta;
-            strcpy(juego->jugadores[i].respuestas[rondaActual].opcion, respuesta == '\0'? "" : opciones[toupper(respuesta) - 'A']);
-            juego->jugadores[i].respuestas[rondaActual].puntaje = 0;
-        }
+        realizarRondas(juego, jugador);
+
         printf("\n\nSu turno ha finalizado, ingrese una tecla para continuar");
         getch();
         system("cls");
@@ -172,6 +149,18 @@ void iniciarTrivia(tJuego* juego)
     puts("Juego terminado, ingrese cualquier tecla para continuar");
     getch();
     system("cls");
+}
+
+void realizarRondas(tJuego* juego, int jugador)
+{
+    int rondaActual;
+
+    for(rondaActual = 0; rondaActual < juego->cantRondas; rondaActual++)
+    {
+        printf("\n\nPregunta %d: %s\n", rondaActual + 1,
+               juego->preguntas[rondaActual].pregunta);
+        realizarPregunta(juego, jugador, rondaActual);
+    }
 }
 
 int iniciarTemporizador(char* respuesta, int tiempoLimite)
@@ -223,10 +212,7 @@ int iniciarTemporizador(char* respuesta, int tiempoLimite)
 
 int esLetraValida(char key)
 {
-    return key == 'A' ||
-           key == 'B' ||
-           key == 'C' ||
-           key == 'D';
+    return key >= PRIMERA_OPCION_VALIDA && key <= ULTIMA_OPCION_VALIDA;
 }
 
 void determinarPuntos(tJuego* juego)
