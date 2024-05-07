@@ -11,6 +11,8 @@
 #include "estructuras.h"
 #include "teclado.h"
 
+#define SIN_JUGADORES -4
+
 char mostrarMenu();
 int iniciarJuego();
 int configurarJuego(tJuego* juego);

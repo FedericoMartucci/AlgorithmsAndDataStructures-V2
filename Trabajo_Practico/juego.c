@@ -35,12 +35,12 @@ int iniciarJuego()
     switch(opcion)
     {
     case 'A':
-        estado = configurarJuego(&juego);
+        if((estado = configurarJuego(&juego)) != OK) return estado;
         mostrarOrdenJuego(&juego);
         mostrarInformacionJuego(&juego);
         iniciarTrivia(&juego);
         determinarPuntos(&juego);
-        estado = imprimirResultados(&juego);
+        if((estado = imprimirResultados(&juego)) != OK) return estado;
         break;
     case 'B':
         printf("¡Hasta luego!\n");
@@ -60,6 +60,9 @@ int configurarJuego(tJuego* juego)
         return estado;
 
     cargarJugadores(juego);
+    if(juego->cantJugadores == 0)
+        return SIN_JUGADORES;
+
     mezclar(juego, juego->cantJugadores, mezclarJugadores);
     elegirDificultad(juego);
 
