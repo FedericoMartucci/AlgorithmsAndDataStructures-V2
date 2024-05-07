@@ -44,11 +44,10 @@ int iniciarJuego()
         break;
     case 'B':
         printf("¡Hasta luego!\n");
-        estado = OK;
         break;
     }
 
-    return estado;
+    return OK;
 }
 
 int configurarJuego(tJuego* juego)
