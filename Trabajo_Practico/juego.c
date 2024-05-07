@@ -81,30 +81,29 @@ int configurarJuego(tJuego* juego)
 
 void elegirDificultad(tJuego* juego)
 {
-    char dificultad[8];
+    int i;
+    char dificultad;
+    tMapeoDificultad mapeo[] =
+    {
+        {"FACIL", FACIL},
+        {"MEDIO", MEDIO},
+        {"DIFICIL", DIFICIL}
+    };
 
-    fprintf(stdout, "Ingrese la dificultad deseada (FACIL - MEDIA - DIFICIL): ");
-    fflush(stdin);
-    scanf("%7s", dificultad);
+    fprintf(stdout, "Ingrese la dificultad deseada:\n");
+    for(i = 0; i < sizeof(mapeo) / sizeof(tMapeoDificultad); i ++)
+        printf("%2c: %15s\n", mapeo[i].nombre[0], mapeo[i].nombre);
+    dificultad = captarIngresoDificultad(mapeo, sizeof(mapeo) / sizeof(tMapeoDificultad));
 
-    if (strcmpi(dificultad, "FACIL") == 0)
+    for (i = 0; i < sizeof(mapeo) / sizeof(mapeo[0]); ++i)
     {
-        juego->dificultad = FACIL;
+        if (dificultad == mapeo[i].nombre[0])
+        {
+            juego->dificultad = mapeo[i].valor;
+            system("cls");
+            return;
+        }
     }
-    else if (strcmpi(dificultad, "MEDIO") == 0)
-    {
-        juego->dificultad = MEDIO;
-    }
-    else if (strcmpi(dificultad, "DIFICIL") == 0)
-    {
-        juego->dificultad = DIFICIL;
-    }
-    else
-    {
-        juego->dificultad = DIFICIL;
-    }
-
-    system("cls");
 }
 
 void mezclar(void* item, int cantElementos, void(*mezclarImpl)(void*, int))
@@ -161,58 +160,6 @@ void realizarRondas(tJuego* juego, int jugador)
                juego->preguntas[rondaActual].pregunta);
         realizarPregunta(juego, jugador, rondaActual);
     }
-}
-
-int iniciarTemporizador(char* respuesta, int tiempoLimite)
-{
-    char key;
-    time_t startTime;
-    int cursorPosition ;  // Posición del cursor en el buffer
-
-    *respuesta = '\0';
-    startTime = time(NULL);
-    cursorPosition = 0;
-
-    while (difftime(time(NULL), startTime) < tiempoLimite)
-    {
-        usleep(1000);  // duerme la entrada cada 1 milisegundos, importante asi para no cargar al procesador en un bucle hiper rapido
-        if (_kbhit())
-        {
-            // Si el usuario presiona una tecla, la almacenamos
-            key = _getch();
-            if (key == RETORNO_DE_CARRO)    // Tecla Enter
-            {
-                break;        // Salir si se presiona Enter
-            }
-            else if (key == BACKSPACE)      // Retroceso (Backspace)
-            {
-                if (cursorPosition > 0)
-                {
-                    // Solo retroceder si no estamos al principio del buffer
-                    cursorPosition--;
-                    printf("\b \b");  // Retrocede y borra un carácter en la pantalla
-                    *respuesta = '\0';  // Borra el carácter retrocedido en el buffer
-                }
-            }
-            else if (esLetraValida(toupper(key)) && cursorPosition == 0)
-            {
-                // Almacena el carácter en el buffer y muestra en pantalla
-                *respuesta = key;
-                printf("%c", toupper(key));
-                cursorPosition++;
-            }
-        }
-    }
-
-    if(difftime(time(NULL), startTime) >= tiempoLimite)
-        printf("- No puede contestar, el tiempo ha finalizado");
-    fflush(stdin);
-    return (int)difftime(time(NULL), startTime);
-}
-
-int esLetraValida(char key)
-{
-    return key >= PRIMERA_OPCION_VALIDA && key <= ULTIMA_OPCION_VALIDA;
 }
 
 void determinarPuntos(tJuego* juego)

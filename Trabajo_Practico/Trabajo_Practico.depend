@@ -16,38 +16,35 @@
 	"pregunta.h"
 	"archivos.h"
 
-1715036960 c:\devs\trabajo_practico\archivos.h
+1715050582 c:\devs\trabajo_practico\archivos.h
 	"juego.h"
 	"estructuras.h"
 
 1715037146 source:c:\devs\trabajo_practico\archivos.c
 	"archivos.h"
 
-1715041782 source:c:\devs\trabajo_practico\juego.c
+1715050314 source:c:\devs\trabajo_practico\juego.c
 	"juego.h"
 	"archivos.h"
 	"curlReducido.h"
 
-1715041533 c:\devs\trabajo_practico\juego.h
+1715050383 c:\devs\trabajo_practico\juego.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
-	<ctype.h>
-	<conio.h>
-	<time.h>
-	<unistd.h>
 	"curlReducido.h"
 	"pregunta.h"
 	"jugador.h"
 	"estructuras.h"
+	"teclado.h"
 
 1714852875 D
 
-1715041533 source:c:\devs\trabajo_practico\pregunta.c
+1715050529 source:c:\devs\trabajo_practico\pregunta.c
 	"pregunta.h"
 	"juego.h"
 
-1715041782 c:\devs\trabajo_practico\pregunta.h
+1715050529 c:\devs\trabajo_practico\pregunta.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -94,8 +91,19 @@
 	<string.h>
 	"estructuras.h"
 
-1715041782 c:\devs\trabajo_practico\estructuras.h
+1715050314 c:\devs\trabajo_practico\estructuras.h
 
 1715037240 source:c:\devs\trabajo_practico\jugador.c
 	"jugador.h"
+
+1715050529 c:\devs\trabajo_practico\teclado.h
+	<stdio.h>
+	<ctype.h>
+	<conio.h>
+	<time.h>
+	<unistd.h>
+	"estructuras.h"
+
+1715050529 source:c:\devs\trabajo_practico\teclado.c
+	"teclado.h"
 

@@ -8,6 +8,14 @@ enum eDificultad
     DIFICIL = 3
 };
 
+#define TAM_DIFICULTAD 10
+
+typedef struct
+{
+    char nombre[TAM_DIFICULTAD];
+    enum eDificultad valor;
+} tMapeoDificultad;
+
 #define TAM_ID 4
 #define TAM_PREGUNTA 256
 #define TAM_OPCION 256
@@ -23,9 +31,6 @@ typedef struct
     char opcion_3[TAM_OPCION];
     enum eDificultad nivel;
 } tPregunta;
-
-#define PRIMERA_OPCION_VALIDA 'A'
-#define ULTIMA_OPCION_VALIDA 'D'
 
 typedef struct
 {

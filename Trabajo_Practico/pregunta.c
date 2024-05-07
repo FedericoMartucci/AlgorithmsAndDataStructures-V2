@@ -9,9 +9,6 @@ void parsearPregunta(char* json, void* preguntas)
     tPregunta* preguntaAux;
     int i;
     int cantPreguntas;
-//    FILE* arch;
-
-//    abrirArchivo(&arch, "prueba.txt", "wt");
 
     cantPreguntas = cJSON_GetArraySize(json_array);
     preguntaAux = (tPregunta*) preguntas;
@@ -38,8 +35,7 @@ void parsearPregunta(char* json, void* preguntas)
         strcpy(preguntaAux->opcion_2, cJSON_GetObjectItem(item, "opcion_2")->valuestring);
         strcpy(preguntaAux->opcion_3, cJSON_GetObjectItem(item, "opcion_3")->valuestring);
         preguntaAux->nivel = cJSON_GetObjectItem(item, "nivel")->valueint;
-//        imprimirPregunta(arch, preguntaAux);
-//        imprimirPregunta(stdout, preguntaAux);
+
         preguntaAux++;
     }
 
@@ -116,17 +112,6 @@ void intercambiarOpciones(char* opcionA, char* opcionB)
     strcpy(opcionB, temp);
 }
 
-char obtenerLetra(const char* opcion, const tPregunta* pregunta)
-{
-    if (strcmp(opcion, pregunta->opcion_1) == 0)
-        return 'A';
-    else if (strcmp(opcion, pregunta->opcion_2) == 0)
-        return 'B';
-    else if (strcmp(opcion, pregunta->opcion_3) == 0)
-        return 'C';
-    return 'D';
-}
-
 void realizarPregunta(tJuego* juego, int jugador, int rondaActual)
 {
     char opciones[CANT_OPCIONES][TAM_OPCION];
@@ -147,7 +132,9 @@ void realizarPregunta(tJuego* juego, int jugador, int rondaActual)
     procesarRespuesta(juego, jugador, rondaActual, opciones, respuesta, menorTiempo, tiempoDeRespuesta);
 }
 
-void procesarRespuesta(tJuego* juego, int jugador, int rondaActual, char opciones[][TAM_OPCION], char respuesta, int menorTiempo, int tiempoDeRespuesta)
+void procesarRespuesta(tJuego* juego, int jugador, int rondaActual,
+                       char opciones[][TAM_OPCION], char respuesta,
+                       int menorTiempo, int tiempoDeRespuesta)
 {
     if(respuesta == '\0')
         juego->jugadores[jugador].respuestas[rondaActual].esCorrecta = 0;

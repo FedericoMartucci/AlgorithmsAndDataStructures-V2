@@ -1,0 +1,26 @@
+1- ¿Cuál es la moneda oficial de Argentina?
+	A) Dólar estadounidense
+	B) Euro
+	C) Peso mexicano
+	D) Peso argentino (Correcta)
+Respuestas:
+2- ¿Quién escribió el Martín Fierro?
+	A) Jorge Luis Borges
+	B) Julio Cortázar
+	C) Gabriela Mistral
+	D) José Hernández (Correcta)
+Respuestas:
+3- ¿En qué año se celebró la independencia de Argentina?
+	A) 1810
+	B) 1820
+	C) 1830
+	D) 1816 (Correcta)
+Respuestas:
+4- Determine el valor de X: X * 5 - 3 = 27
+	A) 7
+	B) 8
+	C) 5
+	D) 6 (Correcta)
+Respuestas:
+Total
+Ganador/es:
