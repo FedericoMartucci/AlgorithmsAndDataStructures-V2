@@ -115,46 +115,38 @@ int buscarElementoListaOrdenada(const tListaDoble* pl, void* dato, unsigned tamD
 {
     int resultadoComparacion;
 
-    if(!*pl)
-        return LISTA_VACIA;
 
-    ///TODO: cambiarlo por un while como en insertar ordenado
+    while(*pl && (resultadoComparacion = cmp((*pl)->info, dato)) > 0)
+    {
+        if((resultadoComparacion = cmp((*pl)->info, dato)) <= 0)
+        {
+            if(resultadoComparacion == 0)
+            {
+                memcpy(dato, (*pl)->info, MIN(tamDato, (*pl)->tamInfo));
+                return ELEMENTO_ENCONTRADO;
+            }
+            else
+                return ELEMENTO_NO_ENCONTRADO;
+        }
+        pl = &(*pl)->ant;
+    }
 
-    if((resultadoComparacion = cmp((*pl)->info, dato)) > 0)//mientras la comparacion sea mayor voy a ant
+    while(*pl && (resultadoComparacion = cmp((*pl)->info, dato)) < 0)
     {
-        while((*pl)->ant)
+        if((resultadoComparacion = cmp((*pl)->info, dato)) >= 0)
         {
-            if((resultadoComparacion = cmp((*pl)->info, dato)) <= 0)
+            if(resultadoComparacion == 0)
             {
-                if(resultadoComparacion == 0)
-                {
-                    memcpy(dato, (*pl)->info, MIN(tamDato, (*pl)->tamInfo));
-                    return ELEMENTO_ENCONTRADO;
-                }
-                else
-                    return ELEMENTO_NO_ENCONTRADO;
+                memcpy(dato, (*pl)->info, MIN(tamDato, (*pl)->tamInfo));
+                return ELEMENTO_ENCONTRADO;
             }
-            pl = &(*pl)->ant;
+            else
+                return ELEMENTO_NO_ENCONTRADO;
         }
+        pl = &(*pl)->sig;
     }
-    else if (resultadoComparacion < 0)//mientras la comparacion sea mayor voy a sig ///TODO: cambiarlo por un while como en insertar ordenado
-    {
-        while((*pl)->sig)
-        {
-            if((resultadoComparacion = cmp((*pl)->info, dato)) >= 0)
-            {
-                if(resultadoComparacion == 0)
-                {
-                    memcpy(dato, (*pl)->info, MIN(tamDato, (*pl)->tamInfo));
-                    return ELEMENTO_ENCONTRADO;
-                }
-                else
-                    return ELEMENTO_NO_ENCONTRADO;
-            }
-            pl = &(*pl)->sig;
-        }
-    }
-    else
+
+    if( resultadoComparacion == 0)
     {
         memcpy(dato, (*pl)->info, MIN(tamDato, (*pl)->tamInfo));
         return ELEMENTO_ENCONTRADO;
@@ -192,3 +184,39 @@ int buscarElementoListaDesordenada(const tListaDoble* pl, void* dato, unsigned t
 
     return ELEMENTO_NO_ENCONTRADO;
 }
+
+int eliminarClaveListaOrdenadaSinDup(tListaDoble* pl, void* clave, tComparacion cmp)
+{
+
+}
+
+int eliminarOcurrenciasClaveListaDesordenada(tListaDoble* pl, void* clave, tComparacion cmp)
+{
+
+}
+
+int resumirOcurrenciasClaveListaDesordenada(tListaDoble* pl, void* clave, tComparacion cmp)
+{
+
+}
+
+void mapC(tListaDoble* pl, tAccion accion)
+{
+
+}
+
+void filterC(tListaDoble* pl, tComparacion cmp)
+{
+
+}
+
+void reduceC(tListaDoble* pl, void* acumulador, tAccion2 accion)
+{
+
+}
+
+void acumularSumaEnteros(void* acc, const void* info)
+{
+    *(int*)acc = *(int*)acc + *(int*)info;
+}
+

@@ -11,9 +11,9 @@ int main()
 
     generarArchivoProductos("lotePrueba.txt", "TEXTO");
     cargarArchivoProductosEnLista("lotePrueba.txt", &pl);
-    recorrerIzqADer(&pl, mostrarProducto);
-    puts("\n\n");
-    recorrerDerAIzq(&pl, mostrarProducto);
+//    recorrerIzqADer(&pl, mostrarProducto);
+//    puts("\n\n");
+//    recorrerDerAIzq(&pl, mostrarProducto);
 
     vaciarLista(&pl);
 

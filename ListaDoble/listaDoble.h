@@ -17,6 +17,7 @@
 
 typedef int(*tComparacion)(const void*, const void*);
 typedef void(*tAccion)(FILE*, const void*);
+typedef void(*tAccion2)(void*, const void*);
 
 typedef struct sNodo
 {
@@ -37,11 +38,15 @@ void vaciarLista(tListaDoble* pl);
 int buscarElementoListaOrdenada(const tListaDoble* pl, void* dato, unsigned tamDato, tComparacion cmp);
 int buscarElementoListaDesordenada(const tListaDoble* pl, void* dato, unsigned tamDato, tComparacion cmp);
 
-//Hacer:
-//
-//- Crear lista
-//- Insertar ordenado en lista
-//- Recorrer izq-der
-//- Recorrer der-izq.
+int eliminarClaveListaOrdenadaSinDup(tListaDoble* pl, void* clave, tComparacion cmp);
+
+int eliminarOcurrenciasClaveListaDesordenada(tListaDoble* pl, void* clave, tComparacion cmp);
+int resumirOcurrenciasClaveListaDesordenada(tListaDoble* pl, void* clave, tComparacion cmp);
+
+void mapC(tListaDoble* pl, tAccion accion);
+void filterC(tListaDoble* pl, tComparacion cmp);
+void reduceC(tListaDoble* pl, void* acumulador, tAccion2 accion);
+
+void acumularSumaEnteros(void* acc, const void* info);
 
 #endif // LISTADOBLE_H_INCLUDED

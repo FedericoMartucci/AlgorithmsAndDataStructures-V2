@@ -1,15 +1,15 @@
 # depslib dependency file v1.0
-1715802546 source:c:\devs\listadoble\main.c
+1716387615 source:c:\devs\listadoble\main.c
 	"listaDoble.h"
 	"../Bibliotecas/archivos.h"
 	"../Bibliotecas/productos.h"
 
-1715803643 c:\devs\listadoble\listadoble.h
+1716387700 c:\devs\listadoble\listadoble.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1715801412 source:c:\devs\listadoble\listadoble.c
+1716387549 source:c:\devs\listadoble\listadoble.c
 	"listaDoble.h"
 
 1714332014 source:c:\devs\bibliotecas\productos.c
