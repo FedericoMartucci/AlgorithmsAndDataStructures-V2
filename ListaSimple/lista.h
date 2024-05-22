@@ -58,9 +58,8 @@ void sumOperation(void* acc, const void* value);
 
 tLista mapPython(tLista* pl, void(*accion)(void*));
 tLista filterPython(tLista* pl, const void* clave,int(*cmp)(const void*, const void*));
-void eliminarClaveSinDupYEjecutarAccionClavesDup(tLista* pl, const void* info,
-                                                void(*accion)(void*),
-                                                int(*cmp)(const void*, const void*));
+void eliminarClaveSinDupYEjecutarAccionClavesDup(tLista* pl, void(* accion)(void*),
+                                                int(* cmp)(const void*, const void*));
 int insertarEnPosicion(tLista* pl, const void* info, unsigned cantBytes, unsigned pos);
 int eliminarPorPosicion(tLista* pl, void* info, unsigned cantBytes, unsigned pos);
 //insertar después de una clave "n" nodos

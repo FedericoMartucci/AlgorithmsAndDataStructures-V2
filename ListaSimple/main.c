@@ -3,7 +3,7 @@
 int main()
 {
     int i;
-    int vec[] = {33, 259, 0, -3, 21, -33, 0, 89, 5, 8, 9};
+    int vec[] = {33, 5, 259, 0, -3, 21, -33, 0, 89, 5, 8, 9, -33};
     int elim = 5;
     int clave = 33;
     tLista pl;
@@ -28,7 +28,9 @@ int main()
 
     mapC(&pl, mostrarNumeroPorConsola);
     puts("");
-    eliminarNDespuesDeUnaClave(&pl, &clave, 2, cmpEnteros);
+    eliminarClaveSinDupYEjecutarAccionClavesDup(&pl, mostrarNumeroPorConsola, cmpEnteros);
+    puts("");
+//    eliminarNDespuesDeUnaClave(&pl, &clave, 2, cmpEnteros);
 //    eliminarNUltimos(&pl, -2);
     mapC(&pl, mostrarNumeroPorConsola);
 

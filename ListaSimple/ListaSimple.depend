@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1716346545 source:c:\devs\listasimple\main.c
+1716385886 source:c:\devs\listasimple\main.c
 	"lista.h"
 
-1716346672 c:\devs\listasimple\lista.h
+1716385832 c:\devs\listasimple\lista.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1716346775 source:c:\devs\listasimple\lista.c
+1716386023 source:c:\devs\listasimple\lista.c
 	"lista.h"
 

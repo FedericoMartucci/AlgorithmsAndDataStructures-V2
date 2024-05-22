@@ -331,26 +331,26 @@ tLista filterPython(tLista* pl, const void* clave, int(* cmp)(const void*, const
     return listaClonada;
 }
 
-void eliminarClaveSinDupYEjecutarAccionClavesDup(tLista* pl, const void* clave,
-                                                void(* accion)(void*),
+void eliminarClaveSinDupYEjecutarAccionClavesDup(tLista* pl, void(* accion)(void*),
                                                 int(* cmp)(const void*, const void*))
 {
     tNodo* coincidencia;
     tNodo* elim;
-    ///TODO: realizar modificacion que recorra toda la lista por cada elemento para ver si tiene duplicados o no.
+    tLista* ini;
+
+    ini = pl;
+
     while(*pl)
     {
-        coincidencia = *pl;
+        coincidencia = *ini;
         while(coincidencia)
         {
-            if(cmp(coincidencia->info, clave))
-            {
-
-            }
+            if(coincidencia != *pl && cmp(coincidencia->info, (*pl)->info) == 0)
+                break;
             coincidencia = coincidencia->sig;
         }
 
-        if()
+        if(coincidencia == NULL)
         {
             elim = *pl;
             *pl = elim->sig;
