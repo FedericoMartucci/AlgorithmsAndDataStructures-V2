@@ -10,7 +10,7 @@
 #define TAM_DESCRIPCION 16
 #define TAM_PROVEEDOR 16
 
-#define CANT_PRODUCTOS 100
+#define CANT_PRODUCTOS 10
 #define CANT_NUMEROS 10
 
 typedef struct {

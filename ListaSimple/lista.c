@@ -20,7 +20,7 @@ int insertarAlInicio(tLista* pl, const void* info, unsigned cantBytes)
     tNodo* nodoAInsertar;
 
     if((nodoAInsertar = (tNodo*) malloc(sizeof(tNodo))) == NULL ||
-       (nodoAInsertar->info = malloc(cantBytes)) == NULL)
+            (nodoAInsertar->info = malloc(cantBytes)) == NULL)
     {
         free(nodoAInsertar);
         return MEM_ERR;
@@ -44,7 +44,7 @@ int insertarAlFinal(tLista* pl, const void* info, unsigned cantBytes)
 
 
     if((nodoAInsertar = (tNodo*) malloc(sizeof(tNodo))) == NULL ||
-       (nodoAInsertar->info = malloc(cantBytes)) == NULL)
+            (nodoAInsertar->info = malloc(cantBytes)) == NULL)
     {
         free(nodoAInsertar);
         return MEM_ERR;
@@ -60,9 +60,9 @@ int insertarAlFinal(tLista* pl, const void* info, unsigned cantBytes)
 }
 
 int insertarAlFinalOAcumulando(tLista* pl, const void* info, unsigned cantBytes,
-                              int(*cmp)(const void*, const void*),
-                              void(*acumular)(void* infoEnLista, void* tamInfo,
-                                              const void* info, unsigned cantBytes))
+                               int(*cmp)(const void*, const void*),
+                               void(*acumular)(void* infoEnLista, void* tamInfo,
+                                       const void* info, unsigned cantBytes))
 {
     tNodo* nodoAInsertar;
     int comparacion;
@@ -80,7 +80,7 @@ int insertarAlFinalOAcumulando(tLista* pl, const void* info, unsigned cantBytes,
 
 
     if((nodoAInsertar = (tNodo*) malloc(sizeof(tNodo))) == NULL ||
-       (nodoAInsertar->info = malloc(cantBytes)) == NULL)
+            (nodoAInsertar->info = malloc(cantBytes)) == NULL)
     {
         free(nodoAInsertar);
         return MEM_ERR;
@@ -108,3 +108,377 @@ void acumularSumando(void* infoEnLista, const void* info)
 {
 
 }
+
+void mostrarNumeroPorConsola(void* num)
+{
+    fprintf(stdout, "%d ", *(int*)num);
+}
+
+
+///Ejercicios de tarea
+int insertarEnOrden(tLista* pl, const void* info, unsigned cantBytes, int(* cmp)(const void*, const void*))
+{
+    tNodo* nuevo;
+
+    while(*pl && cmp((*pl)->info, info) < 0)
+        pl = &(*pl)->sig;
+
+    if((nuevo = (tNodo*) malloc(sizeof(tNodo))) == NULL ||
+            (nuevo->info = malloc(cantBytes)) == NULL)
+    {
+        free(nuevo);
+        return MEM_ERR;
+    }
+
+    memcpy(nuevo->info, info, cantBytes);
+    nuevo->tamInfo = cantBytes;
+    nuevo->sig = *pl;
+    *pl = nuevo;
+
+    return OK;
+}
+
+void ordenarPorSeleccion(tLista* pl, int(* cmp)(const void*, const void*))
+{
+    tNodo** menor;
+    tNodo* aux;
+
+    if(*pl == NULL)
+        return;
+
+    while((*pl)->sig)
+    {
+        menor = buscarMenor(pl, cmp);
+        if(menor != pl)
+        {
+            aux = *menor;
+            *menor = aux->sig;
+            aux->sig = *pl;
+            *pl = aux;
+        }
+        pl = &(*pl)->sig;
+    }
+}
+
+tNodo** buscarMenor(const tLista* pl, int(* cmp)(const void*, const void*))
+{
+    tNodo** menor;
+
+    if(*pl == NULL)
+        return NULL;
+
+    menor = (tLista*) pl;
+
+    while((*pl)->sig)
+    {
+        pl = &(*pl)->sig;
+        if(cmp((*menor)->info, (*pl)->info) > 0)
+            menor = (tLista*) pl;
+    }
+
+    return menor;
+}
+
+void eliminarPrimeraOcurrencia(tLista* pl, void* info, unsigned cantBytes, int(* cmp)(const void*, const void*))
+{
+    tNodo* elim;
+
+    while(*pl && cmp((*pl)->info, info))
+        pl = &(*pl)->sig;
+
+    if(*pl == NULL)
+        return;
+
+    elim = *pl;
+    memcpy(info, elim->info, MIN(cantBytes, elim->tamInfo));
+    *pl = elim->sig;
+
+    free(elim->info);
+    free(elim);
+}
+
+void eliminarOcurrencias(tLista* pl, const void* info, unsigned cantBytes, int(* cmp)(const void*, const void*))
+{
+    tNodo* elim;
+
+    while(*pl)
+    {
+        if(cmp((*pl)->info, info) == 0)
+        {
+            elim = *pl;
+            *pl = elim->sig;
+            free(elim->info);
+            free(elim);
+        }
+        else
+            pl = &(*pl)->sig;
+    }
+}
+
+void eliminarUltimaOcurrencia(tLista* pl, void* info, unsigned cantBytes, int(* cmp)(const void*, const void*))
+{
+    tNodo* elim;
+    tNodo** dirElim;
+
+    elim = NULL;
+
+    while(*pl)
+    {
+        if(cmp((*pl)->info, info) == 0)
+        {
+            elim = *pl;
+            dirElim = pl;
+        }
+        pl = &(*pl)->sig;
+    }
+
+    if(elim == NULL)
+        return;
+
+    memcpy(info, elim->info, MIN(cantBytes, elim->tamInfo));
+    *dirElim = elim->sig;
+
+    free(elim->info);
+    free(elim);
+}
+
+void mapC(tLista* pl, void(* accion)(void*))
+{
+    while(*pl)
+    {
+        accion((*pl)->info);
+        pl = &(*pl)->sig;
+    }
+}
+
+int filterC(tLista* pl, const void* clave, int(* cmp)(const void*, const void*))
+{
+    tNodo* elim;
+    int cantElementos;
+
+    cantElementos = 0;
+
+    while(*pl)
+    {
+        if(cmp((*pl)->info, clave))
+        {
+            elim = *pl;
+            *pl = elim->sig;
+            free(elim->info);
+            free(elim);
+        }
+        else
+            pl = &(*pl)->sig;
+        cantElementos++;
+    }
+
+    return cantElementos;
+}
+
+void reduceC(tLista* pl, void* acumulador, void (*accion)(void*, const void*))
+{
+    while(*pl)
+    {
+        accion(acumulador, (*pl)->info);
+        pl = &(*pl)->sig;
+    }
+}
+
+void sumOperation(void* acc, const void* value)
+{
+    *(int*)acc = (*(int*)acc) + (*(int*)value);
+}
+
+tLista mapPython(tLista* pl, void(* accion)(void*))
+{
+    tLista listaClonada;
+
+    crearLista(&listaClonada);
+
+    while(*pl)
+    {
+        accion((*pl)->info);
+        insertarAlFinal(&listaClonada, (*pl)->info, (*pl)->tamInfo);
+        pl = &(*pl)->sig;
+    }
+
+    return listaClonada;
+}
+
+tLista filterPython(tLista* pl, const void* clave, int(* cmp)(const void*, const void*))
+{
+    tNodo* elim;
+    tLista listaClonada;
+
+    crearLista(&listaClonada);
+
+    while(*pl)
+    {
+        if(cmp((*pl)->info, clave))
+        {
+            elim = *pl;
+            *pl = elim->sig;
+            free(elim->info);
+            free(elim);
+        }
+        else
+        {
+            insertarAlFinal(&listaClonada, (*pl)->info, (*pl)->tamInfo);
+            pl = &(*pl)->sig;
+        }
+    }
+
+    return listaClonada;
+}
+
+void eliminarClaveSinDupYEjecutarAccionClavesDup(tLista* pl, const void* clave,
+                                                void(* accion)(void*),
+                                                int(* cmp)(const void*, const void*))
+{
+    tNodo* coincidencia;
+    tNodo* elim;
+    ///TODO: realizar modificacion que recorra toda la lista por cada elemento para ver si tiene duplicados o no.
+    while(*pl)
+    {
+        coincidencia = *pl;
+        while(coincidencia)
+        {
+            if(cmp(coincidencia->info, clave))
+            {
+
+            }
+            coincidencia = coincidencia->sig;
+        }
+
+        if()
+        {
+            elim = *pl;
+            *pl = elim->sig;
+            free(elim->info);
+            free(elim);
+        }
+        else
+        {
+            accion((*pl)->info);
+            pl = &(*pl)->sig;
+        }
+    }
+}
+
+int insertarEnPosicion(tLista* pl, const void* info, unsigned cantBytes, unsigned pos)
+{
+    int i;
+    tNodo* nuevo;
+
+    i = 1;
+
+    while(*pl && i <= pos)
+    {
+        pl = &(*pl)->sig;
+        i ++;
+    }
+
+    if(i < pos)
+        return OVERFLOW_ERROR;
+
+    if((nuevo = (tNodo*) malloc(sizeof(tNodo))) == NULL ||
+            (nuevo->info = malloc(cantBytes)) == NULL)
+    {
+        free(nuevo);
+        return MEM_ERR;
+    }
+
+    memcpy(nuevo->info, info, cantBytes);
+    nuevo->tamInfo = cantBytes;
+    nuevo->sig = *pl;
+    *pl = nuevo;
+
+    return OK;
+}
+
+int eliminarPorPosicion(tLista* pl, void* info, unsigned cantBytes, unsigned pos)
+{
+    tNodo* elim;
+
+    while(*pl && pos--)
+    {
+        if(pos == 0)
+        {
+            elim = *pl;
+            memcpy(info, elim->info, MIN(elim->tamInfo, cantBytes));
+            *pl = elim->sig;
+
+            free(elim->info);
+            free(elim);
+            return OK;
+        }
+        pl = &(*pl)->sig;
+    }
+    return OVERFLOW_ERROR;
+}
+
+int eliminarNDespuesDeUnaClave(tLista* pl, const void* clave, int n,
+                                      int (*cmp)(const void*, const void*))
+{
+    tNodo* elim;
+    tNodo* sublista;
+
+    while(*pl && cmp(clave, (*pl)->info))
+        pl = &(*pl)->sig;
+
+    if(*pl == NULL)
+        return CLAVE_NO_ENCONTRADA;
+    else
+        pl = &(*pl)->sig;
+
+    sublista = *pl;
+
+    while(sublista && n-- > 0)
+        sublista = sublista->sig;
+
+    if(n > 0)
+        return NO_EXISTEN_N_ELEMENTOS;
+
+    while(*pl && *pl != sublista)
+    {
+        elim = *pl;
+        *pl = elim->sig;
+
+        free(elim->info);
+        free(elim);
+    }
+
+    return OK;
+}
+
+int eliminarNUltimos(tLista* pl, int n)
+{
+    tNodo* elim;
+    tNodo* sublista;
+
+    sublista = *pl;
+
+    while(sublista && n-- > 0)
+        sublista = sublista->sig;
+
+    if(n > 0)
+        return NO_EXISTEN_N_ELEMENTOS;
+
+    while(sublista)
+    {
+        sublista = sublista->sig;
+        pl = &(*pl)->sig;
+    }
+
+    while(*pl)
+    {
+        elim = *pl;
+        *pl = elim->sig;
+
+        free(elim->info);
+        free(elim);
+    }
+
+    return OK;
+}
+
