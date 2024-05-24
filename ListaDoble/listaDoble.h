@@ -38,7 +38,7 @@ void vaciarLista(tListaDoble* pl);
 int buscarElementoListaOrdenada(const tListaDoble* pl, void* dato, unsigned tamDato, tComparacion cmp);
 int buscarElementoListaDesordenada(const tListaDoble* pl, void* dato, unsigned tamDato, tComparacion cmp);
 
-int eliminarClaveListaOrdenadaSinDup(tListaDoble* pl, void* clave, tComparacion cmp);
+void eliminarClaveListaOrdenadaSinDup(tListaDoble* pl, void* clave, tComparacion cmp);
 
 int eliminarOcurrenciasClaveListaDesordenada(tListaDoble* pl, void* clave, tComparacion cmp);
 int resumirOcurrenciasClaveListaDesordenada(tListaDoble* pl, void* clave, tComparacion cmp);

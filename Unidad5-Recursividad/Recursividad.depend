@@ -1,0 +1,37 @@
+# depslib dependency file v1.0
+1716411488 source:c:\users\laboratorios\desktop\recursividad\main.c
+	"recursividad.h"
+
+1716411474 c:\users\laboratorios\desktop\recursividad\recursividad.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+
+1716411468 source:c:\users\laboratorios\desktop\recursividad\recursividad.c
+	"recursividad.h"
+
+1716438901 source:c:\users\user\desktop\recursividad\main.c
+	"recursividad.h"
+
+1716438884 c:\users\user\desktop\recursividad\recursividad.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+
+1716438914 source:c:\users\user\desktop\recursividad\recursividad.c
+	"recursividad.h"
+
+1716500911 source:c:\devs\recursividad\main.c
+	"recursividad.h"
+
+1716500459 c:\devs\recursividad\recursividad.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+
+1716501127 source:c:\devs\recursividad\recursividad.c
+	"recursividad.h"
+

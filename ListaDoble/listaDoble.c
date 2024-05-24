@@ -185,9 +185,36 @@ int buscarElementoListaDesordenada(const tListaDoble* pl, void* dato, unsigned t
     return ELEMENTO_NO_ENCONTRADO;
 }
 
-int eliminarClaveListaOrdenadaSinDup(tListaDoble* pl, void* clave, tComparacion cmp)
+void eliminarClaveListaOrdenadaSinDup(tListaDoble* pl, void* clave, tComparacion cmp)
 {
+    int resultadoComparacion;
+    tNodo* elim;
+    tNodo* auxAnt;
+    tNodo* auxSig;
 
+    while(*pl && (resultadoComparacion = cmp((*pl)->info, clave) > 0))
+        pl = &(*pl)->ant;
+
+    if(resultadoComparacion == 0)
+    {
+        elim = *pl;
+        //hago conexiones
+
+        free(elim->info);
+        free(elim);
+    }
+
+    while(*pl && cmp((*pl)->info, clave) < 0)
+        pl = &(*pl)->sig1;
+
+    if(resultadoComparacion == 0)
+    {
+        elim = *pl;
+        //hago conexiones
+
+        free(elim->info);
+        free(elim);
+    }
 }
 
 int eliminarOcurrenciasClaveListaDesordenada(tListaDoble* pl, void* clave, tComparacion cmp)
