@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1716747786 source:c:\devs\listacircular\main.c
+	"ListaCircular.h"
+
+1716746933 c:\devs\listacircular\listacircular.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1716748644 source:c:\devs\listacircular\listacircular.c
+	"ListaCircular.h"
+
