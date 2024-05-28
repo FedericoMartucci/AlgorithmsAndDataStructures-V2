@@ -97,9 +97,40 @@ int insertarAlFinalOAcumulo(tLista* pl, const void* info, unsigned cantBytes,
     return OK;
 }
 
-int buscarInfoPorClave(const tLista* pl, void* info, unsigned cantBytes, const void* clave)
+int buscarInfoPorClaveListaOrdenada(const tLista* pl, void* info,
+                                    int(*cmp)(const void*, const void*),
+                                    void(*acumular)(void*, const void*))
 {
-    return OK;
+    int comparacion;
+
+    while(*pl && (comparacion = cmp((*pl)->info, info)) < 0)
+        pl = &(*pl)->sig;
+
+    if(comparacion == 0)
+    {
+        acumular(info, (*pl)->info);
+        return OK;
+    }
+
+    return CLAVE_NO_ENCONTRADA;
+}
+
+int buscarInfoPorClaveListaDesordenada(const tLista* pl, void* info,
+                                       int(*cmp)(const void*, const void*),
+                                       void(*acumular)(void*, const void*))
+{
+    int comparacion;
+
+    while(*pl && (comparacion = cmp((*pl)->info, info)))
+        pl = &(*pl)->sig;
+
+    if(comparacion == 0)
+    {
+        acumular(info, (*pl)->info);
+        return OK;
+    }
+
+    return CLAVE_NO_ENCONTRADA;
 }
 
 int cmpEnteros(const void* a, const void* b)

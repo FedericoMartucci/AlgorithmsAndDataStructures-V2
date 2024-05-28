@@ -20,27 +20,27 @@
 	<string.h>
 	<time.h>
 
-1716861945 source:c:\devs\bibliotecas\productos.c
+1716862188 source:c:\devs\bibliotecas\productos.c
 	"productos.h"
 
-1716861931 source:c:\devs\listasimple\lista.c
+1716867759 source:c:\devs\listasimple\lista.c
 	"lista.h"
 
-1716861357 c:\devs\listasimple\lista.h
+1716867008 c:\devs\listasimple\lista.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1716862013 source:c:\devs\unidad4\main.c
+1716864098 source:c:\devs\unidad4\main.c
 	"../Bibliotecas/archivos.h"
 	"../Bibliotecas/productos.h"
 	"../ListaSimple/lista.h"
 	"ejercicios.h"
 
-1716861931 source:c:\devs\unidad4\ejercicios.c
+1716868309 source:c:\devs\unidad4\ejercicios.c
 	"ejercicios.h"
 
-1716861372 c:\devs\unidad4\ejercicios.h
+1716867032 c:\devs\unidad4\ejercicios.h
 	"../Bibliotecas/productos.h"
 	"../ListaSimple/lista.h"
 	"../Bibliotecas/archivos.h"

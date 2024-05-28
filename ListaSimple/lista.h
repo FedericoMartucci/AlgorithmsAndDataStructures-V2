@@ -33,7 +33,12 @@ int insertarAlFinalOAcumulo(tLista* pl, const void* info, unsigned cantBytes,
                                int(*cmp)(const void*, const void*),
                                void(*acumular)(void**, const void*));
 
-int buscarInfoPorClave(const tLista* pl, void* info, unsigned cantBytes, const void* clave);
+int buscarInfoPorClaveListaOrdenada(const tLista* pl, void* info,
+                                    int(*cmp)(const void*, const void*),
+                                    void(*acumular)(void*, const void*));
+int buscarInfoPorClaveListaDesordenada(const tLista* pl, void* info,
+                                       int(*cmp)(const void*, const void*),
+                                       void(*acumular)(void*, const void*));
 
 void mostrarNumeroPorConsola(void* num);
 int cmpEnteros(const void*, const void*);
