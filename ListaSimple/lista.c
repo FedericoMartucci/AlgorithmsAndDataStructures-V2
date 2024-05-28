@@ -59,10 +59,9 @@ int insertarAlFinal(tLista* pl, const void* info, unsigned cantBytes)
     return OK;
 }
 
-int insertarAlFinalOAcumulando(tLista* pl, const void* info, unsigned cantBytes,
+int insertarAlFinalOAcumulo(tLista* pl, const void* info, unsigned cantBytes,
                                int(*cmp)(const void*, const void*),
-                               void(*acumular)(void* infoEnLista, void* tamInfo,
-                                       const void* info, unsigned cantBytes))
+                               void(*acumular)(void**, const void*))
 {
     tNodo* nodoAInsertar;
     int comparacion;
@@ -73,11 +72,13 @@ int insertarAlFinalOAcumulando(tLista* pl, const void* info, unsigned cantBytes,
     if(comparacion == 0)
     {
         if(acumular)
-            acumular(&(*pl)->info, &(*pl)->tamInfo, info, cantBytes);
+        {
+            acumular(&(*pl)->info, info);
+            return OK;
+        }
 
         return CLAVE_DUP;
     }
-
 
     if((nodoAInsertar = (tNodo*) malloc(sizeof(tNodo))) == NULL ||
             (nodoAInsertar->info = malloc(cantBytes)) == NULL)
@@ -85,6 +86,7 @@ int insertarAlFinalOAcumulando(tLista* pl, const void* info, unsigned cantBytes,
         free(nodoAInsertar);
         return MEM_ERR;
     }
+
 
     memcpy(nodoAInsertar->info, info, cantBytes);
     nodoAInsertar->tamInfo = cantBytes;
@@ -116,12 +118,47 @@ void mostrarNumeroPorConsola(void* num)
 
 
 ///Ejercicios de tarea
-int insertarEnOrden(tLista* pl, const void* info, unsigned cantBytes, int(* cmp)(const void*, const void*))
+int insertarOrdenado(tLista* pl, const void* info, unsigned cantBytes, int(* cmp)(const void*, const void*))
 {
     tNodo* nuevo;
 
     while(*pl && cmp((*pl)->info, info) < 0)
         pl = &(*pl)->sig;
+
+    if((nuevo = (tNodo*) malloc(sizeof(tNodo))) == NULL ||
+            (nuevo->info = malloc(cantBytes)) == NULL)
+    {
+        free(nuevo);
+        return MEM_ERR;
+    }
+
+    memcpy(nuevo->info, info, cantBytes);
+    nuevo->tamInfo = cantBytes;
+    nuevo->sig = *pl;
+    *pl = nuevo;
+
+    return OK;
+}
+
+int insertarOrdenadoAcumulando(tLista* pl, const void* info, unsigned cantBytes,
+                              int(*cmp)(const void*, const void*),
+                               void(*acumular)(void**, const void*))
+{
+    tNodo* nuevo;
+    int resultadoComparacion;
+
+    while(*pl && (resultadoComparacion = cmp((*pl)->info, info)) < 0)
+        pl = &(*pl)->sig;
+
+    if(resultadoComparacion == 0)
+    {
+        if(acumular)
+        {
+            acumular(&(*pl)->info, info);
+            return OK;
+        }
+        return CLAVE_DUP;
+    }
 
     if((nuevo = (tNodo*) malloc(sizeof(tNodo))) == NULL ||
             (nuevo->info = malloc(cantBytes)) == NULL)
@@ -177,6 +214,58 @@ tNodo** buscarMenor(const tLista* pl, int(* cmp)(const void*, const void*))
     }
 
     return menor;
+}
+
+int mostrarYEliminarDuplicados(tLista* pl, const char* nombreArch,
+                                int(* cmp)(const void*, const void*))
+{
+    tLista* recorre;
+    tNodo* elim;
+    FILE* archSalida;
+    int duplicado;
+
+    if(abrirArchivo(&archSalida, nombreArch, "wt") != OK)
+        return -2;
+
+    while(*pl)
+    {
+        duplicado = 0;
+        recorre = &(*pl)->sig;
+        while(*recorre)
+        {
+            if(cmpCodigoProductoReducido((*pl)->info, (*recorre)->info) == 0)
+            {
+                mostrarProductoSinProveedor(stdout, (*recorre)->info);
+                mostrarProductoSinProveedor(archSalida, (*recorre)->info);
+                elim = *recorre;
+                *recorre = elim->sig;
+                free(elim->info);
+                free(elim);
+                duplicado = 1;
+            }
+            else
+            {
+                recorre = &(*recorre)->sig;
+            }
+        }
+        if(duplicado)
+        {
+            mostrarProductoSinProveedor(stdout, (*pl)->info);
+            mostrarProductoSinProveedor(archSalida, (*pl)->info);
+            elim = *pl;
+            *pl = elim->sig;
+            free(elim->info);
+            free(elim);
+        }
+        else
+        {
+            pl = &(*pl)->sig;
+        }
+    }
+
+    fclose(archSalida);
+
+    return OK;
 }
 
 void eliminarPrimeraOcurrencia(tLista* pl, void* info, unsigned cantBytes, int(* cmp)(const void*, const void*))

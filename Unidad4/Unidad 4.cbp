@@ -31,10 +31,22 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="../TDA/listaDinamica.c">
+		<Unit filename="../Bibliotecas/archivos.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../TDA/listaDinamica.h" />
+		<Unit filename="../Bibliotecas/archivos.h" />
+		<Unit filename="../Bibliotecas/productos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Bibliotecas/productos.h" />
+		<Unit filename="../ListaSimple/lista.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../ListaSimple/lista.h" />
+		<Unit filename="ejercicios.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ejercicios.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

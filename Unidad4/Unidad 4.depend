@@ -1,0 +1,47 @@
+# depslib dependency file v1.0
+1716842264 source:c:\devs\bibliotecas\archivos.c
+	"archivos.h"
+	"productos.h"
+
+1716860277 c:\devs\bibliotecas\archivos.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../ListaSimple/lista.h"
+
+1716432223 c:\devs\listadoble\listadoble.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1716860625 c:\devs\bibliotecas\productos.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+
+1716861945 source:c:\devs\bibliotecas\productos.c
+	"productos.h"
+
+1716861931 source:c:\devs\listasimple\lista.c
+	"lista.h"
+
+1716861357 c:\devs\listasimple\lista.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1716862013 source:c:\devs\unidad4\main.c
+	"../Bibliotecas/archivos.h"
+	"../Bibliotecas/productos.h"
+	"../ListaSimple/lista.h"
+	"ejercicios.h"
+
+1716861931 source:c:\devs\unidad4\ejercicios.c
+	"ejercicios.h"
+
+1716861372 c:\devs\unidad4\ejercicios.h
+	"../Bibliotecas/productos.h"
+	"../ListaSimple/lista.h"
+	"../Bibliotecas/archivos.h"
+

@@ -29,10 +29,10 @@ int listaVacia(const tLista* pl);
 int listaLlena(const tLista* pl, unsigned cantBytes);
 int insertarAlInicio(tLista* pl, const void* info, unsigned cantBytes);
 int insertarAlFinal(tLista* pl, const void* info, unsigned cantBytes);
-int insertarAlFinalOAcumulando(tLista* pl, const void* info, unsigned cantBytes,
-                              int(*cmp)(const void*, const void*),
-                              void(*acumular)(void* infoEnLista, void* tamInfo,
-                                              const void* info, unsigned cantBytes));
+int insertarAlFinalOAcumulo(tLista* pl, const void* info, unsigned cantBytes,
+                               int(*cmp)(const void*, const void*),
+                               void(*acumular)(void**, const void*));
+
 int buscarInfoPorClave(const tLista* pl, void* info, unsigned cantBytes, const void* clave);
 
 void mostrarNumeroPorConsola(void* num);
@@ -40,10 +40,15 @@ int cmpEnteros(const void*, const void*);
 void acumularSumando(void* infoEnLista, const void* info);
 
 /// Ejercicios de tarea
-int insertarEnOrden(tLista* pl, const void* info, unsigned cantBytes,
+int insertarOrdenado(tLista* pl, const void* info, unsigned cantBytes,
                               int(*cmp)(const void*, const void*));
+int insertarOrdenadoAcumulando(tLista* pl, const void* info, unsigned cantBytes,
+                              int(*cmp)(const void*, const void*),
+                               void(*acumular)(void**, const void*));
 void ordenarPorSeleccion(tLista* pl, int(*cmp)(const void*, const void*));
 tNodo** buscarMenor(const tLista* pl, int(* cmp)(const void*, const void*));
+int mostrarYEliminarDuplicados(tLista* pl, const char* nombreArch,
+                                int(* cmp)(const void*, const void*));
 void eliminarPrimeraOcurrencia(tLista* pl, void* info, unsigned cantBytes,
                               int(*cmp)(const void*, const void*));
 void eliminarOcurrencias(tLista* pl, const void* info, unsigned cantBytes,
@@ -51,6 +56,7 @@ void eliminarOcurrencias(tLista* pl, const void* info, unsigned cantBytes,
 void eliminarUltimaOcurrencia(tLista* pl, void* info, unsigned cantBytes,
                               int(*cmp)(const void*, const void*));
 void mapC(tLista* pl, void(*accion)(void*));
+
 int filterC(tLista* pl, const void* clave,int(*cmp)(const void*, const void*));
 
 void reduceC(tLista* pl, void* acumulador, void (*accion)(void*, const void*));
