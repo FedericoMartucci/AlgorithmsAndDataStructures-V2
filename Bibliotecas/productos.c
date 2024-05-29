@@ -36,8 +36,8 @@ void generarProductos(tProducto* vecProductos, int cantidad)
     int i;
 
     for (i = 0; i < cantidad; i++) {
-        sprintf(vecProductos[i].codigo, "%07d", 1 + rand() % 9849156);
-        sprintf(vecProductos[i].descripcion, "Producto %d", i + 1);
+        sprintf(vecProductos[i].codigo, "%07d", 1 + rand() % 31);
+        sprintf(vecProductos[i].descripcion, "Producto %d", 1 + rand() % 5);
         sprintf(vecProductos[i].proveedor, "Proveedor%d", i + 1);
         vecProductos[i].fechaCompra.dia = 1 + rand() % 31;
         vecProductos[i].fechaCompra.mes = 1 + rand() % 12;

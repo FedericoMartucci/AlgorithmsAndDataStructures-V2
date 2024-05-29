@@ -6,8 +6,8 @@
 #include <string.h>
 //#include "../TDA/pilaDinamica.h"
 //#include "../ColaDinamica/cola.h"
-//#include "../ListaDoble/listaDoble.h"
-#include "../ListaSimple/lista.h"
+#include "../ListaDoble/listaDoble.h"
+//#include "../ListaSimple/lista.h"
 
 #define OK 0
 #define MEM_ERR -1
@@ -26,7 +26,7 @@
 
 int generarArchivoCalculos(const char* nombre, const char* tipo);
 int generarArchivoProductos(const char* nombre, const char* tipo);
-int cargarArchivoProductosEnLista(const char* nombre, tLista* pl);
+int cargarArchivoProductosEnLista(const char* nombre, tListaDoble* pl);
 int generarArchivoNumeros(const char* nombre, const char* tipo);
 int abrirArchivo(FILE** archivoAAbrir, const char* nombre, const char* tipo);
 int ordenarArchivoTexto(const char* nombre, unsigned tamRegistro,

@@ -130,7 +130,7 @@ int generarArchivoNumeros(const char* nombre, const char* tipo)
     return OK;
 }
 
-int cargarArchivoProductosEnLista(const char* nombre, tLista* pl)
+int cargarArchivoProductosEnLista(const char* nombre, tListaDoble* pl)
 {
     FILE* archProductos;
     tProducto productoLeido;
