@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1717125244 source:c:\devs\unidad6\main.c
+	"arbol.h"
+
+1717125211 c:\devs\unidad6\arbol.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1717125378 source:c:\devs\unidad6\arbol.c
+	"arbol.h"
+
