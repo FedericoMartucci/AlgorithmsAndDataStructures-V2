@@ -117,7 +117,7 @@ int contarNodosSinHijosIzq(const tArbol* pa);
 
 /// Map - Filter - Reduce
 void mapArbol(tArbol* pa, tAccion accion);
-void filterArbol(const tArbol* pa, void* filtro, tComparacion cmp, tAccion accion);
+void filterArbol(tArbol* pa, void* filtro, tComparacion cmp, tAccion accion);
 void reduceArbol(const tArbol* pa, void* acc, tAccion2 accion);
 
 /// Generar datos random

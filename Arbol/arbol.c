@@ -306,7 +306,10 @@ void eliminarHoja(tArbol* pa, void* claveInfo, unsigned cantBytes, tComparacion 
         *pa = NULL;
     }
 }
-void podarArbolHastaAltura(tArbol* pa, int altura); //Ejercicio 6.1
+void podarArbolHastaAltura(tArbol* pa, int altura)
+{
+
+}
 void podarArbolHastaAlturaInclusive(tArbol* pa, int altura); //Ejercicio 6.1
 
 /// Primitivas clasicas
@@ -322,7 +325,16 @@ int arbolVacio(const tArbol* pa)
 {
     return *pa == NULL;
 }
-void vaciarArbol(tArbol* pa); //Ejercicio 6.1
+void vaciarArbol(tArbol* pa)
+{
+    if(*pa == NULL)
+        return;
+    vaciarArbol(&(*pa)->izq);
+    vaciarArbol(&(*pa)->der);
+    free((*pa)->info);
+    free(*pa);
+    *pa = NULL;
+}
 
 /// Clasificacion arbol
 int esArbolCompleto(const tArbol* pa); //Ejercicio 6.4
@@ -504,9 +516,37 @@ int contarNodosSinHijosIzq(const tArbol* pa)
 }
 
 /// Map - Filter - Reduce
-void mapArbol(tArbol* pa, tAccion accion);
-void filterArbol(const tArbol* pa, void* filtro, tComparacion cmp, tAccion accion);
-void reduceArbol(const tArbol* pa, void* acc, tAccion2 accion);
+void mapArbol(tArbol* pa, tAccion accion)
+{
+    if(*pa == NULL)
+        return
+    mapArbol(&(*pa)->izq, accion);
+    mapArbol(&(*pa)->der, accion);
+    accion((*pa)->info);
+}
+void filterArbol(tArbol* pa, void* filtro, tComparacion cmp, tAccion accion)
+{
+    if(*pa == NULL)
+        return
+    filterArbol(&(*pa)->izq, filtro, cmp, accion);
+    filterArbol(&(*pa)->der, filtro, cmp, accion);
+    if(cmp((*pa)->info, filtro) == 0)
+        accion((*pa)->info);
+    else
+    {
+        free((*pa)->info);
+        free(*pa);
+        *pa = NULL;
+    }
+}
+void reduceArbol(const tArbol* pa, void* acc, tAccion2 accion)
+{
+    if(*pa == NULL)
+        return
+    reduceArbol(&(*pa)->izq, acc, accion);
+    reduceArbol(&(*pa)->der, acc, accion);
+    accion(acc, (*pa)->info);
+}
 
 /// Generar datos random
 void generarVectorEnteros(int* vec, int tam)
@@ -542,7 +582,11 @@ void mostrarNodosHojas(const tArbol* pa, tAccion accion)
     if((*pa)->izq == NULL && (*pa)->der == NULL)
         accion((*pa)->info);
 }
-void mostrarNodosNoHoja(const tArbol* pa, tAccion accion); //Ejercicio 6.1
+void mostrarNodosNoHoja(const tArbol* pa, tAccion accion)
+{
+
+}
+
 void mostrarNodosHijosSoloIzq(const tArbol* pa, tAccion accion); //Ejercicio 6.1
 void mostrarNodosHijosIzq(const tArbol* pa, tAccion accion); //Ejercicio 6.1
 void mostrarNodosHijosDer(const tArbol* pa, tAccion accion); //Ejercicio 6.1
