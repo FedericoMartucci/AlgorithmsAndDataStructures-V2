@@ -66,9 +66,9 @@ int recuperarArbolDeArchivoTxt(tArbol* pa, const char* nombreArch, unsigned cant
 
 void grabarRegistroBin(void*, const void*);
 void grabarEnteroTxt(void*, const void*);
-int esArchivoBinarioOrdenado(tArbol* pa, const char* nombreArch, unsigned cantBytes,
+int esArchivoBinarioOrdenado(const char* nombreArch, unsigned cantBytes,
                              tComparacion cmp, tAccion accion); //Ejercicio 6.3
-int esArchivoBinarioConDuplicados(tArbol* pa, const char* nombreArch, unsigned cantBytes,
+int esArchivoBinarioConDuplicados(const char* nombreArch, unsigned cantBytes,
                                   tComparacion cmp, tAccion accion);
 /// Recorridos
 void recorrerPreOrden(tArbol* pa, tAccion accion); //Ejercicio 6.1
