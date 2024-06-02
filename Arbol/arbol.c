@@ -377,10 +377,42 @@ void vaciarArbol(tArbol* pa)
 }
 
 /// Clasificacion arbol
-int esArbolCompleto(const tArbol* pa); //Ejercicio 6.4
-int esArbolBalanceado(const tArbol* pa); //Ejercicio 6.4
-int esArbolAVL(const tArbol* pa); //Ejercicio 6.4
+int esArbolCompleto(const tArbol* pa)
+{
+    return contarNodos(pa) == (pow(2, alturaArbol(pa)) - 1);
+}
+int esCompletoANivel(const tArbol* pa, int nivel)
+{
+    return contarNodosANivel(pa, nivel) == (pow(2, nivel) - 1);
+}
+int esArbolBalanceado(const tArbol* pa)
+{
+    return esCompletoANivel(pa, alturaArbol(pa) - 1);
+}
+int esArbolAVL(const tArbol* pa)
+{
+    int hi;
+    int hd;
+
+    if(*pa == NULL)
+        return ES_AVL;
+
+    hi = alturaArbol(&(*pa)->izq);
+    hd = alturaArbol(&(*pa)->der);
+
+    if(abs(hi - hd) > 1)
+        return !ES_AVL;
+
+    return esArbolAVL(&(*pa)->izq) && esArbolAVL(&(*pa)->der);
+}
 int determinarTipoDeArbol(const tArbol* pa); //Ejercicio 6.5
+//TODO:
+//    - testear funciones restantes
+//    - agregar eliminarRaiz
+//    - eliminarNodo
+//    - balancearArbol
+//    - recorridos iterativos
+//    - verificar tp
 
 /// Funciones de busqueda
 void* buscarNodoRetornandoInfo(const tArbol* pa, const void* key, tComparacion cmp)
@@ -544,7 +576,13 @@ int contarNodos(const tArbol* pa)
         return 0;
     return contarNodos(&(*pa)->izq) + contarNodos(&(*pa)->der) + 1;
 }
+int contarNodosANivel(const tArbol* pa, int nivel)
+{
+    if(*pa == NULL)
+        return 0;
 
+    return nivel < 1? 0 : contarNodosANivel(&(*pa)->izq, nivel - 1) + contarNodosANivel(&(*pa)->der, nivel - 1) + 1;
+}
 int contarNodosSinHijosIzq(const tArbol* pa)
 {
     int tieneHijoIzq;

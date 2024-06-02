@@ -1,13 +1,14 @@
 # depslib dependency file v1.0
-1717307318 source:c:\devs\arbol\main.c
+1717349203 source:c:\devs\arbol\main.c
 	"arbol.h"
 
-1717306365 c:\devs\arbol\arbol.h
+1717346890 c:\devs\arbol\arbol.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<time.h>
+	<math.h>
 
-1717307220 source:c:\devs\arbol\arbol.c
+1717349212 source:c:\devs\arbol\arbol.c
 	"arbol.h"
 

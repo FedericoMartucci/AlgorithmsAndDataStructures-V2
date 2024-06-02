@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <math.h>
 
 #define MIN(X, Y) ((X) < (Y)? (X) : (Y))
 #define MAX(X, Y) ((X) > (Y)? (X) : (Y))
@@ -91,6 +92,7 @@ void vaciarArbol(tArbol* pa); //Ejercicio 6.1
 
 /// Clasificacion arbol
 int esArbolCompleto(const tArbol* pa); //Ejercicio 6.4
+int esCompletoANivel(const tArbol* pa, int nivel);
 int esArbolBalanceado(const tArbol* pa); //Ejercicio 6.4
 int esArbolAVL(const tArbol* pa); //Ejercicio 6.4
 int determinarTipoDeArbol(const tArbol* pa); //Ejercicio 6.5
@@ -113,6 +115,7 @@ int contarYMostrarNoHojas(const tArbol* pa, tAccion accion);
 void sumarNoHojas(const tArbol* pa, void* acc, tAccion2 accion);
 
 int contarNodos(const tArbol* pa);
+int contarNodosANivel(const tArbol* pa, int nivel);
 int contarNodosSinHijosIzq(const tArbol* pa);
 
 /// Map - Filter - Reduce

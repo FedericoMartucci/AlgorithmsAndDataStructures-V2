@@ -4,7 +4,7 @@ int main()
 {
 
 //    int vec[TAM_VEC];
-    int vec[] = {6, 9, 7, 2, 4, 1, 3, 13, 11, 12};
+    int vec[] = {6, 9, 7, 2, 4, 1, 3, 13};
 //    int vec[] = {6, 9, 7, 2, 4, 1, 3, 13, 11, 12, 6, 7};
     int i;
     int claveInfo = 13;
@@ -39,7 +39,12 @@ int main()
     imprimirArbol(&paRecuperadoTxt, 1, mostrarEnteroPorConsola);
     printf("Arch bin: %s\n", esArchivoBinarioOrdenado("archGrabadoBinario.bin", sizeof(int), cmpEnteros, mostrarEnteroPorConsola) == 1? "ORDENADO" : "DESORDENADO");
     altura = alturaArbol(&pa);
-    printf("\n\nAltura: %d\n", altura);
+    printf("Altura: %d\n", altura);
+    printf("Nodos a nivel 3: %d\n", contarNodosANivel(&pa, 4));
+    printf("Es balanceado: %s\n", esArbolBalanceado(&pa)? "SI" : "NO");
+    printf("Es AVL: %s\n", esArbolAVL(&pa)? "SI" : "NO");
+    printf("Es completo: %s\n", esArbolCompleto(&pa)? "SI" : "NO");
+    printf("Es completo a nivel 3: %s\n", esCompletoANivel(&pa, 3)? "SI" : "NO");
     printf("Menor nodo: ");
     mostrarMenorNodo(&pa, mostrarEnteroPorConsola);
     puts("");
