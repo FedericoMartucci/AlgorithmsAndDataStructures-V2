@@ -12,11 +12,13 @@
 #define ARBOL_VACIO -1
 #define MEM_ERR -2
 #define CLA_DUP -3
+#define FILE_ERR -4
 #define ELEMENTO_ENCONTRADO 1
 #define ELEMENTO_NO_ENCONTRADO 0
 #define OK 0
 
 #define TAM_VEC 8
+#define TAM_BUFFER 1000
 
 // Ejercicio 6.5
 #define ES_COMPLETO 2
@@ -38,8 +40,8 @@ typedef int(*tComparacion)(const void*, const void*);
 typedef void(*tAccion)(const void*);
 typedef void(*tAccion2)(void*, const void*);
 typedef void(*tAccion3)(FILE*, const void*);
-typedef void(*tRecorrido)(tArbol*, tAccion);
-typedef int(*tGrabarArbol)(const tArbol*, const char*, tRecorrido);
+typedef void(*tRecorrido)(const tArbol*, void*, tAccion2);
+typedef int(*tGrabarArbol)(const tArbol*, const char*, tRecorrido, tAccion2);
 typedef int(*tRecuperarArbol)(tArbol* pa, const char* nombreArch, unsigned cantBytes, tComparacion cmp, tAccion accion);
 
 void crearArbol(tArbol* pa);
@@ -48,11 +50,12 @@ int insertarEnArbol_I(tArbol* pa, const void* info, unsigned cantBytes, tCompara
 
 /// Archivos
 int grabarArbolEnArchivo(const tArbol* pa, const char* nombreArch,
-                         tRecorrido recorrido, tGrabarArbol modoGrabado);
+                         tRecorrido recorrido, tAccion2 accion,
+                         tGrabarArbol modoGrabado);
 int grabarArbolEnArchivoBin(const tArbol* pa, const char* nombreArch,
-                            tRecorrido recorrido);
+                            tRecorrido recorrido, tAccion2 accion);
 int grabarArbolEnArchivoTxt(const tArbol* pa, const char* nombreArch,
-                            tRecorrido recorrido);
+                            tRecorrido recorrido, tAccion2 accion);
 
 int recuperarArbolDeArchivo(tArbol* pa, const char* nombreArch, unsigned cantBytes,
                             tComparacion cmp, tAccion accion, tRecuperarArbol modoRecuperado);
@@ -61,11 +64,20 @@ int recuperarArbolDeArchivoBin(tArbol* pa, const char* nombreArch, unsigned cant
 int recuperarArbolDeArchivoTxt(tArbol* pa, const char* nombreArch, unsigned cantBytes,
                                tComparacion cmp, tAccion accion);
 
-int esArchivoBinarioOrdenado(const char* nombreArch, tArbol* pa, const void* ultimoValor, tComparacion cmp); //Ejercicio 6.3
+void grabarRegistroBin(void*, const void*);
+void grabarEnteroTxt(void*, const void*);
+int esArchivoBinarioOrdenado(tArbol* pa, const char* nombreArch, unsigned cantBytes,
+                             tComparacion cmp, tAccion accion); //Ejercicio 6.3
+int esArchivoBinarioConDuplicados(tArbol* pa, const char* nombreArch, unsigned cantBytes,
+                                  tComparacion cmp, tAccion accion);
 /// Recorridos
 void recorrerPreOrden(tArbol* pa, tAccion accion); //Ejercicio 6.1
 void recorrerInOrden(tArbol* pa, tAccion accion); //Ejercicio 6.1
 void recorrerPosOrden(tArbol* pa, tAccion accion); //Ejercicio 6.1
+
+void recorrerPreOrden2(const tArbol* pa, void* contexto, tAccion2 accion);
+void recorrerInOrden2(const tArbol* pa, void* contexto, tAccion2 accion);
+void recorrerPosOrden2(const tArbol* pa, void* contexto, tAccion2 accion);
 
 /// Eliminar
 void eliminarHoja(tArbol* pa, void* claveInfo, unsigned cantBytes, tComparacion cmp);
@@ -101,6 +113,7 @@ int contarYMostrarNoHojas(const tArbol* pa, tAccion accion);
 void sumarNoHojas(const tArbol* pa, void* acc, tAccion2 accion);
 
 int contarNodos(const tArbol* pa);
+int contarNodosSinHijosIzq(const tArbol* pa);
 
 /// Map - Filter - Reduce
 void mapArbol(tArbol* pa, tAccion accion);

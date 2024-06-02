@@ -7,7 +7,6 @@ void crearArbol(tArbol* pa)
 
 int insertarEnArbol_I(tArbol* pa, const void* info, unsigned cantBytes, tComparacion cmp, tAccion accion)
 {
-    tNodo* nuevo;
     int rc;
 
     while(*pa)
@@ -47,21 +46,19 @@ int insertarEnArbol_I(tArbol* pa, const void* info, unsigned cantBytes, tCompara
 int insertarEnArbol_R(tArbol* pa, const void* info, unsigned cantBytes, tComparacion cmp, tAccion accion)
 {
     int resultadoComparacion;
-    tNodo* nuevo;
 
     if(*pa == NULL)
     {
-        if((nuevo = (tNodo*) malloc(sizeof(tNodo))) == NULL ||
-                (nuevo->info = malloc(cantBytes)) == NULL)
+        if((*pa = (tNodo*) malloc(sizeof(tNodo))) == NULL ||
+                ((*pa)->info = malloc(cantBytes)) == NULL)
         {
-            free(nuevo);
+            free(*pa);
             return MEM_ERR;
         }
-        memcpy(nuevo->info, info, cantBytes);
-        nuevo->tamInfo = cantBytes;
-        nuevo->der = NULL;
-        nuevo->izq = NULL;
-        *pa = nuevo;
+        memcpy((*pa)->info, info, cantBytes);
+        (*pa)->tamInfo = cantBytes;
+        (*pa)->der = NULL;
+        (*pa)->izq = NULL;
 
         return OK;
     }
@@ -77,20 +74,155 @@ int insertarEnArbol_R(tArbol* pa, const void* info, unsigned cantBytes, tCompara
 
 /// Archivos
 int grabarArbolEnArchivo(const tArbol* pa, const char* nombreArch,
-                         tRecorrido recorrido, tGrabarArbol modoGrabado);
+                         tRecorrido recorrido, tAccion2 accion,
+                         tGrabarArbol modoGrabado)
+{
+    return modoGrabado(pa, nombreArch, recorrido, accion);
+}
 int grabarArbolEnArchivoBin(const tArbol* pa, const char* nombreArch,
-                            tRecorrido recorrido);
+                            tRecorrido recorrido, tAccion2 accion)
+{
+    FILE* archGrabar;
+
+    if((archGrabar = fopen(nombreArch, "wb")) == NULL)
+        return FILE_ERR;
+
+    recorrido(pa, archGrabar, accion);
+
+    fclose(archGrabar);
+    return OK;
+}
 int grabarArbolEnArchivoTxt(const tArbol* pa, const char* nombreArch,
-                            tRecorrido recorrido);
+                            tRecorrido recorrido, tAccion2 accion)
+{
+    FILE* archGrabar;
+
+    if((archGrabar = fopen(nombreArch, "wt")) == NULL)
+        return FILE_ERR;
+
+    recorrido(pa, archGrabar, accion);
+
+    fclose(archGrabar);
+    return OK;
+}
 
 int recuperarArbolDeArchivo(tArbol* pa, const char* nombreArch, unsigned cantBytes,
-                            tComparacion cmp, tAccion accion, tRecuperarArbol modoRecuperado);
+                            tComparacion cmp, tAccion accion, tRecuperarArbol modoRecuperado)
+{
+    return modoRecuperado(pa, nombreArch, cantBytes, cmp, accion);
+}
 int recuperarArbolDeArchivoBin(tArbol* pa, const char* nombreArch, unsigned cantBytes,
-                               tComparacion cmp, tAccion accion);
-int recuperarArbolDeArchivoTxt(tArbol* pa, const char* nombreArch, unsigned cantBytes,
-                               tComparacion cmp, tAccion accion);
+                               tComparacion cmp, tAccion accion)
+{
+    FILE* archGrabar;
+    void* registroLeido;
 
-int esArchivoBinarioOrdenado(const char* nombreArch, tArbol* pa, const void* ultimoValor, tComparacion cmp); //Ejercicio 6.3
+    if((registroLeido = malloc(cantBytes)) == NULL)
+        return MEM_ERR;
+
+    if((archGrabar = fopen(nombreArch, "rb")) == NULL)
+    {
+        free(registroLeido);
+        return FILE_ERR;
+    }
+
+    fread(registroLeido, cantBytes, 1, archGrabar);
+    while(!feof(archGrabar))
+    {
+        insertarEnArbol_R(pa, registroLeido, cantBytes, cmp, accion);
+        fread(registroLeido, cantBytes, 1, archGrabar);
+    }
+
+    free(registroLeido);
+    fclose(archGrabar);
+
+    return OK;
+}
+//Consultar como pasar un trozar en esta strategy
+int recuperarArbolDeArchivoTxt(tArbol* pa, const char* nombreArch, unsigned cantBytes,
+                               tComparacion cmp, tAccion accion)
+{
+    FILE* archGrabar;
+    char registroLeido[TAM_BUFFER];
+    int elem;
+
+    if((archGrabar = fopen(nombreArch, "rt")) == NULL)
+        return FILE_ERR;
+
+    while(fgets(registroLeido, TAM_BUFFER, archGrabar))
+    {
+        elem = atoi(registroLeido);
+        insertarEnArbol_R(pa, &elem, cantBytes, cmp, accion);
+    }
+
+    fclose(archGrabar);
+    return OK;
+}
+
+void grabarRegistroBin(void* arch, const void* nodo)
+{
+    fwrite(((tNodo*)nodo)->info, ((tNodo*)nodo)->tamInfo, 1, (FILE*)arch);
+}
+void grabarEnteroTxt(void* arch, const void* nodo)
+{
+    fprintf((FILE*)arch, "%d\n", *((int*)(((tNodo*)nodo)->info)));
+}
+int esArchivoBinarioOrdenado(tArbol* pa, const char* nombreArch, unsigned cantBytes,
+                             tComparacion cmp, tAccion accion)
+{
+    FILE* archGrabar;
+    void* registroLeido;
+
+    if((registroLeido = malloc(cantBytes)) == NULL)
+        return MEM_ERR;
+
+    if((archGrabar = fopen(nombreArch, "rb")) == NULL)
+    {
+        free(registroLeido);
+        return FILE_ERR;
+    }
+
+    fread(registroLeido, cantBytes, 1, archGrabar);
+    while(!feof(archGrabar))
+    {
+        insertarEnArbol_R(pa, registroLeido, cantBytes, cmp, accion);
+        fread(registroLeido, cantBytes, 1, archGrabar);
+    }
+
+    free(registroLeido);
+    fclose(archGrabar);
+
+    return contarNodosSinHijosIzq(pa) == contarNodos(pa);//true: ordenado, false: no ordenado
+}
+int esArchivoBinarioConDuplicados(tArbol* pa, const char* nombreArch, unsigned cantBytes,
+                                  tComparacion cmp, tAccion accion)
+{
+    FILE* archGrabar;
+    void* registroLeido;
+    int cantRegistros;
+
+    if((registroLeido = malloc(cantBytes)) == NULL)
+        return MEM_ERR;
+
+    if((archGrabar = fopen(nombreArch, "rb")) == NULL)
+    {
+        free(registroLeido);
+        return FILE_ERR;
+    }
+
+    fread(registroLeido, cantBytes, 1, archGrabar);
+    while(!feof(archGrabar))
+    {
+        cantRegistros ++;
+        insertarEnArbol_R(pa, registroLeido, cantBytes, cmp, accion);
+        fread(registroLeido, cantBytes, 1, archGrabar);
+    }
+
+    free(registroLeido);
+    fclose(archGrabar);
+
+    return contarNodos(pa) < cantRegistros;//true: duplicados, false: no duplicados
+}
 
 /// Recorridos
 void recorrerPreOrden(tArbol* pa, tAccion accion)
@@ -123,8 +255,57 @@ void recorrerPosOrden(tArbol* pa, tAccion accion)
     }
 }
 
+void recorrerPreOrden2(const tArbol* pa, void* contexto, tAccion2 accion)
+{
+    if(*pa == NULL)
+        return;
+
+    accion(contexto, *pa);
+    recorrerPreOrden2(&(*pa)->izq, contexto, accion);
+    recorrerPreOrden2(&(*pa)->der, contexto, accion);
+}
+
+void recorrerInOrden2(const tArbol* pa, void* contexto, tAccion2 accion)
+{
+    if(*pa != NULL)
+    {
+        recorrerInOrden2(&(*pa)->izq, contexto, accion);
+        accion(contexto, *pa);
+        recorrerInOrden2(&(*pa)->der, contexto, accion);
+    }
+}
+
+void recorrerPosOrden2(const tArbol* pa, void* contexto, tAccion2 accion)
+{
+    if(*pa != NULL)
+    {
+        recorrerPosOrden2(&(*pa)->izq, contexto, accion);
+        recorrerPosOrden2(&(*pa)->der, contexto, accion);
+        accion(contexto, *pa);
+    }
+}
+
 /// Eliminar
-void eliminarHoja(tArbol* pa, void* claveInfo, unsigned cantBytes, tComparacion cmp);
+void eliminarHoja(tArbol* pa, void* claveInfo, unsigned cantBytes, tComparacion cmp)
+{
+    int rc;
+
+    if(*pa == NULL)
+        return;
+
+    rc = cmp((*pa)->info, claveInfo);
+    if(rc > 0)
+        eliminarHoja(&(*pa)->izq, claveInfo, cantBytes, cmp);
+    else if(rc < 0)
+        eliminarHoja(&(*pa)->der, claveInfo, cantBytes, cmp);
+    else if((*pa)->izq == NULL && (*pa)->der == NULL)
+    {
+        memcpy(claveInfo, (*pa)->info, MIN((*pa)->tamInfo, cantBytes));
+        free((*pa)->info);
+        free(*pa);
+        *pa = NULL;
+    }
+}
 void podarArbolHastaAltura(tArbol* pa, int altura); //Ejercicio 6.1
 void podarArbolHastaAlturaInclusive(tArbol* pa, int altura); //Ejercicio 6.1
 
@@ -137,7 +318,10 @@ int alturaArbol(const tArbol* pa)
     return 1 + MAX(alturaArbol(&(*pa)->izq), alturaArbol(&(*pa)->der));
 }
 
-int arbolVacio(const tArbol* pa);
+int arbolVacio(const tArbol* pa)
+{
+    return *pa == NULL;
+}
 void vaciarArbol(tArbol* pa); //Ejercicio 6.1
 
 /// Clasificacion arbol
@@ -147,15 +331,84 @@ int esArbolAVL(const tArbol* pa); //Ejercicio 6.4
 int determinarTipoDeArbol(const tArbol* pa); //Ejercicio 6.5
 
 /// Funciones de busqueda
-void* buscarNodoRetornandoInfo(const tArbol* pa, const void* key, tComparacion cmp);
-tNodo* buscarNodoRetornandoNodo(const tArbol* pa, const void* key, tComparacion cmp);
-tArbol* buscarNodoRetornandoSubarbol(const tArbol* pa, const void* key, tComparacion cmp);
+void* buscarNodoRetornandoInfo(const tArbol* pa, const void* key, tComparacion cmp)
+{
+    int rc;
 
-tNodo* buscarMenor(const tArbol* pa);
-tNodo* buscarMayor(const tArbol* pa);
+    if(*pa == NULL)
+        return NULL;
+
+    rc = cmp((*pa)->info, key);
+    if(rc > 0)
+        return buscarNodoRetornandoInfo(&(*pa)->izq, key, cmp);
+    if(rc < 0)
+        return buscarNodoRetornandoInfo(&(*pa)->der, key, cmp);
+    return (*pa)->info;
+}
+tNodo* buscarNodoRetornandoNodo(const tArbol* pa, const void* key, tComparacion cmp)
+{
+    int rc;
+
+    if(*pa == NULL)
+        return NULL;
+
+    rc = cmp((*pa)->info, key);
+    if(rc > 0)
+        return buscarNodoRetornandoNodo(&(*pa)->izq, key, cmp);
+    if(rc < 0)
+        return buscarNodoRetornandoNodo(&(*pa)->der, key, cmp);
+    return *pa;
+}
+tArbol* buscarNodoRetornandoSubarbol(const tArbol* pa, const void* key, tComparacion cmp)
+{
+    int rc;
+
+    if(*pa == NULL)
+        return NULL;
+
+    rc = cmp((*pa)->info, key);
+    if(rc > 0)
+        return buscarNodoRetornandoSubarbol(&(*pa)->izq, key, cmp);
+    if(rc < 0)
+        return buscarNodoRetornandoSubarbol(&(*pa)->der, key, cmp);
+    return (tArbol*) pa;
+}
+
+tNodo* buscarMenor(const tArbol* pa)
+{
+    if(*pa == NULL)
+        return NULL;
+    if((*pa)->izq == NULL)
+        return *pa;
+    return buscarMenor(&(*pa)->izq);
+}
+tNodo* buscarMayor(const tArbol* pa)
+{
+    if(*pa == NULL)
+        return NULL;
+    if((*pa)->der == NULL)
+        return *pa;
+    return buscarMayor(&(*pa)->der);
+}
 
 /// Funciones de contar
-int contarHojas(const tArbol* pa);
+int contarHojas(const tArbol* pa)
+{
+    int hi;
+    int hd;
+
+    if(*pa == NULL)
+        return 0;
+
+    hi = contarHojas(&(*pa)->izq);
+    hd = contarHojas(&(*pa)->der);
+
+    if(!hi && !hd)
+        return 1;
+
+    return hi + hd;
+}
+
 int contarYMostrarHojas(const tArbol* pa, tAccion accion)
 {
     int hi;
@@ -175,17 +428,79 @@ int contarYMostrarHojas(const tArbol* pa, tAccion accion)
 
     return hi + hd;
 }
-void sumarHojas(const tArbol* pa, void* acc, tAccion2 accion);
+void sumarHojas(const tArbol* pa, void* acc, tAccion2 accion)
+{
+    if(*pa == NULL)
+        return;
 
-int contarNoHojas(const tArbol* pa);
-int contarYMostrarNoHojas(const tArbol* pa, tAccion accion);
-void sumarNoHojas(const tArbol* pa, void* acc, tAccion2 accion);
+    if((*pa)->izq == NULL && (*pa)->der == NULL)
+        accion(acc, (*pa)->info);
+
+    sumarHojas(&(*pa)->izq, acc, accion);
+    sumarHojas(&(*pa)->der, acc, accion);
+}
+
+int contarNoHojas(const tArbol* pa)
+{
+    int noHojasIzq;
+    int noHojasDer;
+
+    if(*pa == NULL)
+        return 0;
+
+    noHojasIzq = contarNoHojas(&(*pa)->izq);
+    noHojasDer = contarNoHojas(&(*pa)->der);
+
+    if((*pa)->izq || (*pa)->der)
+        return 1 + noHojasIzq + noHojasDer;
+    return noHojasIzq + noHojasDer;
+}
+int contarYMostrarNoHojas(const tArbol* pa, tAccion accion)
+{
+    int noHojasIzq;
+    int noHojasDer;
+
+    if(*pa == NULL)
+        return 0;
+
+    noHojasIzq = contarNoHojas(&(*pa)->izq);
+    noHojasDer = contarNoHojas(&(*pa)->der);
+
+    if((*pa)->izq || (*pa)->der)
+    {
+        accion((*pa)->info);
+        return 1 + noHojasIzq + noHojasDer;
+    }
+    return noHojasIzq + noHojasDer;
+}
+
+void sumarNoHojas(const tArbol* pa, void* acc, tAccion2 accion)
+{
+    if(*pa == NULL)
+        return;
+
+    if((*pa)->izq || (*pa)->der)
+        accion(acc, (*pa)->info);
+
+    sumarNoHojas(&(*pa)->izq, acc, accion);
+    sumarNoHojas(&(*pa)->der, acc, accion);
+}
 
 int contarNodos(const tArbol* pa)
 {
     if(*pa == NULL)
         return 0;
     return contarNodos(&(*pa)->izq) + contarNodos(&(*pa)->der) + 1;
+}
+
+int contarNodosSinHijosIzq(const tArbol* pa)
+{
+    int tieneHijoIzq;
+
+    if(*pa == NULL)
+        return 0;
+    tieneHijoIzq = (*pa)->izq == NULL? 1 : 0;
+    return contarNodosSinHijosIzq(&(*pa)->izq) + contarNodosSinHijosIzq(&(*pa)->der) + tieneHijoIzq;
 }
 
 /// Map - Filter - Reduce
