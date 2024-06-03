@@ -1,7 +1,6 @@
 #include "arbol.h"
 #include <locale.h>
 //TODO:
-//    - insertarBalanceadoDesdeArchOrdenado (6.6)
 //    - ejercicio indices (6.7)
 //    - verificar tp
 int main()
@@ -39,7 +38,7 @@ int main()
     recuperarArbolDeArchivo(&paRecuperadoBin, "archGrabadoBinario.bin", sizeof(int), cmpEnteros, mostrarEnteroPorConsola, recuperarArbolDeArchivoBin);
     recuperarArbolDeArchivo(&paRecuperadoTxt, "archGrabadoTextoPrO.txt", sizeof(int), cmpEnteros, mostrarEnteroPorConsola, recuperarArbolDeArchivoTxt);
 //    eliminarHoja(&pa, &claveInfo, sizeof(claveInfo), cmpEnteros);
-    cargarArchivoBinarioEnArbol(&pa2, "archGrabadoBinario.bin", sizeof(int), cmpEnteros);
+    cargarArchivoBinarioEnArbol(&pa2, "archGrabadoBinario.bin", sizeof(int), cmpEnteros, mostrarEnteroPorConsola);
     imprimirArbol(&pa, 1, mostrarEnteroPorConsola);
     eliminarRaiz(&pa);
     puts("\n\nArbol con raiz eliminada: ");

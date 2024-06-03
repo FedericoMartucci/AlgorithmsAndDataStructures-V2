@@ -41,9 +41,11 @@ typedef int(*tComparacion)(const void*, const void*);
 typedef void(*tAccion)(const void*);
 typedef void(*tAccion2)(void*, const void*);
 typedef void(*tAccion3)(FILE*, const void*);
+typedef void(*tAccion4)(void*, const void*, int);
 typedef void(*tRecorrido)(const tArbol*, void*, tAccion2);
 typedef int(*tGrabarArbol)(const tArbol*, const char*, tRecorrido, tAccion2);
 typedef int(*tRecuperarArbol)(tArbol* pa, const char* nombreArch, unsigned cantBytes, tComparacion cmp, tAccion accion);
+typedef int(*tRecuperarArbolIndice)(tArbol* pa, const char* nombreArch, unsigned cantBytesReg, unsigned cantBytesInd, tComparacion cmp, tAccion accion, tAccion4 generarIndice);
 
 void crearArbol(tArbol* pa);
 int insertarEnArbol_R(tArbol* pa, const void* info, unsigned cantBytes, tComparacion cmp, tAccion accion); //Ejercicio 6.1
@@ -73,10 +75,18 @@ int esArchivoBinarioConDuplicados(const char* nombreArch, unsigned cantBytes,
                                   tComparacion cmp, tAccion accion);
 
 int cargarArchivoBinarioEnArbol(tArbol* pa, const char* nombreArch,
-                                unsigned cantBytes, tComparacion cmp);
+                                unsigned cantBytes, tComparacion cmp, tAccion accion);
 int insertarBalanceadoDesdeArchOrdenado(tArbol* pa, FILE* archLectura, void* buffer,
-                                        int li, int ls, int cantReg,
-                                        unsigned cantBytes, tComparacion cmp);
+                                        int li, int ls, unsigned cantBytes,
+                                        tComparacion cmp, tAccion accion);
+
+int recuperarIndiceDeArchivo(tArbol* pa, const char* nombreArch,
+                             unsigned cantBytesReg, unsigned cantBytesInd,
+                             tComparacion cmp, tAccion accion, tAccion4 generarIndice,
+                             tRecuperarArbolIndice modoRecuperado);
+int recuperarIndiceDeArchivoBin(tArbol* pa, const char* nombreArch,
+                               unsigned cantBytesReg, unsigned cantBytesInd,
+                               tComparacion cmp, tAccion accion, tAccion4 generarIndice);
 /// Recorridos
 void recorrerPreOrden(tArbol* pa, tAccion accion); //Ejercicio 6.1
 void recorrerInOrden(tArbol* pa, tAccion accion); //Ejercicio 6.1

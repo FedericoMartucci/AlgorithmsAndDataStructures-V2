@@ -1,0 +1,25 @@
+0Verde
+1Acción Ciudadana
+2Movimiento Solidario
+3Celeste y Blanca
+4Nuevo Amanecer
+5Movimiento Solidario
+6Renovación Popular
+7Renovación Popular
+8Unión por Todos y Para Todos
+9Movimiento Solidario
+10Partido del Progreso
+11Partido del Progreso
+12Verde
+13Acción Ciudadana
+14Verde
+15Verde
+16Partido del Progreso
+17Unión por Todos y Para Todos
+18Acción Ciudadana
+19Libres del Sur
+20Verde
+21Movimiento Solidario
+22Unión por Todos y Para Todos
+23Frente de la Esperanza
+24Unión por Todos y Para Todos

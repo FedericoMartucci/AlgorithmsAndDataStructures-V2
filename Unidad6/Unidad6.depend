@@ -1,6 +1,6 @@
 # depslib dependency file v1.0
-1717125244 source:c:\devs\unidad6\main.c
-	"arbol.h"
+1717385638 source:c:\devs\unidad6\main.c
+	"ejercicios.h"
 
 1717125211 c:\devs\unidad6\arbol.h
 	<stdio.h>
@@ -9,4 +9,23 @@
 
 1717125378 source:c:\devs\unidad6\arbol.c
 	"arbol.h"
+
+1717385268 source:c:\devs\arbol\arbol.c
+	"arbol.h"
+
+1717382295 c:\devs\arbol\arbol.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<math.h>
+
+1717385429 c:\devs\unidad6\ejercicios.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../Arbol/arbol.h"
+
+1717385379 source:c:\devs\unidad6\ejercicios.c
+	"ejercicios.h"
 

@@ -241,7 +241,7 @@ int esArchivoBinarioConDuplicados(const char* nombreArch, unsigned cantBytes,
 }
 
 int cargarArchivoBinarioEnArbol(tArbol* pa, const char* nombreArch,
-                                unsigned cantBytes, tComparacion cmp)
+                                unsigned cantBytes, tComparacion cmp, tAccion accion)
 {
     FILE* archLectura;
     int cantReg;
@@ -260,15 +260,15 @@ int cargarArchivoBinarioEnArbol(tArbol* pa, const char* nombreArch,
     cantReg = ftell(archLectura)/cantBytes;
     fseek(archLectura, -0L, SEEK_CUR);
 
-    insertarBalanceadoDesdeArchOrdenado(pa, archLectura, reg, 0, cantReg - 1, cantReg, cantBytes, cmp);
+    insertarBalanceadoDesdeArchOrdenado(pa, archLectura, reg, 0, cantReg - 1, cantBytes, cmp, accion);
 
     free(reg);
     fclose(archLectura);
     return OK;
 }
 int insertarBalanceadoDesdeArchOrdenado(tArbol* pa, FILE* archLectura, void* buffer,
-                                        int li, int ls, int cantReg,
-                                        unsigned cantBytes, tComparacion cmp)
+                                        int li, int ls, unsigned cantBytes,
+                                        tComparacion cmp, tAccion accion)
 {
     int regMedio;
 
@@ -281,10 +281,58 @@ int insertarBalanceadoDesdeArchOrdenado(tArbol* pa, FILE* archLectura, void* buf
     fread(buffer, cantBytes, 1, archLectura);
     fseek(archLectura, -0L, SEEK_CUR);
 
-    insertarEnArbol_R(pa, buffer, cantBytes, cmp, NULL);
+    insertarEnArbol_R(pa, buffer, cantBytes, cmp, accion);
 
-    insertarBalanceadoDesdeArchOrdenado(pa, archLectura, buffer, li, regMedio - 1, cantReg, cantBytes, cmp);//izq
-    insertarBalanceadoDesdeArchOrdenado(pa, archLectura, buffer, regMedio + 1, ls, cantReg, cantBytes, cmp);//der
+    insertarBalanceadoDesdeArchOrdenado(pa, archLectura, buffer, li, regMedio - 1, cantBytes, cmp, accion); //izq
+    insertarBalanceadoDesdeArchOrdenado(pa, archLectura, buffer, regMedio + 1, ls, cantBytes, cmp, accion); //der
+
+    return OK;
+}
+
+int recuperarIndiceDeArchivo(tArbol* pa, const char* nombreArch,
+                             unsigned cantBytesReg, unsigned cantBytesInd,
+                             tComparacion cmp, tAccion accion, tAccion4 generarIndice,
+                             tRecuperarArbolIndice modoRecuperado)
+{
+    return modoRecuperado(pa, nombreArch, cantBytesReg, cantBytesInd, cmp, accion, generarIndice);
+}
+int recuperarIndiceDeArchivoBin(tArbol* pa, const char* nombreArch,
+                               unsigned cantBytesReg, unsigned cantBytesInd,
+                               tComparacion cmp, tAccion accion, tAccion4 generarIndice)
+{
+    FILE* archLeer;
+    void* registroLeido;
+    void* registroIndice;
+    int nroReg;
+
+    nroReg = 0;
+
+    if((registroLeido = malloc(cantBytesReg)) == NULL ||
+       (registroIndice = malloc(cantBytesInd)) == NULL)
+    {
+        free(registroLeido);
+        return MEM_ERR;
+    }
+
+    if((archLeer = fopen(nombreArch, "rb")) == NULL)
+    {
+        free(registroLeido);
+        free(registroIndice);
+        return FILE_ERR;
+    }
+
+    fread(registroLeido, cantBytesReg, 1, archLeer);
+    while(!feof(archLeer))
+    {
+        generarIndice(registroIndice, registroLeido, nroReg);
+        insertarEnArbol_R(pa, registroIndice, cantBytesInd, cmp, accion);
+        nroReg++;
+        fread(registroLeido, cantBytesReg, 1, archLeer);
+    }
+
+    free(registroLeido);
+    free(registroIndice);
+    fclose(archLeer);
 
     return OK;
 }
@@ -822,6 +870,7 @@ void mostrarNodosHijosIzq(const tArbol* pa, tAccion accion)
     mostrarNodosHijosIzq(&(*pa)->izq, accion);
     mostrarNodosHijosIzq(&(*pa)->der, accion);
 }
+
 void mostrarNodosHijosDer(const tArbol* pa, tAccion accion)
 {
     if(*pa == NULL)
@@ -833,6 +882,7 @@ void mostrarNodosHijosDer(const tArbol* pa, tAccion accion)
     mostrarNodosHijosDer(&(*pa)->izq, accion);
     mostrarNodosHijosDer(&(*pa)->der, accion);
 }
+
 void mostrarNodosHastaNivel(const tArbol* pa, int nivel, tAccion accion)
 {
     if(*pa == NULL)
@@ -843,6 +893,7 @@ void mostrarNodosHastaNivel(const tArbol* pa, int nivel, tAccion accion)
         accion((*pa)->info);
     mostrarNodosHastaNivel(&(*pa)->der, nivel - 1, accion);
 }
+
 void mostrarNodosDeNivel(const tArbol* pa, int nivel, tAccion accion)
 {
     if(*pa == NULL)
@@ -876,6 +927,7 @@ void mostrarMayorNodo(const tArbol* pa, tAccion accion)
     if((*pa)->der == NULL)
         accion((*pa)->info);
 }
+
 void mostrarMayorNodoNoClave(const tArbol* pa, void* clave, tAccion accion,
                              tComparacion cmp)
 {
@@ -894,6 +946,7 @@ void mostrarMayorNodoNoClave(const tArbol* pa, void* clave, tAccion accion,
     }
     mostrarMayorNodoNoClave(&(*pa)->der, clave, accion, cmp);
 }
+
 void mostrarMenorNodo(const tArbol* pa, tAccion accion)
 {
     if(*pa == NULL)
@@ -904,6 +957,7 @@ void mostrarMenorNodo(const tArbol* pa, tAccion accion)
     if((*pa)->izq == NULL)
         accion((*pa)->info);
 }
+
 void mostrarMenorNodoNoClave(const tArbol* pa, void* clave, tAccion accion,
                              tComparacion cmp)
 {

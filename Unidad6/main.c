@@ -1,20 +1,24 @@
-#include "arbol.h"
+#include "ejercicios.h"
+
+
+
 
 int main()
 {
-    int vec[] = {6, 9, 7, 2, 4, 1, 3, 13, 11, 12};
-    int i;
-    tArbol pa;
+    const char* nombreArchivo = "personas.dat";
+    tArbol indice;
 
-    crearArbol(&pa);
-    for(i = 0; i < sizeof(vec)/sizeof(vec[i]); i ++)
-        insertarEnArbol_R(&pa, &vec[i], sizeof(vec[i]), cmpEnteros, mostrarEntero);
+    crearArbol(&indice);
+    srand(time(NULL));
 
-//    mostrarHojas(&pa, mostrarEnteroPorConsola);
-//    printf("Hojas: %d\n", contarHojas(&pa));
-    printf("Hojas: %d\n", contarYMostrarHojas(&pa, mostrarEnteroPorConsola));
-    printf("\nAltura: %d\n", alturaArbol(&pa));
-//    vaciarArbol(&pa);
+    if(generarArchivoLotePersonas(nombreArchivo, "wb") != OK)
+        printf("Error al generar el archivo.\n");
+
+    recuperarIndiceDeArchivo(&indice, nombreArchivo, sizeof(tPersona), sizeof(tIndice), cmpIndPersonas, NULL, generarIndicePersona, recuperarIndiceDeArchivoBin);
+    grabarArbolEnArchivo(&indice, "personas.idx", recorrerInOrden2, mostrarIndicePersona3, grabarArbolEnArchivoBin);
+    vaciarArbol(&indice);
+
+    testear_si_el_indice_se_condice_con_el_registro_correspondiente();
 
     return 0;
 }
