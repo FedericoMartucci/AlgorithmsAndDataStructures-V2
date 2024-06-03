@@ -240,6 +240,54 @@ int esArchivoBinarioConDuplicados(const char* nombreArch, unsigned cantBytes,
     return cantNodos < cantRegistros;//true: duplicados, false: no duplicados
 }
 
+int cargarArchivoBinarioEnArbol(tArbol* pa, const char* nombreArch,
+                                unsigned cantBytes, tComparacion cmp)
+{
+    FILE* archLectura;
+    int cantReg;
+    void* reg;
+
+    if((reg = malloc(cantBytes)) == NULL)
+        return MEM_ERR;
+
+    if((archLectura = fopen(nombreArch, "rb")) == NULL)
+    {
+        free(reg);
+        return FILE_ERR;
+    }
+
+    fseek(archLectura, 0L, SEEK_END);
+    cantReg = ftell(archLectura)/cantBytes;
+    fseek(archLectura, -0L, SEEK_CUR);
+
+    insertarBalanceadoDesdeArchOrdenado(pa, archLectura, reg, 0, cantReg - 1, cantReg, cantBytes, cmp);
+
+    free(reg);
+    fclose(archLectura);
+    return OK;
+}
+int insertarBalanceadoDesdeArchOrdenado(tArbol* pa, FILE* archLectura, void* buffer,
+                                        int li, int ls, int cantReg,
+                                        unsigned cantBytes, tComparacion cmp)
+{
+    int regMedio;
+
+    regMedio = (ls + li) / 2;
+
+    if(li > ls)
+        return OK;
+
+    fseek(archLectura, regMedio * cantBytes, SEEK_SET);
+    fread(buffer, cantBytes, 1, archLectura);
+    fseek(archLectura, -0L, SEEK_CUR);
+
+    insertarEnArbol_R(pa, buffer, cantBytes, cmp, NULL);
+
+    insertarBalanceadoDesdeArchOrdenado(pa, archLectura, buffer, li, regMedio - 1, cantReg, cantBytes, cmp);//izq
+    insertarBalanceadoDesdeArchOrdenado(pa, archLectura, buffer, regMedio + 1, ls, cantReg, cantBytes, cmp);//der
+
+    return OK;
+}
 /// Recorridos
 void recorrerPreOrden(tArbol* pa, tAccion accion)
 {
@@ -352,6 +400,52 @@ void podarArbolHastaAlturaInclusive(tArbol* pa, int altura)
     }
 }
 
+int eliminarRaiz(tArbol* pa)
+{
+    int hi;
+    int hd;
+    tArbol* nuevaRaiz;
+
+    if(*pa == NULL)
+        return ARBOL_VACIO;
+
+    free((*pa)->info);
+
+    hi = alturaArbol(&(*pa)->izq);
+    hd = alturaArbol(&(*pa)->der);
+
+    if((*pa)->izq == NULL && (*pa)->der == NULL)
+    {
+        free(*pa);
+        *pa = NULL;
+        return OK;
+    }
+
+    nuevaRaiz = hi > hd? buscarMayor(&(*pa)->izq) : buscarMenor(&(*pa)->der);
+
+    //elim = *nuevaRaiz
+    (*pa)->info = (*nuevaRaiz)->info;
+    (*pa)->tamInfo = (*nuevaRaiz)->tamInfo;
+    free(*nuevaRaiz);
+    if(hi > hd)
+        *nuevaRaiz = (*nuevaRaiz)->izq;
+    else
+        *nuevaRaiz = (*nuevaRaiz)->der;
+    //free(elim);
+    return OK;
+}
+
+int eliminarNodo(tArbol* pa, void* claveInfo, unsigned cantBytes, tComparacion cmp)
+{
+    if(*pa == NULL)
+        return ARBOL_VACIO;
+
+    pa = buscarNodoRetornandoSubarbol(pa, claveInfo, cmp);
+    eliminarRaiz(pa);
+
+    return OK;
+}
+
 /// Primitivas clasicas
 int alturaArbol(const tArbol* pa)
 {
@@ -405,14 +499,49 @@ int esArbolAVL(const tArbol* pa)
 
     return esArbolAVL(&(*pa)->izq) && esArbolAVL(&(*pa)->der);
 }
-int determinarTipoDeArbol(const tArbol* pa); //Ejercicio 6.5
-//TODO:
-//    - testear funciones restantes
-//    - agregar eliminarRaiz
-//    - eliminarNodo
-//    - balancearArbol
-//    - recorridos iterativos
-//    - verificar tp
+int esArbolAVL2(const tArbol* pa, int* altura, int* cantNodos)
+{
+    int hi;
+    int hd;
+    int ni;
+    int nd;
+    int avlIzq;
+    int avlDer;
+
+    if(*pa == NULL)
+    {
+        *altura = 0;
+        *cantNodos = 0;
+        return ES_AVL;
+    }
+
+    avlIzq = esArbolAVL2(&(*pa)->izq, &hi, &ni);
+    avlDer = esArbolAVL2(&(*pa)->der, &hd, &nd);
+
+    *altura = 1 + MAX(hi, hd);
+    *cantNodos = 1 + ni + nd;
+
+    if (abs(hi - hd) > 1)
+        return !ES_AVL;
+
+    return avlIzq && avlDer;
+}
+int determinarTipoDeArbol(const tArbol* pa)
+{
+    int altura;
+    int cantNodos;
+
+    if (esArbolAVL2(pa, &altura, &cantNodos))
+    {
+        if (cantNodos == (pow(2, altura) - 1))
+            return ES_COMPLETO;
+        if (esCompletoANivel(pa, altura - 1))
+            return ES_BALANCEADO;
+        return ES_AVL;
+    }
+
+    return ES_OTRO;
+}
 
 /// Funciones de busqueda
 void* buscarNodoRetornandoInfo(const tArbol* pa, const void* key, tComparacion cmp)
@@ -458,20 +587,20 @@ tArbol* buscarNodoRetornandoSubarbol(const tArbol* pa, const void* key, tCompara
     return (tArbol*) pa;
 }
 
-tNodo* buscarMenor(const tArbol* pa)
+tNodo** buscarMenor(const tArbol* pa)
 {
     if(*pa == NULL)
         return NULL;
     if((*pa)->izq == NULL)
-        return *pa;
+        return (tArbol*) pa;
     return buscarMenor(&(*pa)->izq);
 }
-tNodo* buscarMayor(const tArbol* pa)
+tNodo** buscarMayor(const tArbol* pa)
 {
     if(*pa == NULL)
         return NULL;
     if((*pa)->der == NULL)
-        return *pa;
+        return (tArbol*) pa;
     return buscarMayor(&(*pa)->der);
 }
 
@@ -753,15 +882,17 @@ void mostrarMayorNodoNoClave(const tArbol* pa, void* clave, tAccion accion,
     if(*pa == NULL)
         return;
 
-    mostrarMayorNodoNoClave(&(*pa)->der, clave, accion, cmp);
-
-    if((*pa)->der == NULL)
+    if((*pa)->der && (*pa)->der->der == NULL)
     {
-        if(cmp((*pa)->info, clave) != 0)
-            accion((*pa)->info);
+        if(cmp((*pa)->der->info, clave) != 0)
+            accion((*pa)->der->info);
+        else if((*pa)->der->izq)
+            mostrarMayorNodoNoClave(&(*pa)->der->izq, clave, accion, cmp);
         else
-            mostrarMayorNodoNoClave(&(*pa)->izq, clave, accion, cmp);
+            accion((*pa)->info);
+        return;
     }
+    mostrarMayorNodoNoClave(&(*pa)->der, clave, accion, cmp);
 }
 void mostrarMenorNodo(const tArbol* pa, tAccion accion)
 {
@@ -776,18 +907,20 @@ void mostrarMenorNodo(const tArbol* pa, tAccion accion)
 void mostrarMenorNodoNoClave(const tArbol* pa, void* clave, tAccion accion,
                              tComparacion cmp)
 {
-        if(*pa == NULL)
+    if(*pa == NULL)
         return;
 
-    mostrarMenorNodoNoClave(&(*pa)->izq, clave, accion, cmp);
-
-    if((*pa)->izq == NULL)
+    if((*pa)->izq && (*pa)->izq->izq == NULL)
     {
-        if(cmp((*pa)->info, clave) != 0)
-            accion((*pa)->info);
+        if(cmp((*pa)->izq->info, clave) != 0)
+            accion((*pa)->izq->info);
+        else if((*pa)->izq->der)
+            mostrarMayorNodoNoClave(&(*pa)->izq->der, clave, accion, cmp);
         else
-            mostrarMenorNodoNoClave(&(*pa)->der, clave, accion, cmp);
+            accion((*pa)->info);
+        return;
     }
+    mostrarMenorNodoNoClave(&(*pa)->izq, clave, accion, cmp);
 }
 
 void imprimirArbol(tArbol* pa, int nivel, tAccion accion)

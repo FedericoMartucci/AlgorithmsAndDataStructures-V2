@@ -71,6 +71,12 @@ int esArchivoBinarioOrdenado(const char* nombreArch, unsigned cantBytes,
                              tComparacion cmp, tAccion accion); //Ejercicio 6.3
 int esArchivoBinarioConDuplicados(const char* nombreArch, unsigned cantBytes,
                                   tComparacion cmp, tAccion accion);
+
+int cargarArchivoBinarioEnArbol(tArbol* pa, const char* nombreArch,
+                                unsigned cantBytes, tComparacion cmp);
+int insertarBalanceadoDesdeArchOrdenado(tArbol* pa, FILE* archLectura, void* buffer,
+                                        int li, int ls, int cantReg,
+                                        unsigned cantBytes, tComparacion cmp);
 /// Recorridos
 void recorrerPreOrden(tArbol* pa, tAccion accion); //Ejercicio 6.1
 void recorrerInOrden(tArbol* pa, tAccion accion); //Ejercicio 6.1
@@ -84,6 +90,9 @@ void recorrerPosOrden2(const tArbol* pa, void* contexto, tAccion2 accion);
 void eliminarHoja(tArbol* pa, void* claveInfo, unsigned cantBytes, tComparacion cmp);
 void podarArbolHastaAltura(tArbol* pa, int altura); //Ejercicio 6.1
 void podarArbolHastaAlturaInclusive(tArbol* pa, int altura); //Ejercicio 6.1
+
+int eliminarRaiz(tArbol* pa);
+int eliminarNodo(tArbol* pa, void* claveInfo, unsigned cantBytes, tComparacion cmp);
 
 /// Primitivas clasicas
 int alturaArbol(const tArbol* pa); //Ejercicio 6.1
@@ -102,8 +111,8 @@ void* buscarNodoRetornandoInfo(const tArbol* pa, const void* key, tComparacion c
 tNodo* buscarNodoRetornandoNodo(const tArbol* pa, const void* key, tComparacion cmp);
 tArbol* buscarNodoRetornandoSubarbol(const tArbol* pa, const void* key, tComparacion cmp);
 
-tNodo* buscarMenor(const tArbol* pa);
-tNodo* buscarMayor(const tArbol* pa);
+tNodo** buscarMenor(const tArbol* pa);
+tNodo** buscarMayor(const tArbol* pa);
 
 /// Funciones de contar
 int contarHojas(const tArbol* pa);
