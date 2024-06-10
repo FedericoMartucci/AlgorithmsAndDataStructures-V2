@@ -107,3 +107,84 @@
 1715051116 source:c:\devs\trabajo_practico\teclado.c
 	"teclado.h"
 
+1717962350 source:e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\cjson.c
+	<string.h>
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<limits.h>
+	<ctype.h>
+	<float.h>
+	<locale.h>
+	"cJSON.h"
+
+1717962350 e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\cjson.h
+	<stddef.h>
+
+1717977348 source:e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\jugador.c
+	"jugador.h"
+
+1717962352 e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\jugador.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"estructuras.h"
+
+1717962350 e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\estructuras.h
+
+1717962352 source:e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\teclado.c
+	"teclado.h"
+
+1717962352 e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\teclado.h
+	<stdio.h>
+	<ctype.h>
+	<conio.h>
+	<time.h>
+	<unistd.h>
+	"estructuras.h"
+
+1717962350 source:e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\archivos.c
+	"archivos.h"
+
+1717962350 e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\archivos.h
+	"juego.h"
+	"estructuras.h"
+
+1717968356 e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\juego.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"curlReducido.h"
+	"pregunta.h"
+	"jugador.h"
+	"estructuras.h"
+	"teclado.h"
+
+1717962350 e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\curlreducido.h
+	<curl/curl.h>
+	"pregunta.h"
+	"estructuras.h"
+
+1717976132 e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\pregunta.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cJSON.h"
+	"estructuras.h"
+
+1717962350 source:e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\curlreducido.c
+	"curlReducido.h"
+	"juego.h"
+
+1717977348 source:e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\juego.c
+	"juego.h"
+	"archivos.h"
+	"curlReducido.h"
+
+1717962352 source:e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\main.c
+	"juego.h"
+
+1717977002 source:e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\pregunta.c
+	"pregunta.h"
+	"juego.h"
+

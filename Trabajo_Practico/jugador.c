@@ -57,22 +57,30 @@ void intercambiarJugadores(tJugador* jugadorA, tJugador* jugadorB)
     memcpy(jugadorB, &temp, sizeof(tJugador));
 }
 
-void calcularPuntajePorJugador(tJugador* jugador, int nroRonda, int menorTiempo,
-                               int correctasEnMenorTiempoPorRonda)
+void calcularPuntajePorJugador(tJugador* jugador, int nroRonda, int menorTiempo, int correctasEnMenorTiempoPorRonda)
 {
-    printf("Nro ronda: %d\n", nroRonda);
-    printf("Correctas menor tiempo: %d\n", correctasEnMenorTiempoPorRonda);
-    printf("Menor tiempo: %d\n", menorTiempo);
+//    printf("Nro ronda: %d\n", nroRonda);
+//    printf("Correctas menor tiempo: %d\n", correctasEnMenorTiempoPorRonda);
+//    printf("Menor tiempo: %d\n", menorTiempo);
+
+    //Si la respuesta no es correcta    -> El jugador no respondió
+    //                                  -> Respondió mal
     if (jugador->respuestas[nroRonda].esCorrecta)
     {
         if (jugador->respuestas[nroRonda].tiempoDeRespuesta == menorTiempo)
         {
-            if(correctasEnMenorTiempoPorRonda <= 1)
+            //correctasEnMenorTiempoPorRonda == 0 -> Ningún jugador respondió en esa ronda -> Este caso no se debe analizar, ya que
+            //al no haber respuesta, esCorrecta = false, por lo que no llega acá
+
+            //correctasEnMenorTiempoPorRonda == 1 -> Hubo un único jugador que respondió correctamente
+
+            //correctasEnMenorTiempoPorRonda >= 2 -> Hubo más de un jugador que respondió correctamente
+            if(correctasEnMenorTiempoPorRonda == 1)
             {
                 jugador->respuestas[nroRonda].puntaje = PUNTOS_RESPUESTA_CORRECTA_UNICA_MAS_RAPIDA;
                 jugador->puntaje += PUNTOS_RESPUESTA_CORRECTA_UNICA_MAS_RAPIDA;
             }
-            else
+            else if(correctasEnMenorTiempoPorRonda >= 2)
             {
                 jugador->respuestas[nroRonda].puntaje = PUNTOS_RESPUESTA_CORRECTA_NO_UNICA_MAS_RAPIDA;
                 jugador->puntaje += PUNTOS_RESPUESTA_CORRECTA_NO_UNICA_MAS_RAPIDA;

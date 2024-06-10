@@ -58,9 +58,17 @@ int configurarJuego(tJuego* juego)
     if((estado = leerArchivoConfig(juego)) != OK)
         return estado;
 
+    juego->cantJugadores = 0;
     cargarJugadores(juego);
     if(juego->cantJugadores == 0)
+    {
+        puts("No se cargaron juegadores. Saliendo del juego. Hasta luego!");
+        sleep(3);
         return SIN_JUGADORES;
+    }
+
+    for(int i = 0; i < MAX_PREGUNTAS; i++)
+        juego->menorTiempoRespuesta[i] = -1;
 
     mezclar(juego, juego->cantJugadores, mezclarJugadores);
     elegirDificultad(juego);
@@ -175,15 +183,12 @@ void determinarPuntos(tJuego* juego)
         correctasEnMenorTiempoPorRonda = obtenerCorrectasEnMenorTiempo(juego->jugadores, juego->cantJugadores, ronda, juego->menorTiempoRespuesta[ronda]);
         for (jugador = 0; jugador < juego->cantJugadores; jugador++)
         {
-            calcularPuntajePorJugador(&juego->jugadores[jugador], ronda,
-                                      juego->menorTiempoRespuesta[ronda],
-                                      correctasEnMenorTiempoPorRonda);
+            calcularPuntajePorJugador(&juego->jugadores[jugador], ronda, juego->menorTiempoRespuesta[ronda], correctasEnMenorTiempoPorRonda);
         }
     }
 }
 
-int obtenerCorrectasEnMenorTiempo(const tJugador* jugadores, int cantJugadores,
-                                  int nroRonda, int menorTiempo)
+int obtenerCorrectasEnMenorTiempo(const tJugador* jugadores, int cantJugadores, int nroRonda, int menorTiempo)
 {
     int jugador;
     int correctasEnMenorTiempo;
@@ -191,8 +196,7 @@ int obtenerCorrectasEnMenorTiempo(const tJugador* jugadores, int cantJugadores,
     correctasEnMenorTiempo = 0;
 
     for (jugador = 0; jugador < cantJugadores; jugador++)
-        if(jugadores[jugador].respuestas[nroRonda].esCorrecta &&
-                jugadores[jugador].respuestas[nroRonda].tiempoDeRespuesta ==  menorTiempo)
+        if(jugadores[jugador].respuestas[nroRonda].esCorrecta && jugadores[jugador].respuestas[nroRonda].tiempoDeRespuesta ==  menorTiempo)
             correctasEnMenorTiempo++;
 
     return correctasEnMenorTiempo;

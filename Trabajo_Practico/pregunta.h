@@ -22,6 +22,6 @@ void intercambiarOpciones(char* opcionA, char* opcionB);
 void realizarPregunta(tJuego* juego, int jugador, int rondaActual);
 void procesarRespuesta(tJuego* juego, int jugador, int rondaActual,
                        char opciones[][TAM_OPCION], char respuesta,
-                       int menorTiempo, int tiempoDeRespuesta);
+                       int tiempoDeRespuesta);
 
 #endif // PREGUNTA_H_INCLUDED
