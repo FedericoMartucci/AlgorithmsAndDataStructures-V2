@@ -132,10 +132,10 @@
 
 1717962350 e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\estructuras.h
 
-1717962352 source:e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\teclado.c
+1718070330 source:e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\teclado.c
 	"teclado.h"
 
-1717962352 e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\teclado.h
+1718070320 e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\teclado.h
 	<stdio.h>
 	<ctype.h>
 	<conio.h>
@@ -143,7 +143,7 @@
 	<unistd.h>
 	"estructuras.h"
 
-1717962350 source:e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\archivos.c
+1718070280 source:e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\archivos.c
 	"archivos.h"
 
 1717962350 e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\archivos.h
@@ -184,7 +184,7 @@
 1717962352 source:e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\main.c
 	"juego.h"
 
-1717977002 source:e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\pregunta.c
+1718070004 source:e:\ayed\algorithmsanddatastructures-v2\trabajo_practico\pregunta.c
 	"pregunta.h"
 	"juego.h"
 

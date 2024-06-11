@@ -127,7 +127,7 @@ void realizarPregunta(tJuego* juego, int jugador, int rondaActual)
 }
 
 void procesarRespuesta(tJuego* juego, int jugador, int rondaActual,
-                       char opciones[][TAM_OPCION], char respuesta,
+                       char opciones[CANT_OPCIONES][TAM_OPCION], char respuesta,
                        int tiempoDeRespuesta)
 {
     if(respuesta == '\0')
@@ -145,6 +145,11 @@ void procesarRespuesta(tJuego* juego, int jugador, int rondaActual,
             juego->menorTiempoRespuesta[rondaActual] = juego->tiempoRonda;
 
     juego->jugadores[jugador].respuestas[rondaActual].tiempoDeRespuesta = tiempoDeRespuesta;
-    strcpy(juego->jugadores[jugador].respuestas[rondaActual].opcion, respuesta == '\0' ? "" : opciones[toupper(respuesta) - 'A']);
+
+    if(respuesta == '\0')
+        strcpy(juego->jugadores[jugador].respuestas[rondaActual].opcion, "");
+    else
+        strcpy(juego->jugadores[jugador].respuestas[rondaActual].opcion, opciones[toupper(respuesta) - 'A']);
+
     juego->jugadores[jugador].respuestas[rondaActual].puntaje = 0;
 }

@@ -90,7 +90,7 @@ void generarImpresion(FILE* salida, const tJuego* juego)
                 fprintf(salida, "%s: %d segundos en contestar\t",
                         juego->jugadores[jugador].nombre,
                         juego->jugadores[jugador].respuestas[ronda].tiempoDeRespuesta);
-                fprintf(salida, "%c ", obtenerLetra(juego->jugadores[jugador].respuestas[ronda].opcion, juego->preguntas));
+                fprintf(salida, "%c ", obtenerLetra(juego->jugadores[jugador].respuestas[ronda].opcion, juego->preguntas[ronda]));
                 if (juego->jugadores[jugador].respuestas[ronda].puntaje > 0)
                     fprintf(salida, "(+%d)\n", juego->jugadores[jugador].respuestas[ronda].puntaje);
                 else
