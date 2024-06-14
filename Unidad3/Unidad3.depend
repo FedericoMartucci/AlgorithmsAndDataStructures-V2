@@ -1,21 +1,22 @@
 # depslib dependency file v1.0
-1714332290 source:c:\devs\unidad3\main.c
+1717591685 source:c:\devs\unidad3\main.c
 	"colaDinamica.h"
 	"../Bibliotecas/productos.h"
 	"archivos.h"
+	<time.h>
 
-1714329290 c:\devs\unidad3\coladinamica.h
+1717591983 c:\devs\unidad3\coladinamica.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1714330274 source:c:\devs\unidad3\coladinamica.c
+1717592057 source:c:\devs\unidad3\coladinamica.c
 	"colaDinamica.h"
 
-1714332014 source:c:\devs\bibliotecas\productos.c
+1716922638 source:c:\devs\bibliotecas\productos.c
 	"productos.h"
 
-1714332014 c:\devs\bibliotecas\productos.h
+1716860625 c:\devs\bibliotecas\productos.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

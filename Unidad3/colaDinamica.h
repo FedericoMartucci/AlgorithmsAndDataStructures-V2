@@ -11,6 +11,8 @@
 #define COLA_VACIA -1
 #define MEM_ERR -2
 
+#define COLASVACIAS 5
+
 typedef struct sNodo
 {
     void* info;
@@ -24,6 +26,11 @@ typedef struct
     tNodo* ult;
 } tCola;
 
+typedef struct
+{
+    int tiempoUsoCajero;
+} tCliente;
+
 void crearCola(tCola* pc);
 int colaVacia(const tCola* pc);
 int colaLlena(const tCola* pc, unsigned cantBytes);
@@ -32,5 +39,8 @@ int desacolar(tCola* pc, void* info, unsigned cantBytes);
 int verPrimero(const tCola* pc, void* info, unsigned cantBytes);
 void vaciarCola(tCola* pc);
 
+void colaCajero(tCola *pc);
+int tRandom(int* tiempoArribo);
+void llegaCliente(tCliente* cli, int* tiempoUso);
 
 #endif // COLADINAMICA_H_INCLUDED

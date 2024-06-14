@@ -1,6 +1,7 @@
 #include "colaDinamica.h"
 #include "../Bibliotecas/productos.h"
 #include "archivos.h"
+#include <time.h>
 
 /**
     <"datos1"> con los registros cuya clave comience o termine con un carácter
@@ -15,13 +16,19 @@
 int main()
 {
     tProducto prod;
+    tCola cola;
     char claveComp[] = "1004664";
 
+    srand(time(NULL));
+
+    crearCola(&cola);
     generarArchivoProductos("datos.txt", "TEXTO");
 
     generarArchivoTextoFiltrado("datos.txt", "datos1.txt", claveComp, &prod,
                                 trozarProducto, filtrarCodigo, mostrarProducto);
     generarArchivoTextoFiltrado("datos.txt", "datos2.txt", claveComp, &prod,
                                 trozarProducto, filtrarCodigo, mostrarProducto);
+    colaCajero(&cola);
+    vaciarCola(&cola);
     return 0;
 }
