@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1718475393 source:c:\devs\parcialvehiculos\arbol.c
+	"arbol.h"
+
+1718474483 c:\devs\parcialvehiculos\arbol.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1718479085 source:c:\devs\parcialvehiculos\main.c
+	"arbol.h"
+	"vehiculos.h"
+
+1718479085 c:\devs\parcialvehiculos\vehiculos.h
+	"arbol.h"
+
+1718479094 source:c:\devs\parcialvehiculos\vehiculos.c
+	"vehiculos.h"
+
+1718477911 source:c:\devs\parcialvehiculos\lista.c
+	"lista.h"
+
+1718476967 c:\devs\parcialvehiculos\lista.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
