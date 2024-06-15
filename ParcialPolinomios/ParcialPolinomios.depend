@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1718483167 source:c:\devs\parcialpolinomios\main.c
+	"arbol.h"
+	"polinomios.h"
+
+1718482966 c:\devs\parcialpolinomios\arbol.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1718484050 c:\devs\parcialpolinomios\polinomios.h
+	"arbol.h"
+
+1718484050 source:c:\devs\parcialpolinomios\polinomios.c
+	"polinomios.h"
+
+1718482972 source:c:\devs\parcialpolinomios\arbol.c
+	"arbol.h"
+
