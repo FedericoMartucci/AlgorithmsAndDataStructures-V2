@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1718586252 source:c:\devs\parcialimpuestosvencidos\arbol.c
+	"arbol.h"
+
+1718588542 source:c:\devs\parcialimpuestosvencidos\deuda.c
+	"deuda.h"
+
+1718586252 c:\devs\parcialimpuestosvencidos\arbol.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+
+1718588314 source:c:\devs\parcialimpuestosvencidos\main.c
+	"arbol.h"
+	"deuda.h"
+
+1718588330 c:\devs\parcialimpuestosvencidos\deuda.h
+	"arbol.h"
+

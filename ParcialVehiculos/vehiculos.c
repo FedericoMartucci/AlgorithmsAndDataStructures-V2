@@ -34,7 +34,7 @@ int generarArchBinVehiculos(const char* nombreArch)
 //    for(i = 0; i < sizeof(vehiculos)/sizeof(tVehiculo); i ++)
 //        fwrite(&vehiculos[i], sizeof(tVehiculo), 1, archVehiculos);
 
-    for(i = 0; i < 2000000; i ++)
+    for(i = 0; i < 200000; i ++)
     {
         generarPatenteAleatoria(vehiculo.dominio);
         vehiculo.antiguedad = rand() % 10000 + 1;  // Cantidad entre 1 y 100

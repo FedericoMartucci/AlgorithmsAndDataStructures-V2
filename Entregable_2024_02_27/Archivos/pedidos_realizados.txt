@@ -1,0 +1,13 @@
+Pedido 123 procesado:
+ -       mara-martillo azul       :     10      4 $  500.00 $ 2000.00
+ -      dest1-destornillador      :    100      5 $  200.00 $ 1000.00
+ -     llave8-llave 8'            :      2      1 $  450.00 $  450.00
+ -     mecha8-mecha 8'            :     45     12 $  150.00 $ 1800.00
+                                       TOTAL: $5250.00
+
+Pedido 124 procesado:
+ -       marn-martillo negro      :      3      1 $  500.00 $  500.00
+ -     llave6-llave 6'            :     32      1 $  450.00 $  450.00
+ -      pinza-pinza               :     13      1 $  660.00 $  660.00
+                                       TOTAL: $1610.00
+

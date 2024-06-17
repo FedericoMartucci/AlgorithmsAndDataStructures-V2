@@ -1,0 +1,15 @@
+Pedido 125 con faltantes:
+ -       marn-martillo negro      :      2      3 F
+ -    llave10-llave 10'           :     12      8  
+ -      dest1-destornillador      :     95      4  
+ -    mecha10-mecha 10'           :      6      7 F
+ -     mecha8-mecha 8'            :     33      3  
+ -     serr30-serrucho            :     10      4  
+
+Pedido 126 con faltantes:
+ -     serr30-serrucho            :     10      4  
+ -        cut-cutter              :      2      3 F
+ -        lap-lapiz               :      5      1  
+ -    mecha10-mecha 10'           :      6      4  
+ -       marn-martillo negro      :      2      4 F
+

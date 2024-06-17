@@ -7,14 +7,14 @@
 	<stdlib.h>
 	<string.h>
 
-1718479085 source:c:\devs\parcialvehiculos\main.c
+1718581487 source:c:\devs\parcialvehiculos\main.c
 	"arbol.h"
 	"vehiculos.h"
 
-1718479085 c:\devs\parcialvehiculos\vehiculos.h
+1718581487 c:\devs\parcialvehiculos\vehiculos.h
 	"arbol.h"
 
-1718479094 source:c:\devs\parcialvehiculos\vehiculos.c
+1718581487 source:c:\devs\parcialvehiculos\vehiculos.c
 	"vehiculos.h"
 
 1718477911 source:c:\devs\parcialvehiculos\lista.c

@@ -1,0 +1,93 @@
+# depslib dependency file v1.0
+1709009629 source:c:\users\fedep\dropbox\examenesenmaquina\2024-02-27\examen\arbol.c
+
+1709009606 source:c:\users\fedep\dropbox\examenesenmaquina\2024-02-27\examen\cola_dinamica.c
+
+1709009601 source:c:\users\fedep\dropbox\examenesenmaquina\2024-02-27\examen\ferreteria.c
+
+1709009595 source:c:\users\fedep\dropbox\examenesenmaquina\2024-02-27\examen\utilitarias.c
+
+1709083012 source:c:\users\laboratorios.unlmlab\desktop\entregable_2024_02_27\examen\arbol.c
+	"../include/arbol.h"
+	<stdlib.h>
+	<string.h>
+
+1709071241 source:c:\users\laboratorios.unlmlab\desktop\entregable_2024_02_27\examen\cola_dinamica.c
+	"../include/cola_dinamica.h"
+	<stdlib.h>
+	<string.h>
+
+1709083227 source:c:\users\laboratorios.unlmlab\desktop\entregable_2024_02_27\examen\ferreteria.c
+	"../include/ferreteria.h"
+	"../include/cola_dinamica.h"
+	<stdio.h>
+	"../include/utilitarias.h"
+
+1709082152 source:c:\users\laboratorios.unlmlab\desktop\entregable_2024_02_27\examen\utilitarias.c
+	"../include/utilitarias.h"
+
+1709083107 source:c:\users\laboratorios.unlmlab\desktop\entregable_2024_02_27\examen\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ferreteria.h>
+	<utilitarias.h>
+
+1709082026 c:\users\laboratorios.unlmlab\desktop\entregable_2024_02_27\include\ferreteria.h
+	"../include/arbol.h"
+	"../include/cola_dinamica.h"
+	<stdbool.h>
+
+1709082152 c:\users\laboratorios.unlmlab\desktop\entregable_2024_02_27\include\utilitarias.h
+	<ferreteria.h>
+	<stdio.h>
+
+1709071830 c:\users\laboratorios.unlmlab\desktop\entregable_2024_02_27\include\cola_dinamica.h
+
+1709082999 c:\users\laboratorios.unlmlab\desktop\entregable_2024_02_27\include\arbol.h
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+
+1709083012 source:c:\devs\entregable_2024_02_27\examen\arbol.c
+	"../include/arbol.h"
+	<stdlib.h>
+	<string.h>
+
+1709082999 c:\devs\entregable_2024_02_27\include\arbol.h
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+
+1709071241 source:c:\devs\entregable_2024_02_27\examen\cola_dinamica.c
+	"../include/cola_dinamica.h"
+	<stdlib.h>
+	<string.h>
+
+1709071830 c:\devs\entregable_2024_02_27\include\cola_dinamica.h
+
+1709083227 source:c:\devs\entregable_2024_02_27\examen\ferreteria.c
+	"../include/ferreteria.h"
+	"../include/cola_dinamica.h"
+	<stdio.h>
+	"../include/utilitarias.h"
+
+1709082026 c:\devs\entregable_2024_02_27\include\ferreteria.h
+	"../include/arbol.h"
+	"../include/cola_dinamica.h"
+	<stdbool.h>
+
+1709082152 c:\devs\entregable_2024_02_27\include\utilitarias.h
+	<ferreteria.h>
+	<stdio.h>
+
+1709083107 source:c:\devs\entregable_2024_02_27\examen\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ferreteria.h>
+	<utilitarias.h>
+
+1709082152 source:c:\devs\entregable_2024_02_27\examen\utilitarias.c
+	"../include/utilitarias.h"
+
