@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="ParcialImpuestosVencidos" />
+		<Option title="ParcialMayorSuperficie" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/ParcialImpuestosVencidos" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/ParcialMayorSuperficie" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -16,7 +16,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/ParcialImpuestosVencidos" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/ParcialMayorSuperficie" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -35,13 +35,17 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="arbol.h" />
-		<Unit filename="deuda.c">
+		<Unit filename="lista.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="deuda.h" />
+		<Unit filename="lista.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="superficies.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="superficies.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1718596107 source:c:\devs\parcialmayorsuperficie\arbol.c
+	"arbol.h"
+
+1718596107 c:\devs\parcialmayorsuperficie\arbol.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1718594487 source:c:\devs\parcialmayorsuperficie\lista.c
+	"lista.h"
+
+1718593876 c:\devs\parcialmayorsuperficie\lista.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1718596149 source:c:\devs\parcialmayorsuperficie\superficies.c
+	"superficies.h"
+
+1718596112 c:\devs\parcialmayorsuperficie\superficies.h
+	"lista.h"
+	"arbol.h"
+
+1718595825 source:c:\devs\parcialmayorsuperficie\main.c
+	"arbol.h"
+	"lista.h"
+	"superficies.h"
+
