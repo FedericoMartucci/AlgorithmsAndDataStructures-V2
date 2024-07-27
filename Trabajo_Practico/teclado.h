@@ -18,7 +18,7 @@
 #define BACKSPACE '\b'
 
 int esLetraValida(char key);
-char obtenerLetra(const char* opcion, const tPregunta* pregunta);
+char obtenerLetra(const char* opcion, const tPregunta pregunta);
 int iniciarTemporizador(char* respuesta, int tiempoLimite);
 char captarIngresoDificultad(const tMapeoDificultad* mapeoDificultades,
                              int cantElementos);

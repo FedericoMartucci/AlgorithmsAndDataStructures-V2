@@ -64,8 +64,7 @@ void mezclarPreguntas(void* preguntas, int cantPreguntas)
     {
         j = rand() % (i + 1);
         if (i != j)
-            intercambiarPreguntas(&((tPregunta*)preguntas)[i],
-                                  &((tPregunta*)preguntas)[j]);
+            intercambiarPreguntas(&((tPregunta*)preguntas)[i], &((tPregunta*)preguntas)[j]);
     }
 }
 
@@ -78,8 +77,7 @@ void intercambiarPreguntas(tPregunta* preguntaA, tPregunta* preguntaB)
     memcpy(preguntaB, &temp, sizeof(tPregunta));
 }
 
-void cargarYMezclarOpciones(char opciones[][TAM_OPCION],
-                            const tPregunta* pregunta)
+void cargarYMezclarOpciones(char opciones[][TAM_OPCION], const tPregunta* pregunta)
 {
     strcpy(opciones[0], pregunta->resp_correcta);
     strcpy(opciones[1], pregunta->opcion_1);
@@ -98,8 +96,7 @@ void mezclarOpciones(void* opciones, int cantOpciones)
     {
         j = rand() % (i + 1);
         if (i != j)
-            intercambiarOpciones(opciones + TAM_OPCION * i,
-                                 opciones + TAM_OPCION * j);
+            intercambiarOpciones(opciones + TAM_OPCION * i, opciones + TAM_OPCION * j);
     }
 }
 
@@ -116,11 +113,8 @@ void realizarPregunta(tJuego* juego, int jugador, int rondaActual)
 {
     char opciones[CANT_OPCIONES][TAM_OPCION];
     int opcion;
-    int menorTiempo;
     int tiempoDeRespuesta;
     char respuesta;
-
-    menorTiempo = juego->tiempoRonda;
 
     cargarYMezclarOpciones(opciones, &juego->preguntas[rondaActual]);
 
@@ -129,23 +123,33 @@ void realizarPregunta(tJuego* juego, int jugador, int rondaActual)
     printf("Respuesta: ");
     tiempoDeRespuesta = iniciarTemporizador(&respuesta, juego->tiempoRonda);
 
-    procesarRespuesta(juego, jugador, rondaActual, opciones, respuesta, menorTiempo, tiempoDeRespuesta);
+    procesarRespuesta(juego, jugador, rondaActual, opciones, respuesta, tiempoDeRespuesta);
 }
 
 void procesarRespuesta(tJuego* juego, int jugador, int rondaActual,
-                       char opciones[][TAM_OPCION], char respuesta,
-                       int menorTiempo, int tiempoDeRespuesta)
+                       char opciones[CANT_OPCIONES][TAM_OPCION], char respuesta,
+                       int tiempoDeRespuesta)
 {
     if(respuesta == '\0')
         juego->jugadores[jugador].respuestas[rondaActual].esCorrecta = 0;
     else
         juego->jugadores[jugador].respuestas[rondaActual].esCorrecta = strcmp(opciones[toupper(respuesta) - 'A'], juego->preguntas[rondaActual].resp_correcta) == 0;
 
-    if(menorTiempo > tiempoDeRespuesta && juego->jugadores[jugador].respuestas[rondaActual].esCorrecta)
-        menorTiempo = tiempoDeRespuesta;
+    if(juego->jugadores[jugador].respuestas[rondaActual].esCorrecta == 1)
+    {
+        if(juego->menorTiempoRespuesta[rondaActual] == -1 || tiempoDeRespuesta < juego->menorTiempoRespuesta[rondaActual])
+            juego->menorTiempoRespuesta[rondaActual] = tiempoDeRespuesta;
+    }
+    else
+        if(juego->menorTiempoRespuesta[rondaActual] == -1)
+            juego->menorTiempoRespuesta[rondaActual] = juego->tiempoRonda;
 
-    juego->menorTiempoRespuesta[rondaActual] = menorTiempo;
     juego->jugadores[jugador].respuestas[rondaActual].tiempoDeRespuesta = tiempoDeRespuesta;
-    strcpy(juego->jugadores[jugador].respuestas[rondaActual].opcion, respuesta == '\0'? "" : opciones[toupper(respuesta) - 'A']);
+
+    if(respuesta == '\0')
+        strcpy(juego->jugadores[jugador].respuestas[rondaActual].opcion, "");
+    else
+        strcpy(juego->jugadores[jugador].respuestas[rondaActual].opcion, opciones[toupper(respuesta) - 'A']);
+
     juego->jugadores[jugador].respuestas[rondaActual].puntaje = 0;
 }

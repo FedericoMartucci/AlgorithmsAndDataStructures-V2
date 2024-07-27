@@ -24,7 +24,6 @@ void iniciarTrivia(tJuego* juego);
 void realizarRondas(tJuego* juego, int jugador);
 
 void determinarPuntos(tJuego* juego);
-int obtenerCorrectasEnMenorTiempo(const tJugador* jugadores, int cantJugadores,
-                                  int nroRonda, int menorTiempo);
+int obtenerCorrectasEnMenorTiempo(const tJugador* jugadores, int cantJugadores, int nroRonda, int menorTiempo);
 
 #endif // JUEGO_H_INCLUDED
