@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1720960174 source:c:\devs\mergetxt\main.c
+	"archivos.h"
+
+1720960174 c:\devs\mergetxt\archivos.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+
+1720960178 source:c:\devs\mergetxt\archivos.c
+	"archivos.h"
+

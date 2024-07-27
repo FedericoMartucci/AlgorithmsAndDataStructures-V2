@@ -9,7 +9,7 @@
 #define NOMBRE_MAX 30
 #define APELLIDO_MAX 30
 
-#define CANT_PERSONAS 1000
+#define CANT_PERSONAS 100000
 
 typedef struct
 {

@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1721708222 source:c:\devs\finaltopicos\main.c
+	"archivos.h"
+
+1721708222 c:\devs\finaltopicos\archivos.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1721708303 source:c:\devs\finaltopicos\archivos.c
+	"archivos.h"
+

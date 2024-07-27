@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1719592958 source:c:\devs\parcialcachotopicos\reservas.c
+	"reservas.h"
+
+1719593025 c:\devs\parcialcachotopicos\reservas.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1719592954 source:c:\devs\parcialcachotopicos\main.c
+	"reservas.h"
+	"cartelera.h"
+
+1719593183 source:c:\devs\parcialcachotopicos\cartelera.c
+	"cartelera.h"
+
+1719593183 c:\devs\parcialcachotopicos\cartelera.h
+	"reservas.h"
+

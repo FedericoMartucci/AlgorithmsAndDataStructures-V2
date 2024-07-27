@@ -29,7 +29,7 @@ int generarArchivoLotePersonas(const char* nombreArch, const char* modoApertura)
         persona.dni = rand() * 99; // DNI aleatorio de 8 dígitos
         generarNombreAleatorio(persona.nombre);
         generarApellidoAleatorio(persona.apellido);
-        persona.edad = rand() % 100; // Edad aleatoria entre 0 y 99
+        persona.edad = rand() % 100 + 1; // Edad aleatoria entre 0 y 99
 
 //        mostrarPersonaPorConsola(&persona);
         fwrite(&persona, sizeof(tPersona), 1, archPersonas);
@@ -104,7 +104,7 @@ void testear_si_el_indice_se_condice_con_el_registro_correspondiente()
     {
         fseek(archLeer, idx.nroReg * sizeof(tPersona), SEEK_SET);
         fread(&persona, sizeof(tPersona), 1, archLeer);
-        fseek(archLeer, -0L, SEEK_CUR);
+//        fseek(archLeer, -0L, SEEK_CUR);
         if(idx.dni == persona.dni)
             printf("TEST PASSED\t%10d = %10d\n", idx.dni, persona.dni);
         else
